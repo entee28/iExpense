@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "color": "red",
+        "fontFamily": "Nunito-Regular",
+        "fontSize": 14,
+        "lineHeight": 16,
+        "textAlign": "auto",
+      },
+      Object {},
+    ]
+  }
+>
+  Hello World
+</Text>
+`;
