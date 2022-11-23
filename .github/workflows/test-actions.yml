@@ -2,7 +2,7 @@ name: iExpense Test
 run-name: Running unit tests for iExpense 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  iExpense-Unit-Tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
