@@ -26,9 +26,7 @@ it('correctly handles press event', () => {
     pressed = true
   }
 
-  const pressable = render(
-    <Pressable testID="pressable" onPress={press} testOnly_pressed={true} />
-  )
+  const pressable = render(<Pressable testID="pressable" onPress={press} />)
 
   fireEvent.press(pressable.getByTestId('pressable'))
   expect(pressed).toEqual(true)
@@ -41,7 +39,6 @@ it('renders styles correctly', () => {
       height={300}
       backgroundColor="red"
       testID="pressable"
-      testOnly_pressed={true}
     />
   )
 
@@ -54,11 +51,7 @@ it('renders styles correctly', () => {
 
 it('renders correctly', () => {
   const snapshot = render(
-    <Pressable
-      alignItems="center"
-      justifyContent="center"
-      onPress={() => {}}
-      testOnly_pressed>
+    <Pressable alignItems="center" justifyContent="center" onPress={() => {}}>
       <Text color="red">Hello</Text>
     </Pressable>
   ).toJSON()

@@ -1,50 +1,33 @@
 import React from 'react'
 import {
   ViewStyle,
-  Pressable as RNPressable,
-  PressableProps
+  TouchableOpacity,
+  TouchableOpacityProps
 } from 'react-native'
 
 type Props = Pick<
-  PressableProps,
-  | 'children'
-  | 'delayLongPress'
-  | 'disabled'
-  | 'hitSlop'
-  | 'onLongPress'
-  | 'onPress'
-  | 'onPressIn'
-  | 'onPressOut'
-  | 'testOnly_pressed'
-  | 'testID'
+  TouchableOpacityProps,
+  'children' | 'disabled' | 'hitSlop' | 'onPress' | 'testID' | 'activeOpacity'
 > &
   ViewStyle
 
 export const Pressable = ({
+  activeOpacity,
   children,
-  delayLongPress,
   disabled,
   hitSlop,
-  onLongPress,
   onPress,
-  onPressIn,
-  onPressOut,
-  testOnly_pressed,
   testID,
   ...styles
 }: Props) => {
   return (
-    <RNPressable
+    <TouchableOpacity
+      activeOpacity={activeOpacity}
       children={children}
       testID={testID}
-      delayLongPress={delayLongPress}
       disabled={disabled}
       hitSlop={hitSlop}
-      onLongPress={onLongPress}
       onPress={onPress}
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
-      testOnly_pressed={testOnly_pressed}
       style={styles}
     />
   )
