@@ -2,62 +2,6 @@
   "migIndex": 1,
   "data": [
     {
-      "path": "src/assets/fonts/Muli-Black.ttf",
-      "sha1": "73f1141453b5cbe5c2d20b66761af65fc0a44a28"
-    },
-    {
-      "path": "src/assets/fonts/Muli-BlackItalic.ttf",
-      "sha1": "36cb4290dd02f350a9df13bb4ac7328a534c4d29"
-    },
-    {
-      "path": "src/assets/fonts/Muli-Bold.ttf",
-      "sha1": "752c29103a01913fc68042d56daf8f4606910da9"
-    },
-    {
-      "path": "src/assets/fonts/Muli-BoldItalic.ttf",
-      "sha1": "986447a0754ba2ede15503a7c01d4dd8bb442579"
-    },
-    {
-      "path": "src/assets/fonts/Muli-ExtraBold.ttf",
-      "sha1": "e863a11af8bed21780fb7af02ad3392162e4ded7"
-    },
-    {
-      "path": "src/assets/fonts/Muli-ExtraBoldItalic.ttf",
-      "sha1": "8dd0720e2f2aea3e665efc21510bf1e1bd9bf317"
-    },
-    {
-      "path": "src/assets/fonts/Muli-ExtraLight.ttf",
-      "sha1": "394c40ef87ffde2b2a67dbc176e574776ad03880"
-    },
-    {
-      "path": "src/assets/fonts/Muli-ExtraLightItalic.ttf",
-      "sha1": "ea8a1cf7aea33587c3afe96bf8e8d136e05def63"
-    },
-    {
-      "path": "src/assets/fonts/Muli-Italic.ttf",
-      "sha1": "1d85f0d76682bd1cff652918c647f5d992989651"
-    },
-    {
-      "path": "src/assets/fonts/Muli-Light.ttf",
-      "sha1": "fc3a926c2c96df4732131ee9286ff69ff62d139b"
-    },
-    {
-      "path": "src/assets/fonts/Muli-LightItalic.ttf",
-      "sha1": "6ca5efdd4069c4fea3f894b1aa719da642aa3bf9"
-    },
-    {
-      "path": "src/assets/fonts/Muli-Regular.ttf",
-      "sha1": "2338e15c4ca85c187fc1534ab4f770b6f863bde6"
-    },
-    {
-      "path": "src/assets/fonts/Muli-SemiBold.ttf",
-      "sha1": "c4b931df152206bbfef97387aa814ca84031e2e4"
-    },
-    {
-      "path": "src/assets/fonts/Muli-SemiBoldItalic.ttf",
-      "sha1": "8055514d6ae4bc4290d25304c2e18dcfca498bc1"
-    },
-    {
       "path": "src/assets/fonts/Nunito-Black.ttf",
       "sha1": "e338cd0fa9399ea96cd13aa051ee065ecc9d88ed"
     },
