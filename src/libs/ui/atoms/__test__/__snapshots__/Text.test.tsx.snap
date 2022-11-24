@@ -6,7 +6,7 @@ exports[`renders correctly 1`] = `
     Array [
       Object {
         "color": "red",
-        "fontFamily": "Nunito-Regular",
+        "fontFamily": "Nunito-Medium",
         "fontSize": 14,
         "lineHeight": 16,
         "textAlign": "auto",
