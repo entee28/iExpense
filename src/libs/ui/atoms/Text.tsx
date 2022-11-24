@@ -4,6 +4,7 @@ import colors from '../colors'
 
 type Props = {
   children?: React.ReactNode
+  testID?: string
   textProps?: TextProps
 } & TextStyle &
   GetFontFamilyParams
@@ -43,6 +44,7 @@ export const Text = ({
   semiBold,
   medium,
   regular,
+  testID,
   ...styles
 }: Props) => {
   const fontFamily = useMemo(() => {
@@ -58,6 +60,7 @@ export const Text = ({
 
   return (
     <RNText
+      testID={testID}
       {...textProps}
       style={[{ color, textAlign, lineHeight, fontSize, fontFamily }, styles]}>
       {children}
