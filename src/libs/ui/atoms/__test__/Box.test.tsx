@@ -14,6 +14,18 @@ it('renders children components correctly', () => {
   expect(text.children).toContain('Hello World')
 })
 
+it('renders styles correctly', () => {
+  const box = render(
+    <Box width={300} height={300} backgroundColor="red" testID="red_box" />
+  )
+
+  expect(box.getByTestId('red_box')).toHaveStyle({
+    width: 300,
+    height: 300,
+    backgroundColor: 'red'
+  })
+})
+
 it('renders correctly', () => {
   const snapshot = render(
     <Box
