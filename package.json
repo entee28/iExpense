@@ -59,6 +59,9 @@
     ],
     "moduleNameMapper": {
       "\\.svg": "<rootDir>/__mocks__/svgMock.js"
-    }
+    },
+    "setupFiles": [
+      "./__mocks__/nativeAnimatedMock.js"
+    ]
   }
 }
