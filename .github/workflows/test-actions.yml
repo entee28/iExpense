@@ -1,6 +1,6 @@
 name: iExpense Test
 run-name: Running unit tests for iExpense 🚀
-on: [push, pull_request]
+on: [push]
 jobs:
   iExpense-Unit-Tests:
     runs-on: ubuntu-latest
