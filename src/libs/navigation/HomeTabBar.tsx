@@ -1,5 +1,5 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import {HomeScreen, InsightScreen, SettingScreen} from 'screens/index'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { HomeScreen, InsightScreen, SettingScreen } from 'screens/index'
 
 const Tab = createBottomTabNavigator<HomeTabBarParamList>()
 

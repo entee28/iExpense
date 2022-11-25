@@ -9,7 +9,8 @@
     "baseUrl": ".",
     "paths": {
       "libs/*": ["./src/libs/*"],
-      "screens/*": ["./src/screens/*"]
+      "screens/*": ["./src/screens/*"],
+      "assets/*": ["./src/assets/*"]
     }
   },
 

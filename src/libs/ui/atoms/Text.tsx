@@ -6,12 +6,8 @@ type Props = {
   children?: React.ReactNode
   testID?: string
   textProps?: TextProps
-  extraBold?: boolean
-  bold?: boolean
-  semiBold?: boolean
-  medium?: boolean
-  regular?: boolean
-} & TextStyle
+} & TextStyle &
+  FontWeight
 
 export enum FontFamily {
   extraBold = 'Nunito-ExtraBold',

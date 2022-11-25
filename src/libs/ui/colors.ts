@@ -14,5 +14,18 @@ export default {
   mono60: '#1A1A1A99',
   mono70: '#1A1A1AB2',
   mono80: '#1A1A1ACC',
-  mono100: '#1A1A1A'
+  mono100: '#1A1A1A',
+  warning5: '#FFA8000D',
+  warning10: '#FFA8001A',
+  warning30: '#FFA8004D',
+  warning80: '#FFA80080',
+  warning100: '#FFA800',
+  warning: '#FF6100',
+  destructive: '#E60A32',
+  destructive80: '#E60A32CC',
+  destructive30: '#E60A324D',
+  destructive30Hard: '#F8B6C1',
+  destructive10: '#E60A321A',
+  destructive5: 'rgba(230, 10, 50, 0.05)',
+  white: '#FFFFFF'
 }

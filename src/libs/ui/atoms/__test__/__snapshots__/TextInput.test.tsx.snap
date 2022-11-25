@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#1A1A1A",
+          "fontFamily": "Nunito-Regular",
+          "fontSize": 14,
+          "lineHeight": 22,
+          "textAlign": "auto",
+        },
+        Object {
+          "marginBottom": 8,
+        },
+      ]
+    }
+  >
+    hello
+  </Text>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#FFFFFF",
+        "borderColor": "#1A1A1A1A",
+        "borderRadius": 8,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "height": 48,
+        "paddingVertical": 12,
+        "width": "100%",
+      }
+    }
+  >
+    <TextInput
+      allowFontScaling={false}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      placeholderTextColor="#1A1A1A66"
+      style={
+        Array [
+          Object {
+            "color": undefined,
+            "fontFamily": undefined,
+            "fontSize": undefined,
+            "lineHeight": undefined,
+            "paddingHorizontal": 16,
+          },
+          Object {
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "padding": 0,
+          },
+          undefined,
+        ]
+      }
+      value="test"
+    />
+  </View>
+</View>
+`;
