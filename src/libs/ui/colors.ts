@@ -27,5 +27,6 @@ export default {
   destructive30Hard: '#F8B6C1',
   destructive10: '#E60A321A',
   destructive5: 'rgba(230, 10, 50, 0.05)',
-  white: '#FFFFFF'
+  white: '#FFFFFF',
+  transparent: 'transparent'
 }

@@ -1,11 +1,15 @@
 import React, { useMemo } from 'react'
-import { TextProps, TextStyle, Text as RNText } from 'react-native'
+import {
+  TextProps as RNTextProps,
+  TextStyle,
+  Text as RNText
+} from 'react-native'
 import colors from '../colors'
 
-type Props = {
+export type TextProps = {
   children?: React.ReactNode
   testID?: string
-  textProps?: TextProps
+  textProps?: RNTextProps
 } & TextStyle &
   FontWeight
 
@@ -31,7 +35,7 @@ export const Text = ({
   regular,
   testID,
   ...styles
-}: Props) => {
+}: TextProps) => {
   const fontFamily = useMemo(() => {
     if (extraBold) {
       return FontFamily.extraBold
