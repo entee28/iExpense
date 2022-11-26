@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`Button should match snapshot 1`] = `
 <View
   accessible={true}
   collapsable={false}
@@ -14,28 +14,29 @@ exports[`renders correctly 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "alignItems": "center",
       "backgroundColor": "red",
-      "justifyContent": "center",
+      "borderRadius": 8,
       "opacity": 1,
+      "padding": 12,
     }
   }
+  testID="btn2"
 >
   <Text
     style={
       Array [
         Object {
-          "color": "red",
-          "fontFamily": "Nunito-Regular",
+          "color": "blue",
+          "fontFamily": "Nunito-SemiBold",
           "fontSize": 14,
           "lineHeight": 22,
-          "textAlign": "auto",
+          "textAlign": "center",
         },
         Object {},
       ]
     }
   >
-    Hello
+    Button 2
   </Text>
 </View>
 `;

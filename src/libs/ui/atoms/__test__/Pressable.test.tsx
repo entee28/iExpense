@@ -38,6 +38,7 @@ it('renders styles correctly', () => {
       width={300}
       height={300}
       backgroundColor="red"
+      style={{ alignItems: 'center' }}
       testID="pressable"
     />
   )
@@ -45,13 +46,18 @@ it('renders styles correctly', () => {
   expect(pressable.getByTestId('pressable')).toHaveStyle({
     width: 300,
     height: 300,
-    backgroundColor: 'red'
+    backgroundColor: 'red',
+    alignItems: 'center'
   })
 })
 
 it('renders correctly', () => {
   const snapshot = render(
-    <Pressable alignItems="center" justifyContent="center" onPress={() => {}}>
+    <Pressable
+      alignItems="center"
+      justifyContent="center"
+      onPress={() => {}}
+      style={{ backgroundColor: 'red' }}>
       <Text color="red">Hello</Text>
     </Pressable>
   ).toJSON()

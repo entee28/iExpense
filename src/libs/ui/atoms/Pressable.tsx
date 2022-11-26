@@ -5,9 +5,15 @@ import {
   TouchableOpacityProps
 } from 'react-native'
 
-type Props = Pick<
+export type PressableProps = Pick<
   TouchableOpacityProps,
-  'children' | 'disabled' | 'hitSlop' | 'onPress' | 'testID' | 'activeOpacity'
+  | 'children'
+  | 'disabled'
+  | 'hitSlop'
+  | 'onPress'
+  | 'testID'
+  | 'activeOpacity'
+  | 'style'
 > &
   ViewStyle
 
@@ -18,8 +24,9 @@ export const Pressable = ({
   hitSlop,
   onPress,
   testID,
+  style,
   ...styles
-}: Props) => {
+}: PressableProps) => {
   return (
     <TouchableOpacity
       activeOpacity={activeOpacity}
@@ -28,7 +35,7 @@ export const Pressable = ({
       disabled={disabled}
       hitSlop={hitSlop}
       onPress={onPress}
-      style={styles}
+      style={[styles, style]}
     />
   )
 }
