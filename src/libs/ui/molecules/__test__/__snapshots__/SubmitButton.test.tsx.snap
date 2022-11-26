@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should match snapshot 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFFFFF",
+      "borderTopColor": "#1A1A1A1A",
+      "borderTopWidth": 1,
+      "paddingHorizontal": 24,
+      "paddingVertical": 16,
+    }
+  }
+>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "red",
+        "borderRadius": 8,
+        "opacity": 1,
+        "padding": 12,
+      }
+    }
+    testID="submit_btn"
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "blue",
+            "fontFamily": "Nunito-SemiBold",
+            "fontSize": 14,
+            "lineHeight": 22,
+            "textAlign": "center",
+          },
+          Object {},
+        ]
+      }
+    >
+      Submit Button
+    </Text>
+  </View>
+</View>
+`;

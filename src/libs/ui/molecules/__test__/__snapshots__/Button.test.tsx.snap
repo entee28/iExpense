@@ -20,7 +20,7 @@ exports[`Button should match snapshot 1`] = `
       "padding": 12,
     }
   }
-  testID="btn2"
+  testID="btn"
 >
   <Text
     style={
@@ -36,7 +36,7 @@ exports[`Button should match snapshot 1`] = `
       ]
     }
   >
-    Button 2
+    Button
   </Text>
 </View>
 `;

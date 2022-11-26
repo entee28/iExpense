@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react-native'
 import colors from '../../colors'
-import { Button } from '../Button'
+import { SubmitButton } from '../SubmitButton'
 
 it('Button should render variation styles correctly', () => {
   const primaryBtn = render(
-    <Button
+    <SubmitButton
       label="Primary Button"
       variation="primary"
       onPress={() => {}}
@@ -12,7 +12,7 @@ it('Button should render variation styles correctly', () => {
     />
   )
   const secondaryBtn = render(
-    <Button
+    <SubmitButton
       label="Secondary Button"
       variation="secondary"
       onPress={() => {}}
@@ -20,7 +20,7 @@ it('Button should render variation styles correctly', () => {
     />
   )
   const tertiaryBtn = render(
-    <Button
+    <SubmitButton
       label="Tertiary Button"
       variation="tertiary"
       onPress={() => {}}
@@ -28,7 +28,7 @@ it('Button should render variation styles correctly', () => {
     />
   )
   const disbledBtn = render(
-    <Button
+    <SubmitButton
       label="Disabled Button"
       disabled
       onPress={() => {}}
@@ -67,7 +67,7 @@ it('Button should render variation styles correctly', () => {
 
 it('Button should render styles correctly', () => {
   const btn1 = render(
-    <Button
+    <SubmitButton
       label="Button 1"
       onPress={() => {}}
       testID="btn1"
@@ -76,7 +76,7 @@ it('Button should render styles correctly', () => {
     />
   )
   const btn2 = render(
-    <Button
+    <SubmitButton
       label="Button 2"
       onPress={() => {}}
       testID="btn2"
@@ -103,10 +103,10 @@ it('Button should render styles correctly', () => {
 
 it('Button should match snapshot', () => {
   const snapshot = render(
-    <Button
-      label="Button"
+    <SubmitButton
+      label="Submit Button"
       onPress={() => {}}
-      testID="btn"
+      testID="submit_btn"
       variation="primary"
       style={{ backgroundColor: 'red' }}
       labelStyle={{ color: 'blue' }}
