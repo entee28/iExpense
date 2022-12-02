@@ -26,7 +26,6 @@ it('renders the correct styles', () => {
   expect(text1.getByText('Hello World')).toHaveStyle({
     color: colors.mono100,
     fontSize: 14,
-    lineHeight: 22,
     textAlign: 'auto',
     fontFamily: 'Nunito-Regular'
   })
