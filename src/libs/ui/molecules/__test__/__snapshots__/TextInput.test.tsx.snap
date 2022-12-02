@@ -9,7 +9,7 @@ exports[`renders correctly 1`] = `
           "color": "#1A1A1A",
           "fontFamily": "Nunito-Regular",
           "fontSize": 14,
-          "lineHeight": 22,
+          "lineHeight": undefined,
           "textAlign": "auto",
         },
         Object {

@@ -28,7 +28,7 @@ exports[`renders correctly 1`] = `
           "color": "red",
           "fontFamily": "Nunito-Regular",
           "fontSize": 14,
-          "lineHeight": 22,
+          "lineHeight": undefined,
           "textAlign": "auto",
         },
         Object {},

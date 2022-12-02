@@ -29,7 +29,7 @@ exports[`Button should match snapshot 1`] = `
           "color": "blue",
           "fontFamily": "Nunito-SemiBold",
           "fontSize": 14,
-          "lineHeight": 22,
+          "lineHeight": undefined,
           "textAlign": "center",
         },
         Object {},

@@ -9,6 +9,7 @@ import colors from '../colors'
 export type TextProps = {
   children?: React.ReactNode
   testID?: string
+  accessibilityLabel?: string
   textProps?: RNTextProps
 } & TextStyle &
   FontWeight
@@ -25,7 +26,7 @@ export const Text = ({
   textProps,
   children,
   fontSize = 14,
-  lineHeight = 22,
+  lineHeight,
   color = colors.mono100,
   textAlign = 'auto',
   extraBold,
@@ -34,6 +35,7 @@ export const Text = ({
   medium,
   regular,
   testID,
+  accessibilityLabel,
   ...styles
 }: TextProps) => {
   const fontFamily = useMemo(() => {
@@ -58,6 +60,7 @@ export const Text = ({
   return (
     <RNText
       testID={testID}
+      accessibilityLabel={accessibilityLabel}
       {...textProps}
       style={[{ color, textAlign, lineHeight, fontSize, fontFamily }, styles]}>
       {children}
