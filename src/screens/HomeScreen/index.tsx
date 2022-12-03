@@ -1,12 +1,18 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { Box, ExpenseItem, Pressable, Text } from 'libs/ui'
+import { ExpenseItem, Pressable, Text } from 'libs/ui'
 import colors from 'libs/ui/colors'
 import { SCREEN_PADDING_HORIZONTAL } from 'libs/ui/constants'
 import { formatNumber } from 'libs/utils'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScrollView, SectionList, StyleSheet } from 'react-native'
+import { SectionList, StyleSheet } from 'react-native'
+import Animated, {
+  interpolate,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue
+} from 'react-native-reanimated'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { SectionHeader } from './components'
 
@@ -35,26 +41,64 @@ export const HomeScreen = () => {
   const { t } = useTranslation()
   const insets = useSafeAreaInsets()
 
+  const scroll = useSharedValue(0)
+  const scrollHandler = useAnimatedScrollHandler(({ contentOffset: { y } }) => {
+    scroll.value = y
+  })
+
+  const headerBorderWidth = useAnimatedStyle(() => {
+    const borderBottomWidth = interpolate(
+      scroll.value,
+      [-2000, 0, 55, 2000],
+      [0, 0, 0.5, 0.5]
+    )
+
+    return {
+      borderBottomWidth
+    }
+  })
+
+  const animatedTextOpacity = useAnimatedStyle(() => {
+    const opacity = interpolate(
+      scroll.value,
+      [-2000, 70, 130, 2000],
+      [0, 0, 1, 1]
+    )
+
+    return {
+      opacity
+    }
+  })
+
   return (
     <SafeAreaView style={styles.root}>
-      <ScrollView
+      <Animated.View style={[styles.header, headerBorderWidth]}>
+        <Animated.Text style={[styles.headerTotal, animatedTextOpacity]}>
+          {formatNumber(198000, {
+            currency: '₫',
+            showCurrency: true,
+            decimalCount: 2
+          })}
+        </Animated.Text>
+        <Pressable
+          borderRadius={999}
+          backgroundColor={colors.primary100}
+          width={33}
+          height={33}
+          alignItems="center"
+          justifyContent="center">
+          <FontAwesomeIcon icon={faPlus} color={colors.white} size={16} />
+        </Pressable>
+      </Animated.View>
+      <Animated.ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.container}
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
         contentContainerStyle={{
           paddingBottom: insets.bottom === 0 ? 120 : insets.bottom + 100
         }}
         overScrollMode="always">
-        <Box alignItems="flex-end">
-          <Pressable
-            borderRadius={999}
-            backgroundColor={colors.primary100}
-            width={33}
-            height={33}
-            alignItems="center"
-            justifyContent="center">
-            <FontAwesomeIcon icon={faPlus} color={colors.white} size={16} />
-          </Pressable>
-        </Box>
         <Text
           textAlign="center"
           color={colors.mono40}
@@ -105,7 +149,7 @@ export const HomeScreen = () => {
           )}
           keyExtractor={(_, index) => `basicListEntry-${index}`}
         />
-      </ScrollView>
+      </Animated.ScrollView>
     </SafeAreaView>
   )
 }
@@ -118,7 +162,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
+    paddingHorizontal: SCREEN_PADDING_HORIZONTAL
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 24,
+    paddingBottom: 12,
     paddingHorizontal: SCREEN_PADDING_HORIZONTAL,
-    paddingTop: 24
+    borderBottomColor: colors.mono40
+  },
+  headerTotal: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontFamily: 'Nunito-Bold',
+    paddingLeft: 33,
+    flex: 1,
+    color: colors.mono100
   }
 })
