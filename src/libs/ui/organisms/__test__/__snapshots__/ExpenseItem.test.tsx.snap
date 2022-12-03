@@ -2,11 +2,22 @@
 
 exports[`should match snapshot 1`] = `
 <View
+  accessible={true}
+  collapsable={false}
+  focusable={false}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignItems": "center",
       "flexDirection": "row",
-      "marginTop": 10,
+      "marginTop": 4,
+      "opacity": 1,
     }
   }
 >
@@ -74,7 +85,7 @@ exports[`should match snapshot 1`] = `
         ]
       }
     >
-      49,000.00 ₫
+      49,000.0 ₫
     </Text>
   </View>
 </View>
