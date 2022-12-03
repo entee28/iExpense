@@ -1,6 +1,6 @@
 import React from 'react'
 import { formatNumber } from 'libs/utils'
-import { Box, Text } from 'libs/ui'
+import { Box, Pressable, Text } from 'libs/ui'
 import colors from 'libs/ui/colors'
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 
 export const ExpenseItem = ({ category, amount, icon, currency }: Props) => {
   return (
-    <Box flexDirection="row" alignItems="center" marginTop={10}>
+    <Pressable flexDirection="row" alignItems="center" marginTop={4}>
       <Text fontSize={42} accessibilityLabel="icon">
         {icon}
       </Text>
@@ -33,10 +33,10 @@ export const ExpenseItem = ({ category, amount, icon, currency }: Props) => {
           {formatNumber(amount, {
             currency,
             showCurrency: true,
-            decimalCount: 2
+            decimalCount: 1
           })}
         </Text>
       </Box>
-    </Box>
+    </Pressable>
   )
 }

@@ -1,13 +1,12 @@
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HomeScreen, InsightScreen, SettingScreen } from 'screens/index'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-
-import colors from 'libs/ui/colors'
 import {
   faChartColumn,
   faGear,
   faWallet
 } from '@fortawesome/free-solid-svg-icons'
+import colors from 'libs/ui/colors'
 
 const Tab = createBottomTabNavigator<HomeTabBarParamList>()
 

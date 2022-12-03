@@ -19,7 +19,7 @@ it('should display information correctly', () => {
 
   expect(item.getByLabelText('category').children[0]).toEqual(category)
   expect(item.getByLabelText('icon').children[0]).toEqual(icon)
-  expect(item.getByLabelText('amount').children[0]).toEqual('49,000.00 ₫')
+  expect(item.getByLabelText('amount').children[0]).toEqual('49,000.0 ₫')
 })
 
 it('should match snapshot', () => {
