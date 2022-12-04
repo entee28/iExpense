@@ -1,5 +1,16 @@
 {
     "home_screen": {
         "spent_this_week": "Spent this week"
+    },
+    "setting_screen": {
+        "settings": "Settings",
+        "appearance": "Appearance",
+        "noti": "Notifications",
+        "currencies": "Currencies",
+        "lang": "Language",
+        "accounts": "Accounts",
+        "categories": "Categories",
+        "home_amount": "Home Amount",
+        "user": "User"
     }
 }
