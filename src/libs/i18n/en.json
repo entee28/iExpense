@@ -12,5 +12,8 @@
         "categories": "Categories",
         "home_amount": "Home Amount",
         "user": "User"
+    },
+    "language_screen": {
+        "title": "Language"
     }
 }

@@ -1,1 +1,19 @@
-{}
+{
+    "home_screen": {
+        "spent_this_week": "Đã tiêu tuần này"
+    },
+    "setting_screen": {
+        "settings": "Cài đặt",
+        "appearance": "Hiển thị",
+        "noti": "Thông báo",
+        "currencies": "Tiền tệ",
+        "lang": "Ngôn ngữ",
+        "accounts": "Tài khoản tiêu dùng",
+        "categories": "Danh mục tiêu dụng",
+        "home_amount": "Hiển thị màn hình chính",
+        "user": "Người dùng"
+    },
+    "language_screen": {
+        "title": "Ngôn ngữ"
+    }
+}

@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react-native'
-import { formatNumber } from 'libs/utils'
 import { ExpenseItem } from '../ExpenseItem'
 
 const category = 'Eating out'

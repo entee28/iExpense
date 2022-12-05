@@ -65,7 +65,8 @@
       "\\.svg": "<rootDir>/__mocks__/svgMock.js"
     },
     "setupFiles": [
-      "./__mocks__/nativeAnimatedMock.js"
+      "./__mocks__/nativeAnimatedMock.js",
+      "./__mocks__/reactNativeFontAwesome.js"
     ]
   }
 }

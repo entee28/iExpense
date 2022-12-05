@@ -16,9 +16,17 @@ import {
   faLanguage,
   faUser
 } from '@fortawesome/free-solid-svg-icons'
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { loadStorage, STORAGE_KEY_LANGUAGE } from 'libs/storage'
+import { Language, LANGUAGE_LABEL_MAP } from 'libs/i18n/constants'
+import { useCurrentLanguage } from 'libs/hooks'
 
 export const SettingScreen = () => {
   const { t } = useTranslation()
+  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>()
+
+  const lang = useCurrentLanguage()
 
   const handlePress = (label: string) => {
     switch (label) {
@@ -29,6 +37,7 @@ export const SettingScreen = () => {
       case 'setting_screen.currencies':
         break
       case 'setting_screen.lang':
+        navigation.navigate('LanguageScreen')
         break
       case 'setting_screen.accounts':
         break
@@ -68,7 +77,7 @@ export const SettingScreen = () => {
     },
     {
       label: 'setting_screen.lang',
-      sub_label: 'English',
+      sub_label: LANGUAGE_LABEL_MAP[lang],
       icon: (
         <FontAwesomeIcon
           icon={faLanguage}
@@ -121,9 +130,9 @@ export const SettingScreen = () => {
           {t('setting_screen.settings')}
         </Text>
         <Box paddingTop={24}>
-          {ITEMS.map(item =>
+          {ITEMS.map((item, index) =>
             item.label === 'break' ? (
-              <Box height={12} />
+              <Box key={`break_${index}`} height={12} />
             ) : (
               <MenuItem
                 icon={item.icon}
