@@ -1,1 +1,2 @@
 export const SCREEN_PADDING_HORIZONTAL = 24
+export const NAVBAR_HEIGHT = 44
