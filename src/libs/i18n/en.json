@@ -13,7 +13,12 @@
         "home_amount": "Home Amount",
         "user": "User"
     },
-    "language_screen": {
-        "title": "Language"
+    "home_amount_screen": {
+        "SPENT_THIS_WEEK": "Spent this week",
+        "SPENT_THIS_MONTH": "Spent this month",
+        "REVENUE_THIS_WEEK": "Revenue this week",
+        "REVENUE_THIS_MONTH": "Revenue this month",
+        "PROFIT_LOSS_THIS_WEEK": "Profit / Loss this week",
+        "PROFIT_LOSS_THIS_MONTH": "Profit / Loss this month"
     }
 }

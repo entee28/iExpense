@@ -1,7 +1,6 @@
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { changeLanguage } from 'libs/i18n'
-import i18n from 'libs/i18n'
+import i18n, { changeLanguage } from 'libs/i18n'
 import {
   Language,
   LANGUAGE_FLAG_MAP,
@@ -28,7 +27,7 @@ export const LanguageScreen = () => {
 
   return (
     <>
-      <NavigationBar title={t('language_screen.title')} />
+      <NavigationBar title={t('setting_screen.lang')} />
       <Box
         flex={1}
         paddingTop={12}

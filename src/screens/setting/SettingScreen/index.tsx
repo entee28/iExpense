@@ -1,11 +1,3 @@
-import React from 'react'
-import { ScrollView, StyleSheet } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import colors from 'libs/ui/colors'
-import { useTranslation } from 'react-i18next'
-import { Box, MenuItem, Text } from 'libs/ui'
-import { SCREEN_PADDING_HORIZONTAL } from 'libs/ui/constants'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {
   faBars,
   faBell,
@@ -16,17 +8,24 @@ import {
   faLanguage,
   faUser
 } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { loadStorage, STORAGE_KEY_LANGUAGE } from 'libs/storage'
-import { Language, LANGUAGE_LABEL_MAP } from 'libs/i18n/constants'
-import { useCurrentLanguage } from 'libs/hooks'
+import i18n from 'libs/i18n'
+import { Box, MenuItem, Text } from 'libs/ui'
+import colors from 'libs/ui/colors'
+import { SCREEN_PADDING_HORIZONTAL } from 'libs/ui/constants'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { ScrollView, StyleSheet } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { useAppSelector } from 'libs/redux'
 
 export const SettingScreen = () => {
+  const setting = useAppSelector(state => state.setting)
+
   const { t } = useTranslation()
   const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>()
-
-  const lang = useCurrentLanguage()
 
   const handlePress = (label: string) => {
     switch (label) {
@@ -43,6 +42,8 @@ export const SettingScreen = () => {
         break
       case 'setting_screen.categories':
         break
+      case 'setting_screen.home_amount':
+        navigation.navigate('HomeAmountScreen')
     }
   }
 
@@ -77,7 +78,7 @@ export const SettingScreen = () => {
     },
     {
       label: 'setting_screen.lang',
-      sub_label: LANGUAGE_LABEL_MAP[lang],
+      sub_label: i18n.language === 'en' ? 'English' : 'Tiếng Việt',
       icon: (
         <FontAwesomeIcon
           icon={faLanguage}
@@ -107,7 +108,7 @@ export const SettingScreen = () => {
     },
     {
       label: 'setting_screen.home_amount',
-      sub_label: 'Spent this month',
+      sub_label: t(`home_amount_screen.${setting.homeAmountOption}`),
       icon: (
         <FontAwesomeIcon icon={faCoins} size={16} color={colors.primary100} />
       )
