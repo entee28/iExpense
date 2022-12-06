@@ -5,3 +5,8 @@ type FontWeight = {
   medium?: boolean
   regular?: boolean
 }
+
+type Category = {
+  icon: string
+  name: string
+}

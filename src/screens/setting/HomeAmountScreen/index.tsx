@@ -13,15 +13,7 @@ import colors from 'libs/ui/colors'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet } from 'react-native'
-
-export enum HOME_AMOUNT_OPTIONS {
-  SPENT_THIS_WEEK = 'SPENT_THIS_WEEK',
-  SPENT_THIS_MONTH = 'SPENT_THIS_MONTH',
-  REVENUE_THIS_WEEK = 'REVENUE_THIS_WEEK',
-  REVENUE_THIS_MONTH = 'REVENUE_THIS_MONTH',
-  PROFIT_LOSS_THIS_WEEK = 'PROFIT_LOSS_THIS_WEEK',
-  PROFIT_LOSS_THIS_MONTH = 'PROFIT_LOSS_THIS_MONTH'
-}
+import { HOME_AMOUNT_OPTIONS } from 'src/constants'
 
 export const HomeAmountScreen = () => {
   const { t } = useTranslation()

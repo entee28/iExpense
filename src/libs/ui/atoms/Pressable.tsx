@@ -14,6 +14,7 @@ export type PressableProps = Pick<
   | 'testID'
   | 'activeOpacity'
   | 'style'
+  | 'onLongPress'
 > &
   ViewStyle
 
@@ -25,6 +26,7 @@ export const Pressable = ({
   onPress,
   testID,
   style,
+  onLongPress,
   ...styles
 }: PressableProps) => {
   return (
@@ -35,6 +37,7 @@ export const Pressable = ({
       disabled={disabled}
       hitSlop={hitSlop}
       onPress={onPress}
+      onLongPress={onLongPress}
       style={[styles, style]}
     />
   )

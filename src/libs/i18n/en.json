@@ -20,5 +20,20 @@
         "REVENUE_THIS_MONTH": "Revenue this month",
         "PROFIT_LOSS_THIS_WEEK": "Profit / Loss this week",
         "PROFIT_LOSS_THIS_MONTH": "Profit / Loss this month"
+    },
+    "categories_screen": {
+        "expenses": "Expenses",
+        "incomes": "Incomes",
+        "new": "New Category"
+    },
+    "category_modify_screen": {
+        "edit_account": "Edit Account",
+        "edit_income_category": "Edit Category",
+        "edit_expense_category": "Edit Category",
+        "new_account": "New Account",
+        "new_expense_category": "New Expense Category",
+        "new_income_category": "New Income Category",
+        "enter_category": "Enter Category Name",
+        "enter_account": "Enter Account Name"
     }
 }

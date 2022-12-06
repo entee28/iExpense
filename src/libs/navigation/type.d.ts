@@ -11,4 +11,16 @@ declare type StackParamList = {
   HomeTabBar: NavigatorScreenParams<HomeTabBarParamList>
   LanguageScreen: undefined
   HomeAmountScreen: undefined
+  CategoriesScreen: undefined
+  CategoryModifyScreen: {
+    icon?: string
+    category?: string
+    option:
+      | 'edit_expense_category'
+      | 'edit_income_category'
+      | 'edit_account'
+      | 'new_account'
+      | 'new_expense_category'
+      | 'new_income_category'
+  }
 }

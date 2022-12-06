@@ -13,7 +13,12 @@
         "home_amount": "Hiển thị màn hình chính",
         "user": "Người dùng"
     },
-    "language_screen": {
-        "title": "Ngôn ngữ"
+    "home_amount_screen": {
+        "SPENT_THIS_WEEK": "Đã tiêu tuần này",
+        "SPENT_THIS_MONTH": "Đã tiêu tháng này",
+        "REVENUE_THIS_WEEK": "Thu nhập tuần này",
+        "REVENUE_THIS_MONTH": "Thu nhập tháng này",
+        "PROFIT_LOSS_THIS_WEEK": "Lãi / Lỗ tuần này",
+        "PROFIT_LOSS_THIS_MONTH": "Lãi / Lỗ tháng này"
     }
 }

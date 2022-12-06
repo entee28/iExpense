@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { HOME_AMOUNT_OPTIONS } from '../../screens'
+import { HOME_AMOUNT_OPTIONS } from 'src/constants'
 
 export const settingSlice = createSlice({
   name: 'setting',
