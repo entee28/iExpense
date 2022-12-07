@@ -1,7 +1,11 @@
-import { Box, NavigationBar, TabBar } from 'libs/ui'
+import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { Box, NavigationBar, Pressable, TabBar } from 'libs/ui'
+import colors from 'libs/ui/colors'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SceneMap, TabView } from 'react-native-tab-view'
+import { makeEventNotifier } from 'libs/utils'
 import { CategoriesList } from './components'
 
 const ExpensesTab = () => <CategoriesList type="expenses" />
@@ -11,6 +15,15 @@ const renderScene = SceneMap({
   expenses: ExpensesTab,
   incomes: IncomesTab
 })
+
+const notifier = makeEventNotifier('OnEditModeToggled')
+
+export const useEditModeToggleListener = (
+  listener: typeof notifier.notify,
+  deps: ReadonlyArray<any>
+) => {
+  notifier.useEventListener(listener, deps)
+}
 
 export const CategoriesScreen = () => {
   const { t } = useTranslation()
@@ -29,9 +42,21 @@ export const CategoriesScreen = () => {
     ]
   }, [t])
 
+  const handleToggleEditMode = () => {
+    notifier.notify()
+  }
+
   return (
     <>
-      <NavigationBar transparent title={t('setting_screen.categories')} />
+      <NavigationBar
+        transparent
+        title={t('setting_screen.categories')}
+        right={
+          <Pressable onPress={handleToggleEditMode}>
+            <FontAwesomeIcon icon={faPen} size={14} color={colors.mono100} />
+          </Pressable>
+        }
+      />
       <Box flex={1}>
         <TabView
           lazy

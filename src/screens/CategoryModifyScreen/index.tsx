@@ -1,18 +1,26 @@
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { useAppDispatch, useAppSelector } from 'libs/redux'
+import { updateUserInfo } from 'libs/redux/userSlice'
 import { Box, NavigationBar, Pressable } from 'libs/ui'
+import colors from 'libs/ui/colors'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import colors from 'libs/ui/colors'
 import { TextInput } from 'react-native'
+import { v4 as uuidv4 } from 'uuid'
 
 type Props = NativeStackScreenProps<StackParamList, 'CategoryModifyScreen'>
 
 const emojiRegex = /\p{Extended_Pictographic}/u
 
 export const CategoryModifyScreen = ({ navigation, route }: Props) => {
-  const { option, category, icon } = route.params
+  const { expenseCategories, incomeCategories } = useAppSelector(
+    state => state.user
+  )
+  const dispatch = useAppDispatch()
+
+  const { option, category, icon, id } = route.params
   const { t } = useTranslation()
 
   const [emoji, setEmoji] = useState(icon || '')
@@ -26,7 +34,68 @@ export const CategoryModifyScreen = ({ navigation, route }: Props) => {
     return 'category_modify_screen.enter_category'
   }, [option])
 
+  const isDisabled = useMemo(() => {
+    if (
+      (emoji === icon && categoryName === category) ||
+      emoji === '' ||
+      categoryName === ''
+    ) {
+      return true
+    }
+
+    return false
+  }, [emoji, categoryName])
+
   const onDonePress = () => {
+    switch (option) {
+      case 'new_expense_category':
+        if (expenseCategories) {
+          dispatch(
+            updateUserInfo({
+              expenseCategories: [
+                ...expenseCategories,
+                { name: categoryName, icon: emoji, id: uuidv4() }
+              ]
+            })
+          )
+        }
+        break
+      case 'new_income_category':
+        if (incomeCategories) {
+          dispatch(
+            updateUserInfo({
+              incomeCategories: [
+                ...incomeCategories,
+                { name: categoryName, icon: emoji, id: uuidv4() }
+              ]
+            })
+          )
+        }
+        break
+      case 'edit_expense_category':
+        dispatch(
+          updateUserInfo({
+            expenseCategories: expenseCategories?.map(category =>
+              category.id === id
+                ? { name: categoryName, icon: emoji, id }
+                : category
+            )
+          })
+        )
+        break
+      case 'edit_income_category':
+        dispatch(
+          updateUserInfo({
+            incomeCategories: incomeCategories?.map(category =>
+              category.id === id
+                ? { name: categoryName, icon: emoji, id }
+                : category
+            )
+          })
+        )
+        break
+    }
+
     navigation.goBack()
   }
 
@@ -35,8 +104,12 @@ export const CategoryModifyScreen = ({ navigation, route }: Props) => {
       <NavigationBar
         title={t(`category_modify_screen.${option}`)}
         right={
-          <Pressable onPress={onDonePress}>
-            <FontAwesomeIcon icon={faCheck} size={14} color={colors.mono100} />
+          <Pressable disabled={isDisabled} onPress={onDonePress}>
+            <FontAwesomeIcon
+              icon={faCheck}
+              size={14}
+              color={isDisabled ? colors.mono40 : colors.mono100}
+            />
           </Pressable>
         }
       />

@@ -7,6 +7,12 @@ type FontWeight = {
 }
 
 type Category = {
+  id: string
   icon: string
   name: string
+}
+
+type User = {
+  expenseCategories: Category[]
+  incomeCategories: Category[]
 }

@@ -15,6 +15,7 @@ declare type StackParamList = {
   CategoryModifyScreen: {
     icon?: string
     category?: string
+    id?: string
     option:
       | 'edit_expense_category'
       | 'edit_income_category'
