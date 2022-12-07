@@ -79,7 +79,8 @@
     },
     "setupFiles": [
       "./__mocks__/nativeAnimatedMock.js",
-      "./__mocks__/reactNativeFontAwesome.js"
+      "./__mocks__/reactNativeFontAwesome.js",
+      "./__mocks__/reactNativeModalMock.js"
     ]
   }
 }
