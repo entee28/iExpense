@@ -24,7 +24,11 @@
     "categories_screen": {
         "expenses": "Expenses",
         "incomes": "Incomes",
-        "new": "New Category"
+        "new": "New Category",
+        "modal_title": "Delete '{{category}}' category?",
+        "modal_content": "Entries under this category will remain.",
+        "cancel": "Cancel",
+        "delete": "Delete"
     },
     "category_modify_screen": {
         "edit_account": "Edit Account",
