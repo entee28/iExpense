@@ -41,9 +41,11 @@ export const SettingScreen = () => {
       case 'setting_screen.accounts':
         break
       case 'setting_screen.categories':
+        navigation.navigate('CategoriesScreen')
         break
       case 'setting_screen.home_amount':
         navigation.navigate('HomeAmountScreen')
+        break
     }
   }
 
