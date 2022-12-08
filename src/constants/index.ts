@@ -120,3 +120,12 @@ export const defaultIncomesCategories: Category[] = [
     name: 'Salary'
   }
 ]
+
+export const defaultAccountList: Category[] = [
+  { id: uuidv4(), icon: '💳', name: 'Credit Card' },
+  {
+    id: uuidv4(),
+    icon: '💵',
+    name: 'Cash'
+  }
+]

@@ -4,12 +4,13 @@ import {
   faPlus
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { useFocusEffect, useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { useFocusEffect } from '@react-navigation/native'
+import { useAppNavigation } from 'libs/navigation'
 import { useAppDispatch, useAppSelector } from 'libs/redux'
 import { updateCategory, updateUserInfo } from 'libs/redux/userSlice'
 import { Box, Pressable, Text } from 'libs/ui'
 import colors from 'libs/ui/colors'
+import { makeEventNotifier } from 'libs/utils'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ActivityIndicator, StyleSheet } from 'react-native'
@@ -22,26 +23,56 @@ import Animated, {
   useSharedValue,
   withTiming
 } from 'react-native-reanimated'
-import { useEditModeToggleListener } from '..'
-import { DeleteWarnModal } from './DeleteWarnModal'
+import { DeleteWarnModal } from './components'
+
+export const editModeTogglenotifier = makeEventNotifier('OnEditModeToggled')
+
+export const useEditModeToggleListener = (
+  listener: typeof editModeTogglenotifier.notify,
+  deps: ReadonlyArray<any>
+) => {
+  editModeTogglenotifier.useEventListener(listener, deps)
+}
 
 type Props = {
-  type: 'expenses' | 'incomes'
+  type: 'expenses' | 'incomes' | 'accounts'
+}
+
+type CategoryMapItem = {
+  category: Category[] | undefined
+  editOption: 'edit_expense_category' | 'edit_income_category' | 'edit_account'
+  createOption: 'new_expense_category' | 'new_income_category' | 'new_account'
 }
 
 export const CategoriesList = ({ type }: Props) => {
-  const { expenseCategories, incomeCategories } = useAppSelector(
+  const { expenseCategories, incomeCategories, accountList } = useAppSelector(
     state => state.user
   )
   const dispatch = useAppDispatch()
 
-  const [data, setData] = useState(
-    type === 'expenses' ? expenseCategories : incomeCategories
-  )
+  const categoryMap: Record<typeof type, CategoryMapItem> = {
+    expenses: {
+      category: expenseCategories,
+      editOption: 'edit_expense_category',
+      createOption: 'new_expense_category'
+    },
+    incomes: {
+      category: incomeCategories,
+      editOption: 'edit_income_category',
+      createOption: 'new_income_category'
+    },
+    accounts: {
+      category: accountList,
+      editOption: 'edit_account',
+      createOption: 'new_account'
+    }
+  }
+
+  const [data, setData] = useState(categoryMap[type].category)
 
   //Render updated state when focus screen
   useFocusEffect(() => {
-    setData(type === 'expenses' ? expenseCategories : incomeCategories)
+    setData(categoryMap[type].category)
   })
 
   const [editMode, setEditMode] = useState(false)
@@ -52,23 +83,19 @@ export const CategoriesList = ({ type }: Props) => {
   }, [editMode])
 
   const { t } = useTranslation()
-  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>()
+  const navigation = useAppNavigation()
 
   const handlePress = (icon?: string, category?: string, id?: string) => {
     if (icon && category && id) {
       navigation.navigate('CategoryModifyScreen', {
-        option:
-          type === 'expenses'
-            ? 'edit_expense_category'
-            : 'edit_income_category',
+        option: categoryMap[type].editOption,
         icon,
         category,
         id
       })
     } else {
       navigation.navigate('CategoryModifyScreen', {
-        option:
-          type === 'expenses' ? 'new_expense_category' : 'new_income_category'
+        option: categoryMap[type].createOption
       })
     }
   }
@@ -78,14 +105,14 @@ export const CategoriesList = ({ type }: Props) => {
   const barsTranslateX = useSharedValue(32)
 
   useEffect(() => {
-    if (!editMode && type) {
+    if (!editMode) {
       deleteBtnTranslateX.value = withTiming(-32)
       barsTranslateX.value = withTiming(32)
     } else {
       deleteBtnTranslateX.value = withTiming(0)
       barsTranslateX.value = withTiming(-32)
     }
-  }, [editMode, type])
+  }, [editMode])
 
   const deleteBtnAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -136,6 +163,16 @@ export const CategoriesList = ({ type }: Props) => {
         dispatch(
           updateCategory({
             incomeCategories: incomeCategories?.filter(
+              category => category.id !== selectedItem?.id
+            )
+          })
+        )
+        break
+
+      case 'accounts':
+        dispatch(
+          updateCategory({
+            accountList: accountList?.filter(
               category => category.id !== selectedItem?.id
             )
           })
@@ -196,10 +233,16 @@ export const CategoriesList = ({ type }: Props) => {
   }
 
   const handleDragEnd = (data: Category[]) => {
-    if (type === 'expenses') {
-      dispatch(updateUserInfo({ expenseCategories: data }))
-    } else {
-      dispatch(updateUserInfo({ incomeCategories: data }))
+    switch (type) {
+      case 'expenses':
+        dispatch(updateUserInfo({ expenseCategories: data }))
+        break
+      case 'incomes':
+        dispatch(updateUserInfo({ incomeCategories: data }))
+        break
+      case 'accounts':
+        dispatch(updateUserInfo({ accountList: data }))
+        break
     }
 
     setData(data)
@@ -240,7 +283,9 @@ export const CategoriesList = ({ type }: Props) => {
               </Box>
 
               <Text marginLeft={12} fontSize={16} lineHeight={32}>
-                {t('categories_screen.new')}
+                {type === 'accounts'
+                  ? t('categories_list.new_account')
+                  : t('categories_list.new_category')}
               </Text>
             </Box>
           </Pressable>
