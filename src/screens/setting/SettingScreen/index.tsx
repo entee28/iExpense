@@ -9,9 +9,9 @@ import {
   faUser
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import i18n from 'libs/i18n'
+import { useAppNavigation } from 'libs/navigation'
+import { useAppSelector } from 'libs/redux'
 import { Box, MenuItem, Text } from 'libs/ui'
 import colors from 'libs/ui/colors'
 import { SCREEN_PADDING_HORIZONTAL } from 'libs/ui/constants'
@@ -19,13 +19,12 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useAppSelector } from 'libs/redux'
 
 export const SettingScreen = () => {
   const setting = useAppSelector(state => state.setting)
 
   const { t } = useTranslation()
-  const navigation = useNavigation<NativeStackNavigationProp<StackParamList>>()
+  const navigation = useAppNavigation()
 
   const handlePress = (label: string) => {
     switch (label) {
@@ -39,6 +38,7 @@ export const SettingScreen = () => {
         navigation.navigate('LanguageScreen')
         break
       case 'setting_screen.accounts':
+        navigation.navigate('AccountListScreen')
         break
       case 'setting_screen.categories':
         navigation.navigate('CategoriesScreen')

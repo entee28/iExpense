@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { merge } from 'lodash'
 import {
+  defaultAccountList,
   defaultExpensesCategories,
   defaultIncomesCategories
 } from 'src/constants'
@@ -11,7 +12,8 @@ export const userSlice = createSlice({
   name: 'user',
   initialState: {
     expenseCategories: defaultExpensesCategories,
-    incomeCategories: defaultIncomesCategories
+    incomeCategories: defaultIncomesCategories,
+    accountList: defaultAccountList
   } as UserSliceState,
   reducers: {
     updateUserInfo: (state, action: PayloadAction<UserSliceState>) => {
@@ -24,6 +26,10 @@ export const userSlice = createSlice({
 
       if (action.payload.incomeCategories !== undefined) {
         state.incomeCategories = action.payload.incomeCategories
+      }
+
+      if (action.payload.accountList !== undefined) {
+        state.accountList = action.payload.accountList
       }
     }
   }

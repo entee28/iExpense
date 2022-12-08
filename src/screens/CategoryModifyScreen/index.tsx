@@ -15,7 +15,7 @@ type Props = NativeStackScreenProps<StackParamList, 'CategoryModifyScreen'>
 const emojiRegex = /\p{Extended_Pictographic}/u
 
 export const CategoryModifyScreen = ({ navigation, route }: Props) => {
-  const { expenseCategories, incomeCategories } = useAppSelector(
+  const { expenseCategories, incomeCategories, accountList } = useAppSelector(
     state => state.user
   )
   const dispatch = useAppDispatch()
@@ -72,6 +72,18 @@ export const CategoryModifyScreen = ({ navigation, route }: Props) => {
           )
         }
         break
+      case 'new_account':
+        if (accountList) {
+          dispatch(
+            updateUserInfo({
+              accountList: [
+                ...accountList,
+                { name: categoryName, icon: emoji, id: uuidv4() }
+              ]
+            })
+          )
+        }
+        break
       case 'edit_expense_category':
         dispatch(
           updateUserInfo({
@@ -87,6 +99,17 @@ export const CategoryModifyScreen = ({ navigation, route }: Props) => {
         dispatch(
           updateUserInfo({
             incomeCategories: incomeCategories?.map(category =>
+              category.id === id
+                ? { name: categoryName, icon: emoji, id }
+                : category
+            )
+          })
+        )
+        break
+      case 'edit_account':
+        dispatch(
+          updateUserInfo({
+            accountList: accountList?.map(category =>
               category.id === id
                 ? { name: categoryName, icon: emoji, id }
                 : category

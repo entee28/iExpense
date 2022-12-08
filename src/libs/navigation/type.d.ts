@@ -12,6 +12,7 @@ declare type StackParamList = {
   LanguageScreen: undefined
   HomeAmountScreen: undefined
   CategoriesScreen: undefined
+  AccountListScreen: undefined
   CategoryModifyScreen: {
     icon?: string
     category?: string

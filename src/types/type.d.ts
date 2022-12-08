@@ -15,4 +15,5 @@ type Category = {
 type User = {
   expenseCategories: Category[]
   incomeCategories: Category[]
+  accountList: Category[]
 }

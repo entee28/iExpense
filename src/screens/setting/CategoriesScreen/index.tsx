@@ -5,8 +5,7 @@ import colors from 'libs/ui/colors'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SceneMap, TabView } from 'react-native-tab-view'
-import { makeEventNotifier } from 'libs/utils'
-import { CategoriesList } from './components'
+import { CategoriesList, editModeTogglenotifier } from 'src/components'
 
 const ExpensesTab = () => <CategoriesList type="expenses" />
 const IncomesTab = () => <CategoriesList type="incomes" />
@@ -15,15 +14,6 @@ const renderScene = SceneMap({
   expenses: ExpensesTab,
   incomes: IncomesTab
 })
-
-const notifier = makeEventNotifier('OnEditModeToggled')
-
-export const useEditModeToggleListener = (
-  listener: typeof notifier.notify,
-  deps: ReadonlyArray<any>
-) => {
-  notifier.useEventListener(listener, deps)
-}
 
 export const CategoriesScreen = () => {
   const { t } = useTranslation()
@@ -43,7 +33,7 @@ export const CategoriesScreen = () => {
   }, [t])
 
   const handleToggleEditMode = () => {
-    notifier.notify()
+    editModeTogglenotifier.notify()
   }
 
   return (
