@@ -7,7 +7,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { useFocusEffect } from '@react-navigation/native'
 import { useAppNavigation } from 'libs/navigation'
 import { useAppDispatch, useAppSelector } from 'libs/redux'
-import { updateCategory, updateUserInfo } from 'libs/redux/userSlice'
+import {
+  deleteAccount,
+  deleteExpenseCategory,
+  deleteIncomeCategory,
+  updateCategories
+} from 'libs/redux/categorySlice'
 import { Box, Pressable, Text } from 'libs/ui'
 import colors from 'libs/ui/colors'
 import { makeEventNotifier } from 'libs/utils'
@@ -46,7 +51,7 @@ type CategoryMapItem = {
 
 export const CategoriesList = ({ type }: Props) => {
   const { expenseCategories, incomeCategories, accountList } = useAppSelector(
-    state => state.user
+    state => state.category
   )
   const dispatch = useAppDispatch()
 
@@ -150,33 +155,33 @@ export const CategoriesList = ({ type }: Props) => {
   const handleDeleteItem = () => {
     switch (type) {
       case 'expenses':
-        dispatch(
-          updateCategory({
-            expenseCategories: expenseCategories?.filter(
-              category => category.id !== selectedItem?.id
-            )
-          })
-        )
+        if (selectedItem) {
+          dispatch(
+            deleteExpenseCategory({
+              id: selectedItem.id
+            })
+          )
+        }
         break
 
       case 'incomes':
-        dispatch(
-          updateCategory({
-            incomeCategories: incomeCategories?.filter(
-              category => category.id !== selectedItem?.id
-            )
-          })
-        )
+        if (selectedItem) {
+          dispatch(
+            deleteIncomeCategory({
+              id: selectedItem.id
+            })
+          )
+        }
         break
 
       case 'accounts':
-        dispatch(
-          updateCategory({
-            accountList: accountList?.filter(
-              category => category.id !== selectedItem?.id
-            )
-          })
-        )
+        if (selectedItem) {
+          dispatch(
+            deleteAccount({
+              id: selectedItem.id
+            })
+          )
+        }
         break
     }
 
@@ -235,13 +240,13 @@ export const CategoriesList = ({ type }: Props) => {
   const handleDragEnd = (data: Category[]) => {
     switch (type) {
       case 'expenses':
-        dispatch(updateUserInfo({ expenseCategories: data }))
+        dispatch(updateCategories({ expenseCategories: data }))
         break
       case 'incomes':
-        dispatch(updateUserInfo({ incomeCategories: data }))
+        dispatch(updateCategories({ incomeCategories: data }))
         break
       case 'accounts':
-        dispatch(updateUserInfo({ accountList: data }))
+        dispatch(updateCategories({ accountList: data }))
         break
     }
 

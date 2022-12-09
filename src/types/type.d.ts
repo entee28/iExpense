@@ -11,9 +11,3 @@ type Category = {
   icon: string
   name: string
 }
-
-type User = {
-  expenseCategories: Category[]
-  incomeCategories: Category[]
-  accountList: Category[]
-}
