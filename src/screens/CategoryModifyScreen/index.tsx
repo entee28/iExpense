@@ -1,8 +1,15 @@
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { useAppDispatch, useAppSelector } from 'libs/redux'
-import { updateUserInfo } from 'libs/redux/userSlice'
+import { useAppDispatch } from 'libs/redux'
+import {
+  createAccount,
+  createExpenseCategory,
+  createIncomeCategory,
+  updateAccount,
+  updateExpenseCategory,
+  updateIncomeCategory
+} from 'libs/redux/categorySlice'
 import { Box, NavigationBar, Pressable } from 'libs/ui'
 import colors from 'libs/ui/colors'
 import React, { useMemo, useState } from 'react'
@@ -15,9 +22,6 @@ type Props = NativeStackScreenProps<StackParamList, 'CategoryModifyScreen'>
 const emojiRegex = /\p{Extended_Pictographic}/u
 
 export const CategoryModifyScreen = ({ navigation, route }: Props) => {
-  const { expenseCategories, incomeCategories, accountList } = useAppSelector(
-    state => state.user
-  )
   const dispatch = useAppDispatch()
 
   const { option, category, icon, id } = route.params
@@ -49,73 +53,61 @@ export const CategoryModifyScreen = ({ navigation, route }: Props) => {
   const onDonePress = () => {
     switch (option) {
       case 'new_expense_category':
-        if (expenseCategories) {
-          dispatch(
-            updateUserInfo({
-              expenseCategories: [
-                ...expenseCategories,
-                { name: categoryName, icon: emoji, id: uuidv4() }
-              ]
-            })
-          )
-        }
+        dispatch(
+          createExpenseCategory({
+            name: categoryName,
+            icon: emoji,
+            id: uuidv4()
+          })
+        )
         break
       case 'new_income_category':
-        if (incomeCategories) {
-          dispatch(
-            updateUserInfo({
-              incomeCategories: [
-                ...incomeCategories,
-                { name: categoryName, icon: emoji, id: uuidv4() }
-              ]
-            })
-          )
-        }
+        dispatch(
+          createIncomeCategory({
+            name: categoryName,
+            icon: emoji,
+            id: uuidv4()
+          })
+        )
         break
       case 'new_account':
-        if (accountList) {
+        dispatch(
+          createAccount({
+            name: categoryName,
+            icon: emoji,
+            id: uuidv4()
+          })
+        )
+        break
+      case 'edit_expense_category':
+        if (id) {
           dispatch(
-            updateUserInfo({
-              accountList: [
-                ...accountList,
-                { name: categoryName, icon: emoji, id: uuidv4() }
-              ]
+            updateExpenseCategory({
+              id,
+              updatedCategory: { name: categoryName, icon: emoji, id }
             })
           )
         }
         break
-      case 'edit_expense_category':
-        dispatch(
-          updateUserInfo({
-            expenseCategories: expenseCategories?.map(category =>
-              category.id === id
-                ? { name: categoryName, icon: emoji, id }
-                : category
-            )
-          })
-        )
-        break
       case 'edit_income_category':
-        dispatch(
-          updateUserInfo({
-            incomeCategories: incomeCategories?.map(category =>
-              category.id === id
-                ? { name: categoryName, icon: emoji, id }
-                : category
-            )
-          })
-        )
+        if (id) {
+          dispatch(
+            updateIncomeCategory({
+              id,
+              updatedCategory: { name: categoryName, icon: emoji, id }
+            })
+          )
+        }
         break
       case 'edit_account':
-        dispatch(
-          updateUserInfo({
-            accountList: accountList?.map(category =>
-              category.id === id
-                ? { name: categoryName, icon: emoji, id }
-                : category
-            )
-          })
-        )
+        if (id) {
+          dispatch(
+            updateAccount({
+              id,
+              updatedAccount: { name: categoryName, icon: emoji, id }
+            })
+          )
+        }
         break
     }
 
