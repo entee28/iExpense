@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import { persistor, store } from 'libs/redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 
 const App = () => {
   return (
@@ -12,7 +13,9 @@ const App = () => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
-            <MainStack />
+            <BottomSheetModalProvider>
+              <MainStack />
+            </BottomSheetModalProvider>
           </NavigationContainer>
         </PersistGate>
       </Provider>

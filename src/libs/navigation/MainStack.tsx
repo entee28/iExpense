@@ -4,7 +4,8 @@ import {
   LanguageScreen,
   CategoriesScreen,
   CategoryModifyScreen,
-  AccountListScreen
+  AccountListScreen,
+  CurrencyScreen
 } from 'screens/index'
 import { HomeTabBar } from './HomeTabBar'
 
@@ -21,6 +22,7 @@ export const MainStack = () => {
       <Stack.Screen name="HomeAmountScreen" component={HomeAmountScreen} />
       <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
       <Stack.Screen name="AccountListScreen" component={AccountListScreen} />
+      <Stack.Screen name="CurrencyScreen" component={CurrencyScreen} />
       <Stack.Screen
         name="CategoryModifyScreen"
         component={CategoryModifyScreen}

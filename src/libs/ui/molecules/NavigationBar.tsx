@@ -11,6 +11,7 @@ import {
   ViewStyle
 } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { getWidth } from 'libs/utils'
 import { Pressable, Text } from '../atoms'
 import colors from '../colors'
 
@@ -30,9 +31,6 @@ type Props = {
 }
 
 const SIDE_WIDTH = 90
-const { width: w } = Dimensions.get('screen')
-export const getWidth: (percentage: number) => number = percentage =>
-  (w * percentage) / 100
 
 export const NavigationBar = ({
   left,

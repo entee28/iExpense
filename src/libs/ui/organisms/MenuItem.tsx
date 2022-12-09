@@ -8,9 +8,10 @@ import { Box, Pressable, Text } from '../atoms'
 type Props = {
   icon: React.ReactNode
   label: string | React.ReactNode
-  onPress: () => void
+  onPress?: () => void
   right?: React.ReactNode
   accessibilityLabel?: string
+  disabled?: boolean
 } & Omit<ViewStyle, 'right'>
 
 export const MenuItem = ({
@@ -19,20 +20,23 @@ export const MenuItem = ({
   onPress,
   right,
   accessibilityLabel,
+  disabled = false,
   ...props
 }: Props) => {
   return (
-    <Pressable style={[styles.item, { ...props }]} onPress={onPress}>
-      <Box width={16} height={16} alignItems="center" justifyContent="center">
+    <Pressable
+      disabled={disabled}
+      style={[styles.item, { ...props }]}
+      onPress={onPress}>
+      <Box
+        width={16}
+        height={16}
+        marginRight={12}
+        alignItems="center"
+        justifyContent="center">
         {icon}
       </Box>
-      {typeof label === 'string' ? (
-        <Text marginLeft={12} flex={1}>
-          {label}
-        </Text>
-      ) : (
-        label
-      )}
+      {typeof label === 'string' ? <Text flex={1}>{label}</Text> : label}
 
       {right ? (
         right

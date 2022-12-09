@@ -14,6 +14,8 @@ import { InvalidIndicator, ValidIndicator } from 'assets/icons'
 import colors from '../colors'
 
 type Props = {
+  left?: JSX.Element
+  right?: JSX.Element
   error?: string
   isValid?: boolean
   containerStyle?: ViewStyle
@@ -29,6 +31,8 @@ const INPUT_PADDING_HORIZONTAL = 16
 const INPUT_PADDING_VERTICAL = 12
 
 export const TextInput = ({
+  left,
+  right,
   error,
   isValid,
   containerStyle,
@@ -107,6 +111,8 @@ export const TextInput = ({
           width="100%"
           height={48}
           paddingVertical={INPUT_PADDING_VERTICAL}>
+          {!!left && <Box paddingLeft={INPUT_PADDING_HORIZONTAL}>{left}</Box>}
+
           <RNTextInput
             {...inputProps}
             allowFontScaling={false}
@@ -132,6 +138,10 @@ export const TextInput = ({
               inputStyle
             ]}
           />
+
+          {!!right && (
+            <Box paddingRight={INPUT_PADDING_HORIZONTAL}>{right}</Box>
+          )}
 
           {!!rightIndicator && (
             <Box paddingRight={INPUT_PADDING_HORIZONTAL}>{rightIndicator}</Box>
