@@ -33,6 +33,7 @@ export const SettingScreen = () => {
       case 'setting_screen.noti':
         break
       case 'setting_screen.currencies':
+        navigation.navigate('CurrencyScreen')
         break
       case 'setting_screen.lang':
         navigation.navigate('LanguageScreen')
@@ -147,13 +148,10 @@ export const SettingScreen = () => {
                     flexDirection="row"
                     paddingRight={4}
                     justifyContent="space-between"
-                    alignItems="center"
-                    marginLeft={12}>
+                    alignItems="center">
                     <Text lineHeight={22}>{t(item.label)}</Text>
-                    {typeof item.sub_label === 'string' ? (
+                    {item.sub_label && (
                       <Text color={colors.primary100}>{t(item.sub_label)}</Text>
-                    ) : (
-                      item.sub_label
                     )}
                   </Box>
                 }

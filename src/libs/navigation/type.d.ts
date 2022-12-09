@@ -10,6 +10,7 @@ declare type StackParamList = {
    */
   HomeTabBar: NavigatorScreenParams<HomeTabBarParamList>
   LanguageScreen: undefined
+  CurrencyScreen: undefined
   HomeAmountScreen: undefined
   CategoriesScreen: undefined
   AccountListScreen: undefined

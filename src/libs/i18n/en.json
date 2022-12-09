@@ -42,5 +42,17 @@
         "new_income_category": "New Income Category",
         "enter_category": "Enter Category Name",
         "enter_account": "Enter Account Name"
+    },
+    "currency_screen": {
+        "primary": "Primary Currency",
+        "secondary": "Secondary Currency",
+        "swap": "Swap currencies",
+        "advanced": "ADVANCED",
+        "example": "E.g. United States Dollar has a symbol ($). If the switcher is turned off then the currency will display the code (USD) instead.",
+        "example_note": "Note: some currencies may not have symbols",
+        "symbol": "{{currency}} Symbol",
+        "search": "Search",
+        "empty": "No result found",
+        "none": "None"
     }
 }

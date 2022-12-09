@@ -20,5 +20,36 @@
         "REVENUE_THIS_MONTH": "Thu nhập tháng này",
         "PROFIT_LOSS_THIS_WEEK": "Lãi / Lỗ tuần này",
         "PROFIT_LOSS_THIS_MONTH": "Lãi / Lỗ tháng này"
+    },
+    "categories_screen": {
+        "expenses": "Chi tiêu",
+        "incomes": "Thu nhập",
+        "modal_title": "Xóa danh mục '{{category}}'?",
+        "modal_content": "Các khoản chi tiêu thuộc danh mục này vẫn sẽ được giữ.",
+        "cancel": "Hủy",
+        "delete": "Xóa"
+    },
+    "categories_list": {
+        "new_category": "Tạo danh mục mới",
+        "new_account": "Tạo tài khoản mới"
+    },
+    "category_modify_screen": {
+        "edit_account": "Chỉnh sửa tài khoản",
+        "edit_income_category": "Chỉnh sửa danh mục thu nhập",
+        "edit_expense_category": "Chỉnh sửa danh mục chi tiêu",
+        "new_account": "Tài khoản mới",
+        "new_expense_category": "Danh mục chi tiêu mới",
+        "new_income_category": "Danh mục thu nhập mới",
+        "enter_category": "Nhập tên danh mục",
+        "enter_account": "Nhập tên tài khoản"
+    },
+    "currency_screen": {
+        "primary": "Đơn vị tiền tệ chính",
+        "secondary": "Đơn vị tiền tệ phụ",
+        "swap": "Hoán đổi đơn vị tiền tệ",
+        "advanced": "NÂNG CAO",
+        "example": "E.g. Việt Nam Đồng có kí hiệu (₫). Nếu tắt công tắc thì đơn vị tiền tệ sẽ được hiển thị dưới dạng mã (VND).",
+        "example_note": "Lưu ý: một số đơn vị tiền tệ không có kí hiệu",
+        "symbol": "Kí hiệu {{currency}}"
     }
 }
