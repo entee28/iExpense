@@ -50,6 +50,9 @@
         "advanced": "NÂNG CAO",
         "example": "E.g. Việt Nam Đồng có kí hiệu (₫). Nếu tắt công tắc thì đơn vị tiền tệ sẽ được hiển thị dưới dạng mã (VND).",
         "example_note": "Lưu ý: một số đơn vị tiền tệ không có kí hiệu",
-        "symbol": "Kí hiệu {{currency}}"
+        "symbol": "Kí hiệu {{currency}}",
+        "search": "Tìm kiếm",
+        "empty": "Không tìm thấy kết quả",
+        "none": "Không"
     }
 }
