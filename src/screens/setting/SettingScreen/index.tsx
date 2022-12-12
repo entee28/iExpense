@@ -12,13 +12,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import i18n from 'libs/i18n'
 import { useAppNavigation } from 'libs/navigation'
 import { useAppSelector } from 'libs/redux'
-import { Box, MenuItem, Text } from 'libs/ui'
+import { Box, MenuItem, NavigationBar, Text } from 'libs/ui'
 import colors from 'libs/ui/colors'
 import { SCREEN_PADDING_HORIZONTAL } from 'libs/ui/constants'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, StyleSheet } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 export const SettingScreen = () => {
   const setting = useAppSelector(state => state.setting)
@@ -128,12 +127,10 @@ export const SettingScreen = () => {
   ]
 
   return (
-    <SafeAreaView style={styles.root}>
+    <>
+      <NavigationBar left={null} title={t('setting_screen.settings')} />
       <ScrollView style={styles.container}>
-        <Text fontSize={16} lineHeight={24} bold textAlign="center">
-          {t('setting_screen.settings')}
-        </Text>
-        <Box paddingTop={24}>
+        <Box>
           {ITEMS.map((item, index) =>
             item.label === 'break' ? (
               <Box key={`break_${index}`} height={12} />
@@ -161,7 +158,7 @@ export const SettingScreen = () => {
           )}
         </Box>
       </ScrollView>
-    </SafeAreaView>
+    </>
   )
 }
 

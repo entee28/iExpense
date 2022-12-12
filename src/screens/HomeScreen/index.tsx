@@ -14,6 +14,7 @@ import Animated, {
   useSharedValue
 } from 'react-native-reanimated'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useAppNavigation } from 'libs/navigation'
 import { SectionHeader } from './components'
 
 const DATA = [
@@ -40,6 +41,7 @@ const DATA = [
 export const HomeScreen = () => {
   const { t } = useTranslation()
   const insets = useSafeAreaInsets()
+  const navigation = useAppNavigation()
 
   const scroll = useSharedValue(0)
   const scrollHandler = useAnimatedScrollHandler(({ contentOffset: { y } }) => {
@@ -70,6 +72,10 @@ export const HomeScreen = () => {
     }
   })
 
+  const toEntryScreen = () => {
+    navigation.navigate('EntryScreen')
+  }
+
   return (
     <SafeAreaView style={styles.root}>
       <Animated.View style={[styles.header, headerBorderWidth]}>
@@ -81,6 +87,7 @@ export const HomeScreen = () => {
           })}
         </Animated.Text>
         <Pressable
+          onPress={toEntryScreen}
           borderRadius={999}
           backgroundColor={colors.primary100}
           width={33}

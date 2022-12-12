@@ -26,4 +26,5 @@ declare type StackParamList = {
       | 'new_expense_category'
       | 'new_income_category'
   }
+  EntryScreen: undefined
 }

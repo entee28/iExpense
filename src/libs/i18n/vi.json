@@ -54,5 +54,14 @@
         "search": "Tìm kiếm",
         "empty": "Không tìm thấy kết quả",
         "none": "Không"
+    },
+    "entry_screen": {
+        "expense": "Chi tiêu",
+        "income": "Thu nhập",
+        "transfer": "Chuyển",
+        "note": "Ghi chú...",
+        "save": "Lưu",
+        "today": "Hôm nay",
+        "accounts": "TÀI KHOẢN"
     }
 }

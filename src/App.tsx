@@ -6,6 +6,7 @@ import { persistor, store } from 'libs/redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
+import { StatusBar } from 'react-native'
 
 const App = () => {
   return (
@@ -14,6 +15,11 @@ const App = () => {
         <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
             <BottomSheetModalProvider>
+              <StatusBar
+                translucent
+                backgroundColor="transparent"
+                barStyle="dark-content"
+              />
               <MainStack />
             </BottomSheetModalProvider>
           </NavigationContainer>

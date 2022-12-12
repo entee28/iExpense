@@ -54,5 +54,14 @@
         "search": "Search",
         "empty": "No result found",
         "none": "None"
+    },
+    "entry_screen": {
+        "expense": "Expense",
+        "income": "Income",
+        "transfer": "Transfer",
+        "note": "Note...",
+        "save": "Save",
+        "today": "Today",
+        "accounts": "ACCOUNTS"
     }
 }
