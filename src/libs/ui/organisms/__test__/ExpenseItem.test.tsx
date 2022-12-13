@@ -9,6 +9,8 @@ const currency = '₫'
 it('should display information correctly', () => {
   const item = render(
     <ExpenseItem
+      type="expense"
+      onPress={() => {}}
       category={category}
       icon={icon}
       amount={amount}
@@ -24,6 +26,8 @@ it('should display information correctly', () => {
 it('should match snapshot', () => {
   const snapshot = render(
     <ExpenseItem
+      type="expense"
+      onPress={() => {}}
       category={category}
       icon={icon}
       amount={amount}

@@ -38,7 +38,9 @@ export const categorySlice = createSlice({
       state.accountList = [...state.accountList, action.payload]
     },
     createEntry: (state, action: PayloadAction<Entry>) => {
-      state.entryList = [action.payload, ...state.entryList]
+      state.entryList = [action.payload, ...state.entryList].sort(
+        (a, b) => Date.parse(b.date) - Date.parse(a.date)
+      )
     },
     updateExpenseCategory: (
       state,
@@ -74,9 +76,11 @@ export const categorySlice = createSlice({
       state,
       action: PayloadAction<{ id: string; updatedEntry: Entry }>
     ) => {
-      state.entryList = state.entryList.map(entry =>
-        entry.id === action.payload.id ? action.payload.updatedEntry : entry
-      )
+      state.entryList = state.entryList
+        .map(entry =>
+          entry.id === action.payload.id ? action.payload.updatedEntry : entry
+        )
+        .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
     },
     deleteExpenseCategory: (state, action: PayloadAction<{ id: string }>) => {
       state.expenseCategories = state.expenseCategories.filter(
@@ -94,9 +98,9 @@ export const categorySlice = createSlice({
       )
     },
     deleteEntry: (state, action: PayloadAction<{ id: string }>) => {
-      state.entryList = state.entryList.filter(
-        entry => entry.id !== action.payload.id
-      )
+      state.entryList = state.entryList
+        .filter(entry => entry.id !== action.payload.id)
+        .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
     }
   }
 })

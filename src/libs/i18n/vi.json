@@ -1,6 +1,7 @@
 {
     "home_screen": {
-        "spent_this_week": "Đã tiêu tuần này"
+        "spent_this_week": "Đã tiêu tuần này",
+        "today": "Hôm nay"
     },
     "setting_screen": {
         "settings": "Cài đặt",

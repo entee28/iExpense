@@ -1,6 +1,7 @@
 {
     "home_screen": {
-        "spent_this_week": "Spent this week"
+        "spent_this_week": "Spent this week",
+        "today": "Today"
     },
     "setting_screen": {
         "settings": "Settings",
