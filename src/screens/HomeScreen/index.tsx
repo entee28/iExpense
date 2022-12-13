@@ -1,10 +1,13 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { useGetHomeData } from 'libs/hooks'
+import { useAppNavigation } from 'libs/navigation'
+import { useAppSelector } from 'libs/redux'
 import { ExpenseItem, Pressable, Text } from 'libs/ui'
 import colors from 'libs/ui/colors'
 import { SCREEN_PADDING_HORIZONTAL } from 'libs/ui/constants'
 import { formatNumber } from 'libs/utils'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SectionList, StyleSheet } from 'react-native'
 import Animated, {
@@ -14,45 +17,67 @@ import Animated, {
   useSharedValue
 } from 'react-native-reanimated'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
-import { useAppNavigation } from 'libs/navigation'
+import { HOME_AMOUNT_OPTIONS } from 'src/constants'
 import { SectionHeader } from './components'
-import { useAppSelector } from 'libs/redux'
-import { useFocusEffect } from '@react-navigation/native'
-
-const DATA = [
-  {
-    category: 'Eating out',
-    icon: '🍽️',
-    amount: 49000,
-    currency: '₫'
-  },
-  {
-    category: 'Eating out',
-    icon: '🍽️',
-    amount: 49000,
-    currency: '₫'
-  },
-  {
-    category: 'Eating out',
-    icon: '🍽️',
-    amount: 49000,
-    currency: '₫'
-  }
-]
 
 export const HomeScreen = () => {
-  const { entryList } = useAppSelector(state => state.category)
+  const { primaryCurrency, primarySymbol, homeAmountOption } = useAppSelector(
+    state => state.setting
+  )
   const { t } = useTranslation()
   const insets = useSafeAreaInsets()
   const navigation = useAppNavigation()
+  const {
+    data: DATA,
+    weekSpent,
+    weekDiff,
+    weekIncome,
+    monthDiff,
+    monthIncome,
+    monthSpent
+  } = useGetHomeData()
+  const CURRENCY = primarySymbol ? primaryCurrency.symbol : primaryCurrency.code
+
+  const homeAmount = useMemo(() => {
+    if (homeAmountOption === HOME_AMOUNT_OPTIONS.PROFIT_LOSS_THIS_MONTH) {
+      return {
+        amount: monthDiff,
+        title: 'home_amount_screen.PROFIT_LOSS_THIS_MONTH'
+      }
+    }
+    if (homeAmountOption === HOME_AMOUNT_OPTIONS.PROFIT_LOSS_THIS_WEEK) {
+      return {
+        amount: weekDiff,
+        title: 'home_amount_screen.PROFIT_LOSS_THIS_WEEK'
+      }
+    }
+    if (homeAmountOption === HOME_AMOUNT_OPTIONS.REVENUE_THIS_MONTH) {
+      return {
+        amount: monthIncome,
+        title: 'home_amount_screen.REVENUE_THIS_MONTH'
+      }
+    }
+    if (homeAmountOption === HOME_AMOUNT_OPTIONS.REVENUE_THIS_WEEK) {
+      return {
+        amount: weekIncome,
+        title: 'home_amount_screen.REVENUE_THIS_WEEK'
+      }
+    }
+    if (homeAmountOption === HOME_AMOUNT_OPTIONS.SPENT_THIS_MONTH) {
+      return {
+        amount: monthSpent,
+        title: 'home_amount_screen.SPENT_THIS_MONTH'
+      }
+    }
+    return {
+      amount: weekSpent,
+      title: 'home_amount_screen.SPENT_THIS_WEEK'
+    }
+  }, [homeAmountOption, DATA])
 
   const scroll = useSharedValue(0)
   const scrollHandler = useAnimatedScrollHandler(({ contentOffset: { y } }) => {
     scroll.value = y
-  })
-
-  useFocusEffect(() => {
-    console.log({ entryList })
   })
 
   const headerBorderWidth = useAnimatedStyle(() => {
@@ -79,22 +104,24 @@ export const HomeScreen = () => {
     }
   })
 
-  const toEntryScreen = () => {
-    navigation.navigate('EntryScreen', {})
+  const toEntryScreen = (entry?: Entry) => {
+    navigation.navigate('EntryScreen', {
+      entry
+    })
   }
 
   return (
     <SafeAreaView style={styles.root}>
       <Animated.View style={[styles.header, headerBorderWidth]}>
         <Animated.Text style={[styles.headerTotal, animatedTextOpacity]}>
-          {formatNumber(198000, {
-            currency: '₫',
+          {formatNumber(homeAmount.amount, {
+            currency: CURRENCY,
             showCurrency: true,
             decimalCount: 2
           })}
         </Animated.Text>
         <Pressable
-          onPress={toEntryScreen}
+          onPress={() => toEntryScreen()}
           borderRadius={999}
           backgroundColor={colors.primary100}
           width={33}
@@ -120,15 +147,19 @@ export const HomeScreen = () => {
           fontSize={20}
           lineHeight={32}
           marginTop={24}>
-          {t('home_screen.spent_this_week')}
+          {t(homeAmount.title)}
         </Text>
         <Text
+          textProps={{
+            adjustsFontSizeToFit: true,
+            numberOfLines: 1
+          }}
           textAlign="center"
           color={colors.mono40}
           bold
           fontSize={48}
           marginBottom={20}>
-          {formatNumber(198000, {
+          {formatNumber(homeAmount.amount, {
             currency: '₫',
             showCurrency: true,
             decimalCount: 2
@@ -137,29 +168,23 @@ export const HomeScreen = () => {
 
         <SectionList
           scrollEnabled={false}
-          sections={[
-            { title: 'Today', data: DATA, total: 69000 },
-            {
-              title: 'Yesterday',
-              data: DATA,
-              total: 69000
-            },
-            {
-              title: '01/01/2077',
-              data: DATA,
-              total: 69000
-            }
-          ]}
+          sections={DATA}
           renderItem={({ item }) => (
             <ExpenseItem
+              type={item.type}
               amount={item.amount}
-              category={item.category}
-              currency={item.currency}
-              icon={item.icon}
+              category={item.toCategory.name}
+              currency={CURRENCY}
+              icon={item.toCategory.icon}
+              onPress={() => toEntryScreen(item)}
             />
           )}
           renderSectionHeader={({ section }) => (
-            <SectionHeader title={section.title} total={section.total} />
+            <SectionHeader
+              currency={CURRENCY}
+              title={section.title}
+              total={section.total}
+            />
           )}
           keyExtractor={(_, index) => `basicListEntry-${index}`}
         />

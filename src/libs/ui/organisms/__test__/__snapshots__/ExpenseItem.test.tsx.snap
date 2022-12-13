@@ -4,7 +4,7 @@ exports[`should match snapshot 1`] = `
 <View
   accessible={true}
   collapsable={false}
-  focusable={false}
+  focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -28,7 +28,7 @@ exports[`should match snapshot 1`] = `
         Object {
           "color": "#1A1A1A",
           "fontFamily": "Nunito-Regular",
-          "fontSize": 42,
+          "fontSize": 32,
           "lineHeight": undefined,
           "textAlign": "auto",
         },

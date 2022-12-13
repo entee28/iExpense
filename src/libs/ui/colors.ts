@@ -27,6 +27,10 @@ export default {
   destructive30Hard: '#F8B6C1',
   destructive10: '#E60A321A',
   destructive5: 'rgba(230, 10, 50, 0.05)',
+  positive5: '#00B47E0D',
+  positive10: '#00B47E1A',
+  positive30: '#00B47E4D',
+  positive100: '#00B47E',
   white: '#FFFFFF',
   transparent: 'transparent',
   aliceBlue: '#EBF3FF'

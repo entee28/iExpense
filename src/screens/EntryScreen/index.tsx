@@ -1,4 +1,8 @@
-import { faArrowRight, faCircle } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowRight,
+  faCircle,
+  faTrashCan
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import RNDateTimePicker, {
   DateTimePickerEvent
@@ -24,7 +28,7 @@ import colors from 'libs/ui/colors'
 import React, { useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, TextInput } from 'react-native'
-import { createEntry, updateEntry } from 'libs/redux/categorySlice'
+import { createEntry, deleteEntry, updateEntry } from 'libs/redux/categorySlice'
 import { CategoryPicker } from './components'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -119,7 +123,7 @@ export const EntryScreen = ({ route, navigation }: Props) => {
           id: entry.id,
           updatedEntry: {
             amount: parseFloat(amount),
-            date: dayjs(date).toString(),
+            date: dayjs(date).toISOString(),
             fromCategory: selectedAccount,
             toCategory: selectedCategory,
             id: entry.id,
@@ -132,7 +136,7 @@ export const EntryScreen = ({ route, navigation }: Props) => {
       dispatch(
         createEntry({
           amount: parseFloat(amount),
-          date: dayjs(date).toString(),
+          date: dayjs(date).toISOString(),
           fromCategory: selectedAccount,
           toCategory: selectedCategory,
           id: uuidv4(),
@@ -145,9 +149,33 @@ export const EntryScreen = ({ route, navigation }: Props) => {
     navigation.goBack()
   }
 
+  const handleDelete = () => {
+    if (entry) {
+      dispatch(
+        deleteEntry({
+          id: entry.id
+        })
+      )
+    }
+    navigation.goBack()
+  }
+
   return (
     <>
-      <NavigationBar title={t(title)} />
+      <NavigationBar
+        title={t(title)}
+        right={
+          entry && (
+            <Pressable onPress={handleDelete}>
+              <FontAwesomeIcon
+                icon={faTrashCan}
+                color={colors.destructive80}
+                size={16}
+              />
+            </Pressable>
+          )
+        }
+      />
       <Box flex={1} backgroundColor={colors.white}>
         <Box alignItems="center" justifyContent="center" flex={1}>
           <Box
