@@ -56,12 +56,7 @@ export const CurrencyScreen = () => {
     'primary'
   )
   const handleOpenSheet = (type: 'primary' | 'secondary') => {
-    if (type === 'primary') {
-      setPickerType('primary')
-    } else {
-      setPickerType('secondary')
-    }
-
+    setPickerType(type)
     currencyPickerRef.current?.present()
   }
   const handleCloseSheet = () => {

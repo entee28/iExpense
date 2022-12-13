@@ -21,3 +21,15 @@ type Currency = {
   code: string
   name_plural: string
 }
+
+type EntryType = 'expense' | 'income' | 'transfer'
+
+type Entry = {
+  id: string
+  fromCategory: Category
+  toCategory: Category
+  date: string
+  amount: number
+  note: string
+  type: EntryType
+}
