@@ -15,7 +15,7 @@ import { CategoryItem } from './CategoryItem'
 type Props = {
   type: 'from' | 'to'
   closeSheet: () => void
-  setEntryType: (type: 'income' | 'expense' | 'transfer') => void
+  setEntryType: (type: EntryType) => void
   setSelectedAccount: (account: Category) => void
   setSelectedCategory: (category: Category) => void
 }
@@ -34,10 +34,7 @@ export const CategoryPicker = forwardRef<BottomSheetMethods, Props>(
     )
     const { t } = useTranslation()
 
-    const handleModifyCategory = (
-      entryType: 'income' | 'expense' | 'transfer',
-      category: Category
-    ) => {
+    const handleModifyCategory = (entryType: EntryType, category: Category) => {
       if (type === 'from') {
         setSelectedAccount(category)
       } else {

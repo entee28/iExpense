@@ -16,6 +16,8 @@ import Animated, {
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useAppNavigation } from 'libs/navigation'
 import { SectionHeader } from './components'
+import { useAppSelector } from 'libs/redux'
+import { useFocusEffect } from '@react-navigation/native'
 
 const DATA = [
   {
@@ -39,6 +41,7 @@ const DATA = [
 ]
 
 export const HomeScreen = () => {
+  const { entryList } = useAppSelector(state => state.category)
   const { t } = useTranslation()
   const insets = useSafeAreaInsets()
   const navigation = useAppNavigation()
@@ -46,6 +49,10 @@ export const HomeScreen = () => {
   const scroll = useSharedValue(0)
   const scrollHandler = useAnimatedScrollHandler(({ contentOffset: { y } }) => {
     scroll.value = y
+  })
+
+  useFocusEffect(() => {
+    console.log({ entryList })
   })
 
   const headerBorderWidth = useAnimatedStyle(() => {
@@ -73,7 +80,7 @@ export const HomeScreen = () => {
   })
 
   const toEntryScreen = () => {
-    navigation.navigate('EntryScreen')
+    navigation.navigate('EntryScreen', {})
   }
 
   return (

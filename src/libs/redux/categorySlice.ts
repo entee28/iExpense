@@ -10,6 +10,7 @@ type CategorySliceState = {
   expenseCategories: Category[]
   incomeCategories: Category[]
   accountList: Category[]
+  entryList: Entry[]
 }
 
 export const categorySlice = createSlice({
@@ -17,7 +18,8 @@ export const categorySlice = createSlice({
   initialState: {
     expenseCategories: defaultExpensesCategories,
     incomeCategories: defaultIncomesCategories,
-    accountList: defaultAccountList
+    accountList: defaultAccountList,
+    entryList: []
   } as CategorySliceState,
   reducers: {
     updateCategories: (
@@ -34,6 +36,9 @@ export const categorySlice = createSlice({
     },
     createAccount: (state, action: PayloadAction<Category>) => {
       state.accountList = [...state.accountList, action.payload]
+    },
+    createEntry: (state, action: PayloadAction<Entry>) => {
+      state.entryList = [action.payload, ...state.entryList]
     },
     updateExpenseCategory: (
       state,
@@ -65,6 +70,14 @@ export const categorySlice = createSlice({
           : category
       )
     },
+    updateEntry: (
+      state,
+      action: PayloadAction<{ id: string; updatedEntry: Entry }>
+    ) => {
+      state.entryList = state.entryList.map(entry =>
+        entry.id === action.payload.id ? action.payload.updatedEntry : entry
+      )
+    },
     deleteExpenseCategory: (state, action: PayloadAction<{ id: string }>) => {
       state.expenseCategories = state.expenseCategories.filter(
         category => category.id !== action.payload.id
@@ -79,6 +92,11 @@ export const categorySlice = createSlice({
       state.accountList = state.accountList.filter(
         category => category.id !== action.payload.id
       )
+    },
+    deleteEntry: (state, action: PayloadAction<{ id: string }>) => {
+      state.entryList = state.entryList.filter(
+        entry => entry.id !== action.payload.id
+      )
     }
   }
 })
@@ -88,11 +106,14 @@ export const {
   createAccount,
   createExpenseCategory,
   createIncomeCategory,
+  createEntry,
   updateAccount,
   updateExpenseCategory,
   updateIncomeCategory,
+  updateEntry,
   deleteAccount,
   deleteExpenseCategory,
-  deleteIncomeCategory
+  deleteIncomeCategory,
+  deleteEntry
 } = categorySlice.actions
 export const categoryReducer = categorySlice.reducer

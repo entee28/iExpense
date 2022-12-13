@@ -3,11 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import RNDateTimePicker, {
   DateTimePickerEvent
 } from '@react-native-community/datetimepicker'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import dayjs from 'dayjs'
 import 'dayjs/locale/vi'
 import isToday from 'dayjs/plugin/isToday'
 import i18n from 'libs/i18n'
-import { useAppSelector } from 'libs/redux'
+import { useAppDispatch, useAppSelector } from 'libs/redux'
 import {
   BottomSheetMethods,
   Box,
@@ -20,30 +21,47 @@ import {
   Text
 } from 'libs/ui'
 import colors from 'libs/ui/colors'
-import { formatNumber } from 'libs/utils'
 import React, { useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, TextInput } from 'react-native'
+import { createEntry, updateEntry } from 'libs/redux/categorySlice'
 import { CategoryPicker } from './components'
+import { v4 as uuidv4 } from 'uuid'
 
 dayjs.extend(isToday)
 
-export const EntryScreen = () => {
-  const { primaryCurrency } = useAppSelector(state => state.setting)
+function numberWithCommas(amount: string) {
+  return amount.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+}
+
+type Props = NativeStackScreenProps<StackParamList, 'EntryScreen'>
+
+export const EntryScreen = ({ route, navigation }: Props) => {
+  const { primaryCurrency, primarySymbol } = useAppSelector(
+    state => state.setting
+  )
   const { accountList, expenseCategories } = useAppSelector(
     state => state.category
   )
+  const dispatch = useAppDispatch()
+  const { entry } = route.params || {}
   const { t } = useTranslation()
 
-  const [amount, setAmount] = useState('')
-  const [note, setNote] = useState('')
-  const [entryType, setEntryType] = useState<'expense' | 'income' | 'transfer'>(
-    'expense'
+  const [amount, setAmount] = useState(entry ? entry.amount.toString() : '')
+  const [note, setNote] = useState(entry ? entry.note : '')
+  const [entryType, setEntryType] = useState<EntryType>(
+    entry ? entry.type : 'expense'
   )
-  const [selectedAccount, setSelectedAccount] = useState(accountList[0])
-  const [selectedCategory, setSelectedCategory] = useState(expenseCategories[0])
+  const [selectedAccount, setSelectedAccount] = useState(
+    entry ? entry.fromCategory : accountList[0]
+  )
+  const [selectedCategory, setSelectedCategory] = useState(
+    entry ? entry.toCategory : expenseCategories[0]
+  )
   const [showDatePicker, setShowDatePicker] = useState(false)
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(
+    entry ? dayjs(entry.date).toDate() : new Date()
+  )
 
   const title = useMemo(() => {
     if (entryType === 'expense') {
@@ -94,6 +112,39 @@ export const EntryScreen = () => {
     categoryPickerRef.current?.close()
   }
 
+  const handleSave = () => {
+    if (entry) {
+      dispatch(
+        updateEntry({
+          id: entry.id,
+          updatedEntry: {
+            amount: parseFloat(amount),
+            date: dayjs(date).toString(),
+            fromCategory: selectedAccount,
+            toCategory: selectedCategory,
+            id: entry.id,
+            note,
+            type: entryType
+          }
+        })
+      )
+    } else {
+      dispatch(
+        createEntry({
+          amount: parseFloat(amount),
+          date: dayjs(date).toString(),
+          fromCategory: selectedAccount,
+          toCategory: selectedCategory,
+          id: uuidv4(),
+          note,
+          type: entryType
+        })
+      )
+    }
+
+    navigation.goBack()
+  }
+
   return (
     <>
       <NavigationBar title={t(title)} />
@@ -104,10 +155,10 @@ export const EntryScreen = () => {
             borderBottomColor={colors.mono40}
             borderBottomWidth={4}>
             <Text fontSize={48}>
-              {amount === '' ? 0 : formatNumber(parseFloat(amount))}
+              {amount === '' ? 0 : numberWithCommas(amount)}
             </Text>
             <Text color={colors.mono70} fontSize={24}>
-              {primaryCurrency.symbol}
+              {primarySymbol ? primaryCurrency.symbol : primaryCurrency.code}
             </Text>
           </Box>
         </Box>
@@ -136,6 +187,7 @@ export const EntryScreen = () => {
             value={note}
             onChangeText={setNote}
             placeholder={t('entry_screen.note')}
+            maxLength={100}
           />
         </Box>
 
@@ -184,7 +236,7 @@ export const EntryScreen = () => {
             style={styles.saveBtn}
             label={t('entry_screen.save')}
             labelStyle={styles.saveBtnLabel}
-            onPress={() => {}}
+            onPress={handleSave}
           />
         </Box>
 
