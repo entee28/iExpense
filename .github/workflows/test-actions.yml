@@ -4,7 +4,6 @@ on: [push]
 jobs:
   iExpense-Unit-Tests:
     runs-on: ubuntu-latest
-        node-version: [16.x]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
