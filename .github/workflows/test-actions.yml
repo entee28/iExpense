@@ -4,17 +4,15 @@ on: [push]
 jobs:
   iExpense-Unit-Tests:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
         node-version: [16.x]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Install Node.js 16.x
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: npm ci, and run tests
-        run: |
-          npm ci
-          npm run test
+          node-version: '16.x'
+      - name: Install Yarn Dependencies
+        run: yarn install
+      - name: Run Unit Tests
+        run: yarn test
