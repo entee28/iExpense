@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest src",
-    "e2e:android:debug": "detox test --configuration android.emu.debug",
+    "e2e:test": "detox test --configuration",
+    "e2e:build": "detox build --configuration",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
