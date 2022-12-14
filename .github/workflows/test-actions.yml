@@ -1,4 +1,4 @@
-name: iExpense Test
+name: Unit Tests
 run-name: Running unit tests for iExpense 🚀
 on: [push]
 jobs:
