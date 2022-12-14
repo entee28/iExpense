@@ -4,8 +4,6 @@ run-name: Running E2E tests on iOS 🚀
 on:
   pull_request:
     branches: [master]
-  push:
-    branches: [dev-41-actions]
 
 jobs:
   build:
