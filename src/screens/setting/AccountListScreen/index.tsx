@@ -16,9 +16,12 @@ export const AccountListScreen = () => {
   return (
     <>
       <NavigationBar
+        testIDScreen="account_list_screen"
         title={t('setting_screen.accounts')}
         right={
-          <Pressable onPress={handleToggleEditMode}>
+          <Pressable
+            testID="account_list_screen.edit_btn"
+            onPress={handleToggleEditMode}>
             <FontAwesomeIcon icon={faPen} size={14} color={colors.mono100} />
           </Pressable>
         }

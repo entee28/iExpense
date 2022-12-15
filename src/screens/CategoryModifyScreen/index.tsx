@@ -117,7 +117,7 @@ export const CategoryModifyScreen = ({ navigation, route }: Props) => {
   return (
     <>
       <NavigationBar
-        testIDScreen={option}
+        testIDScreen={'category_modify_screen'}
         title={t(`category_modify_screen.${option}`)}
         right={
           <Pressable
