@@ -3,7 +3,7 @@
 exports[`renders correctly 1`] = `
 <View
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "red",
       "flexDirection": "row",

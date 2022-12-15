@@ -27,7 +27,7 @@ export const CategoryModifyScreen = ({ navigation, route }: Props) => {
   const { option, category, icon, id } = route.params
   const { t } = useTranslation()
 
-  const [emoji, setEmoji] = useState(icon || '')
+  const [emoji, setEmoji] = useState(icon || '🤷‍♂️')
   const [categoryName, setCategoryName] = useState(category || '')
 
   const categoryNamePlaceholder = useMemo(() => {
@@ -117,9 +117,13 @@ export const CategoryModifyScreen = ({ navigation, route }: Props) => {
   return (
     <>
       <NavigationBar
+        testIDScreen={option}
         title={t(`category_modify_screen.${option}`)}
         right={
-          <Pressable disabled={isDisabled} onPress={onDonePress}>
+          <Pressable
+            testID="category_modify.done_btn"
+            disabled={isDisabled}
+            onPress={onDonePress}>
             <FontAwesomeIcon
               icon={faCheck}
               size={14}
@@ -135,10 +139,10 @@ export const CategoryModifyScreen = ({ navigation, route }: Props) => {
               setEmoji(e.nativeEvent.key)
             }
           }}
-          placeholder="🤷‍♂️"
           value={emoji}
           style={styles.emojiInput}
           caretHidden={true}
+          testID="category_modify.emoji_input"
         />
         <TextInput
           placeholder={t(categoryNamePlaceholder)}
@@ -146,6 +150,7 @@ export const CategoryModifyScreen = ({ navigation, route }: Props) => {
           onChangeText={setCategoryName}
           style={styles.categoryInput}
           caretHidden={true}
+          testID="category_modify.category_input"
         />
       </Box>
     </>

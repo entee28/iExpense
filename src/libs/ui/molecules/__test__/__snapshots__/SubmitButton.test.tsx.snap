@@ -3,7 +3,7 @@
 exports[`Button should match snapshot 1`] = `
 <View
   style={
-    Object {
+    {
       "backgroundColor": "#FFFFFF",
       "borderTopColor": "#1A1A1A1A",
       "borderTopWidth": 1,
@@ -24,7 +24,7 @@ exports[`Button should match snapshot 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
+      {
         "backgroundColor": "red",
         "borderRadius": 8,
         "opacity": 1,
@@ -35,15 +35,15 @@ exports[`Button should match snapshot 1`] = `
   >
     <Text
       style={
-        Array [
-          Object {
+        [
+          {
             "color": "blue",
             "fontFamily": "Nunito-SemiBold",
             "fontSize": 14,
             "lineHeight": undefined,
             "textAlign": "center",
           },
-          Object {},
+          {},
         ]
       }
     >

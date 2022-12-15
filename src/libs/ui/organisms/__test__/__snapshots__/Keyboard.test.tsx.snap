@@ -2,11 +2,11 @@
 
 exports[`should match snapshot 1`] = `
 <View
-  style={Object {}}
+  style={{}}
 >
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-around",
         "marginTop": 0,
@@ -18,7 +18,7 @@ exports[`should match snapshot 1`] = `
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 10,
           "right": 10,
@@ -33,7 +33,7 @@ exports[`should match snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 48,
           "justifyContent": "center",
@@ -44,15 +44,15 @@ exports[`should match snapshot 1`] = `
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "#1A1A1A",
               "fontFamily": "Nunito-Bold",
               "fontSize": 32,
               "lineHeight": 38,
               "textAlign": "center",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -64,7 +64,7 @@ exports[`should match snapshot 1`] = `
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 10,
           "right": 10,
@@ -79,7 +79,7 @@ exports[`should match snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 48,
           "justifyContent": "center",
@@ -90,15 +90,15 @@ exports[`should match snapshot 1`] = `
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "#1A1A1A",
               "fontFamily": "Nunito-Bold",
               "fontSize": 32,
               "lineHeight": 38,
               "textAlign": "center",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -110,7 +110,7 @@ exports[`should match snapshot 1`] = `
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 10,
           "right": 10,
@@ -125,7 +125,7 @@ exports[`should match snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 48,
           "justifyContent": "center",
@@ -136,15 +136,15 @@ exports[`should match snapshot 1`] = `
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "#1A1A1A",
               "fontFamily": "Nunito-Bold",
               "fontSize": 32,
               "lineHeight": 38,
               "textAlign": "center",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -154,7 +154,7 @@ exports[`should match snapshot 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-around",
         "marginTop": 12,
@@ -166,7 +166,7 @@ exports[`should match snapshot 1`] = `
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 10,
           "right": 10,
@@ -181,7 +181,7 @@ exports[`should match snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 48,
           "justifyContent": "center",
@@ -192,15 +192,15 @@ exports[`should match snapshot 1`] = `
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "#1A1A1A",
               "fontFamily": "Nunito-Bold",
               "fontSize": 32,
               "lineHeight": 38,
               "textAlign": "center",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -212,7 +212,7 @@ exports[`should match snapshot 1`] = `
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 10,
           "right": 10,
@@ -227,7 +227,7 @@ exports[`should match snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 48,
           "justifyContent": "center",
@@ -238,15 +238,15 @@ exports[`should match snapshot 1`] = `
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "#1A1A1A",
               "fontFamily": "Nunito-Bold",
               "fontSize": 32,
               "lineHeight": 38,
               "textAlign": "center",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -258,7 +258,7 @@ exports[`should match snapshot 1`] = `
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 10,
           "right": 10,
@@ -273,7 +273,7 @@ exports[`should match snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 48,
           "justifyContent": "center",
@@ -284,15 +284,15 @@ exports[`should match snapshot 1`] = `
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "#1A1A1A",
               "fontFamily": "Nunito-Bold",
               "fontSize": 32,
               "lineHeight": 38,
               "textAlign": "center",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -302,7 +302,7 @@ exports[`should match snapshot 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-around",
         "marginTop": 12,
@@ -314,7 +314,7 @@ exports[`should match snapshot 1`] = `
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 10,
           "right": 10,
@@ -329,7 +329,7 @@ exports[`should match snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 48,
           "justifyContent": "center",
@@ -340,15 +340,15 @@ exports[`should match snapshot 1`] = `
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "#1A1A1A",
               "fontFamily": "Nunito-Bold",
               "fontSize": 32,
               "lineHeight": 38,
               "textAlign": "center",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -360,7 +360,7 @@ exports[`should match snapshot 1`] = `
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 10,
           "right": 10,
@@ -375,7 +375,7 @@ exports[`should match snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 48,
           "justifyContent": "center",
@@ -386,15 +386,15 @@ exports[`should match snapshot 1`] = `
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "#1A1A1A",
               "fontFamily": "Nunito-Bold",
               "fontSize": 32,
               "lineHeight": 38,
               "textAlign": "center",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -406,7 +406,7 @@ exports[`should match snapshot 1`] = `
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 10,
           "right": 10,
@@ -421,7 +421,7 @@ exports[`should match snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 48,
           "justifyContent": "center",
@@ -432,15 +432,15 @@ exports[`should match snapshot 1`] = `
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "#1A1A1A",
               "fontFamily": "Nunito-Bold",
               "fontSize": 32,
               "lineHeight": 38,
               "textAlign": "center",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -450,7 +450,7 @@ exports[`should match snapshot 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "flexDirection": "row",
         "justifyContent": "space-around",
         "marginTop": 12,
@@ -462,7 +462,7 @@ exports[`should match snapshot 1`] = `
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 10,
           "right": 10,
@@ -477,7 +477,7 @@ exports[`should match snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 48,
           "justifyContent": "center",
@@ -488,15 +488,15 @@ exports[`should match snapshot 1`] = `
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "#1A1A1A",
               "fontFamily": "Nunito-Bold",
               "fontSize": 32,
               "lineHeight": 38,
               "textAlign": "center",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -508,7 +508,7 @@ exports[`should match snapshot 1`] = `
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 10,
           "right": 10,
@@ -523,7 +523,7 @@ exports[`should match snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 48,
           "justifyContent": "center",
@@ -534,15 +534,15 @@ exports[`should match snapshot 1`] = `
     >
       <Text
         style={
-          Array [
-            Object {
+          [
+            {
               "color": "#1A1A1A",
               "fontFamily": "Nunito-Bold",
               "fontSize": 32,
               "lineHeight": 38,
               "textAlign": "center",
             },
-            Object {},
+            {},
           ]
         }
       >
@@ -554,7 +554,7 @@ exports[`should match snapshot 1`] = `
       collapsable={false}
       focusable={true}
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 10,
           "right": 10,
@@ -569,7 +569,7 @@ exports[`should match snapshot 1`] = `
       onResponderTerminationRequest={[Function]}
       onStartShouldSetResponder={[Function]}
       style={
-        Object {
+        {
           "alignItems": "center",
           "height": 48,
           "justifyContent": "center",
@@ -581,11 +581,11 @@ exports[`should match snapshot 1`] = `
       <
         color="#1A1A1A"
         icon={
-          Object {
-            "icon": Array [
+          {
+            "icon": [
               576,
               512,
-              Array [
+              [
                 9003,
                 "backspace",
               ],

@@ -28,6 +28,7 @@ type Props = {
   onBack?: () => void
   border?: boolean
   style?: StyleProp<ViewStyle>
+  testIDScreen?: string
 }
 
 const SIDE_WIDTH = 90
@@ -43,6 +44,7 @@ export const NavigationBar = ({
   backgroundColor = colors.white,
   transparent = false,
   color = colors.mono100,
+  testIDScreen = '',
   border,
   style
 }: Props) => {
@@ -56,6 +58,7 @@ export const NavigationBar = ({
 
   return (
     <View
+      testID={`navigation_bar.${testIDScreen}`}
       style={[
         styles.root,
         shadow && styles.shadow,

@@ -3,15 +3,15 @@
 exports[`renders correctly 1`] = `
 <Text
   style={
-    Array [
-      Object {
+    [
+      {
         "color": "red",
         "fontFamily": "Nunito-Medium",
         "fontSize": 14,
         "lineHeight": 16,
         "textAlign": "auto",
       },
-      Object {},
+      {},
     ]
   }
 >

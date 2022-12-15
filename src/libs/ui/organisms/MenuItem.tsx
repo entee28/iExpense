@@ -12,6 +12,7 @@ type Props = {
   right?: React.ReactNode
   accessibilityLabel?: string
   disabled?: boolean
+  testID?: string
 } & Omit<ViewStyle, 'right'>
 
 export const MenuItem = ({
@@ -21,10 +22,12 @@ export const MenuItem = ({
   right,
   accessibilityLabel,
   disabled = false,
+  testID,
   ...props
 }: Props) => {
   return (
     <Pressable
+      testID={testID}
       disabled={disabled}
       style={[styles.item, { ...props }]}
       onPress={onPress}>

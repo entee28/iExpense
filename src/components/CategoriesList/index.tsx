@@ -198,7 +198,9 @@ export const CategoriesList = ({ type }: Props) => {
           paddingLeft={12}>
           <Animated.View
             style={[styles.categoryItemContainer, deleteBtnAnimatedStyle]}>
-            <Pressable onPress={() => onDeleteBtnPress(item)}>
+            <Pressable
+              testID={`category_list_item.${item.name}_delete_btn`}
+              onPress={() => onDeleteBtnPress(item)}>
               <FontAwesomeIcon
                 icon={faCircleMinus}
                 color={colors.destructive}
@@ -260,6 +262,7 @@ export const CategoriesList = ({ type }: Props) => {
   return (
     <>
       <DraggableFlatList
+        testID="categories_list.flat_list"
         data={data}
         onDragEnd={({ data }) => handleDragEnd(data)}
         keyExtractor={item => item.name}
@@ -272,7 +275,10 @@ export const CategoriesList = ({ type }: Props) => {
           marginBottom: 24
         }}
         ListFooterComponent={() => (
-          <Pressable paddingLeft={12} onPress={() => handlePress()}>
+          <Pressable
+            testID="categories_list.add_category_btn"
+            paddingLeft={12}
+            onPress={() => handlePress()}>
             <Box
               flexDirection="row"
               alignItems="center"
