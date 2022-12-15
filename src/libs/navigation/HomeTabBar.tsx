@@ -51,6 +51,7 @@ export const HomeTabBar = () => {
         name="SettingScreen"
         component={SettingScreen}
         options={{
+          tabBarTestID: 'home_tab_bar.setting_screen',
           tabBarIcon: tabBarIconProps => (
             <FontAwesomeIcon
               color={

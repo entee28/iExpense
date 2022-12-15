@@ -136,6 +136,7 @@ export const SettingScreen = () => {
               <Box key={`break_${index}`} height={12} />
             ) : (
               <MenuItem
+                testID={item.label}
                 icon={item.icon}
                 key={item.label}
                 marginBottom={8}
