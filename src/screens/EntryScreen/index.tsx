@@ -11,8 +11,10 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import dayjs from 'dayjs'
 import 'dayjs/locale/vi'
 import isToday from 'dayjs/plugin/isToday'
+import { Convert } from 'easy-currencies'
 import i18n from 'libs/i18n'
 import { useAppDispatch, useAppSelector } from 'libs/redux'
+import { createEntry, deleteEntry, updateEntry } from 'libs/redux/categorySlice'
 import {
   BottomSheetMethods,
   Box,
@@ -25,12 +27,12 @@ import {
   Text
 } from 'libs/ui'
 import colors from 'libs/ui/colors'
-import React, { useMemo, useRef, useState } from 'react'
+import { formatNumber } from 'libs/utils'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, TextInput } from 'react-native'
-import { createEntry, deleteEntry, updateEntry } from 'libs/redux/categorySlice'
-import { CategoryPicker } from './components'
 import { v4 as uuidv4 } from 'uuid'
+import { CategoryPicker } from './components'
 
 dayjs.extend(isToday)
 
@@ -41,9 +43,8 @@ function numberWithCommas(amount: string) {
 type Props = NativeStackScreenProps<StackParamList, 'EntryScreen'>
 
 export const EntryScreen = ({ route, navigation }: Props) => {
-  const { primaryCurrency, primarySymbol } = useAppSelector(
-    state => state.setting
-  )
+  const { primaryCurrency, primarySymbol, secondaryCurrency, secondarySymbol } =
+    useAppSelector(state => state.setting)
   const { accountList, expenseCategories } = useAppSelector(
     state => state.category
   )
@@ -51,7 +52,7 @@ export const EntryScreen = ({ route, navigation }: Props) => {
   const { entry } = route.params || {}
   const { t } = useTranslation()
 
-  const [amount, setAmount] = useState(entry ? entry.amount.toString() : '')
+  const [amount, setAmount] = useState(entry ? entry.amount.toFixed(2) : '')
   const [note, setNote] = useState(entry ? entry.note : '')
   const [entryType, setEntryType] = useState<EntryType>(
     entry ? entry.type : 'expense'
@@ -66,6 +67,20 @@ export const EntryScreen = ({ route, navigation }: Props) => {
   const [date, setDate] = useState(
     entry ? dayjs(entry.date).toDate() : new Date()
   )
+  const [convertRate, setConvertRate] = useState(0)
+
+  useEffect(() => {
+    const getConvertRate = async () => {
+      if (secondaryCurrency) {
+        const rate = (await Convert().from(primaryCurrency.code).fetch()).rates[
+          secondaryCurrency.code
+        ]
+        setConvertRate(rate)
+      }
+    }
+
+    getConvertRate()
+  }, [convertRate])
 
   const title = useMemo(() => {
     if (entryType === 'expense') {
@@ -77,6 +92,12 @@ export const EntryScreen = ({ route, navigation }: Props) => {
 
     return 'entry_screen.transfer'
   }, [entryType])
+
+  const secondaryAmount = useMemo(() => {
+    return formatNumber(parseFloat(amount) * convertRate, {
+      decimalCount: 2
+    })
+  }, [amount, convertRate])
 
   const onDateChange = (_: DateTimePickerEvent, selectedDate?: Date) => {
     setShowDatePicker(false)
@@ -178,6 +199,19 @@ export const EntryScreen = ({ route, navigation }: Props) => {
       />
       <Box flex={1} backgroundColor={colors.white}>
         <Box alignItems="center" justifyContent="center" flex={1}>
+          {secondaryCurrency && (
+            <Box flexDirection="row" marginBottom={8}>
+              <Text color={colors.mono70} fontSize={28}>
+                {amount === '' ? 0 : secondaryAmount}
+              </Text>
+              <Text color={colors.mono70} fontSize={16}>
+                {secondarySymbol
+                  ? secondaryCurrency.symbol
+                  : secondaryCurrency.code}
+              </Text>
+            </Box>
+          )}
+
           <Box
             flexDirection="row"
             borderBottomColor={colors.mono40}
