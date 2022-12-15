@@ -2,16 +2,10 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { useNavigation } from '@react-navigation/native'
 import { NAVBAR_HEIGHT } from 'libs/ui/constants'
-import React from 'react'
-import {
-  Dimensions,
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewStyle
-} from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { getWidth } from 'libs/utils'
+import React from 'react'
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Pressable, Text } from '../atoms'
 import colors from '../colors'
 
@@ -83,6 +77,7 @@ export const NavigationBar = ({
       <View style={styles.center}>
         {typeof title === 'string' ? (
           <Text
+            testID={`navigation_bar.${testIDScreen}_title`}
             bold
             fontSize={16}
             lineHeight={24}
