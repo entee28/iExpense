@@ -160,7 +160,7 @@ export const HomeScreen = () => {
           fontSize={48}
           marginBottom={20}>
           {formatNumber(homeAmount.amount, {
-            currency: '₫',
+            currency: CURRENCY,
             showCurrency: true,
             decimalCount: 2
           })}
