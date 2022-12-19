@@ -30,6 +30,7 @@ export const ExpenseItem = ({
       marginTop={4}>
       {type === 'transfer' ? (
         <Box
+          testID="expense_item.transfer_icon"
           width={32}
           height={32}
           alignItems="center"
@@ -40,7 +41,10 @@ export const ExpenseItem = ({
           <FontAwesomeIcon color={colors.white} icon={faArrowRightArrowLeft} />
         </Box>
       ) : (
-        <Text fontSize={32} accessibilityLabel="icon">
+        <Text
+          testID="expense_item.category_icon"
+          fontSize={32}
+          accessibilityLabel="icon">
           {icon}
         </Text>
       )}
@@ -55,10 +59,16 @@ export const ExpenseItem = ({
         borderBottomWidth={1}
         paddingBottom={8}
         paddingTop={14}>
-        <Text fontSize={18} accessibilityLabel="category" lineHeight={32} bold>
+        <Text
+          testID="expense_item.category_name"
+          fontSize={18}
+          accessibilityLabel="category"
+          lineHeight={32}
+          bold>
           {category}
         </Text>
         <Text
+          testID="expense_item.amount"
           color={type === 'income' ? colors.positive100 : colors.mono100}
           fontSize={16}
           lineHeight={32}

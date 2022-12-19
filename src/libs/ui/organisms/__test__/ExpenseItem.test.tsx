@@ -6,34 +6,23 @@ const icon = '🍽️'
 const amount = 49000
 const currency = '₫'
 
-it('should display information correctly', () => {
-  const item = render(
-    <ExpenseItem
-      type="expense"
-      onPress={() => {}}
-      category={category}
-      icon={icon}
-      amount={amount}
-      currency={currency}
-    />
-  )
+const item = render(
+  <ExpenseItem
+    type="expense"
+    onPress={() => {}}
+    category={category}
+    icon={icon}
+    amount={amount}
+    currency={currency}
+  />
+)
 
+it('should display information correctly', () => {
   expect(item.getByLabelText('category').children[0]).toEqual(category)
   expect(item.getByLabelText('icon').children[0]).toEqual(icon)
   expect(item.getByLabelText('amount').children[0]).toEqual('49,000.0 ₫')
 })
 
 it('should match snapshot', () => {
-  const snapshot = render(
-    <ExpenseItem
-      type="expense"
-      onPress={() => {}}
-      category={category}
-      icon={icon}
-      amount={amount}
-      currency={currency}
-    />
-  ).toJSON()
-
-  expect(snapshot).toMatchSnapshot()
+  expect(item.toJSON()).toMatchSnapshot()
 })

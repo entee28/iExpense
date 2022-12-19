@@ -79,6 +79,7 @@ export const CategoryPicker = forwardRef<BottomSheetMethods, Props>(
         ref={ref}
         snapPoints={type === 'from' ? ['25%'] : ['50%']}>
         <ScrollView
+          testID="category_picker.scroll_view"
           showsVerticalScrollIndicator={false}
           style={styles.container}>
           {type === 'to' && (

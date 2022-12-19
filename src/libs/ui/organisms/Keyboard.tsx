@@ -30,6 +30,7 @@ export const Keyboard = (props: Props) => {
           marginTop={index > 0 ? 12 : 0}>
           {row.map(key => (
             <Pressable
+              testID={`keyboard.key_${key}`}
               key={`key-${key}`}
               hitSlop={HIT_SLOP}
               onPress={
