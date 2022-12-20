@@ -10,6 +10,18 @@ import i18n from 'libs/i18n'
 dayjs.extend(isToday)
 dayjs.extend(isBetween)
 
+const formatDate = (date: string) => {
+  if (dayjs().isSame(date, 'year')) {
+    return dayjs(date)
+      .locale(i18n.language)
+      .format(i18n.language === 'vi' ? 'D MMMM' : 'MMMM D')
+  }
+
+  return dayjs(date)
+    .locale(i18n.language)
+    .format(i18n.language === 'vi' ? 'D MMM, YYYY' : 'MMM D, YYYY')
+}
+
 export const useGetHomeData = () => {
   const { t } = useTranslation()
   const { entryList } = useAppSelector(state => state.category)
@@ -17,11 +29,7 @@ export const useGetHomeData = () => {
   const dateList = uniq(entryList.map(entry => entry.date.slice(0, 10)))
 
   const data = dateList.map(date => ({
-    title: dayjs(date).isToday()
-      ? t('home_screen.today')
-      : dayjs(date)
-          .locale(i18n.language)
-          .format(i18n.language === 'vi' ? 'D MMMM' : 'MMMM D'),
+    title: dayjs(date).isToday() ? t('home_screen.today') : formatDate(date),
     data: entryList.filter(entry => entry.date.slice(0, 10) === date),
     total: getTotal(
       entryList.filter(
