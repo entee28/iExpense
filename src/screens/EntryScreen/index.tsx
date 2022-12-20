@@ -69,6 +69,18 @@ export const EntryScreen = ({ route, navigation }: Props) => {
   )
   const [convertRate, setConvertRate] = useState(0)
 
+  const formattedDate = useMemo(() => {
+    if (dayjs().isSame(date, 'year')) {
+      return dayjs(date)
+        .locale(i18n.language)
+        .format(i18n.language === 'vi' ? 'D MMMM' : 'MMMM D')
+    }
+
+    return dayjs(date)
+      .locale(i18n.language)
+      .format(i18n.language === 'vi' ? 'D MMM, YYYY' : 'MMM D, YYYY')
+  }, [date])
+
   useEffect(() => {
     const getConvertRate = async () => {
       if (secondaryCurrency) {
@@ -232,11 +244,7 @@ export const EntryScreen = ({ route, navigation }: Props) => {
           alignItems="center">
           <Pressable onPress={handleShowDatePicker}>
             <Text fontSize={16} bold color={colors.mono60}>
-              {dayjs(date).isToday()
-                ? t('entry_screen.today')
-                : dayjs(date)
-                    .locale(i18n.language)
-                    .format(i18n.language === 'vi' ? 'D MMMM' : 'MMMM D')}
+              {dayjs(date).isToday() ? t('entry_screen.today') : formattedDate}
             </Text>
           </Pressable>
           <FontAwesomeIcon
