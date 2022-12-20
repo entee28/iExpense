@@ -1,6 +1,12 @@
 import { faRetweet } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { useAppDispatch, useAppSelector } from 'libs/redux'
+import { updateCategories } from 'libs/redux/categorySlice'
+import {
+  swapCurrency,
+  togglePrimarySymbol,
+  toggleSecondarySymbol
+} from 'libs/redux/settingSlice'
 import {
   BottomSheetMethods,
   Box,
@@ -13,16 +19,13 @@ import {
 import colors from 'libs/ui/colors'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  swapCurrency,
-  togglePrimarySymbol,
-  toggleSecondarySymbol
-} from 'libs/redux/settingSlice'
+import { convertEntryAmount } from 'libs/utils'
 import { CurrencyPicker } from './components'
 
 export const CurrencyScreen = () => {
   const { primaryCurrency, secondaryCurrency, primarySymbol, secondarySymbol } =
     useAppSelector(state => state.setting)
+  const { entryList } = useAppSelector(state => state.category)
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
 
@@ -47,7 +50,24 @@ export const CurrencyScreen = () => {
     }
   }
 
-  const handleSwapCurrencies = () => {
+  const handleSwapCurrencies = async () => {
+    if (secondaryCurrency) {
+      const convertedEntryAmount = await convertEntryAmount(
+        entryList.map(entry => entry.amount),
+        primaryCurrency?.code,
+        secondaryCurrency.code
+      )
+
+      dispatch(
+        updateCategories({
+          entryList: entryList.map((entry, index) => ({
+            ...entry,
+            amount: convertedEntryAmount[index]
+          }))
+        })
+      )
+    }
+
     dispatch(swapCurrency())
   }
 

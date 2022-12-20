@@ -4,15 +4,15 @@ exports[`renders correctly 1`] = `
 <View>
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "color": "#1A1A1A",
           "fontFamily": "Nunito-Regular",
           "fontSize": 14,
           "lineHeight": undefined,
           "textAlign": "auto",
         },
-        Object {
+        {
           "marginBottom": 8,
         },
       ]
@@ -22,7 +22,7 @@ exports[`renders correctly 1`] = `
   </Text>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "backgroundColor": "#FFFFFF",
         "borderColor": "#1A1A1A1A",
@@ -41,15 +41,15 @@ exports[`renders correctly 1`] = `
       onFocus={[Function]}
       placeholderTextColor="#1A1A1A66"
       style={
-        Array [
-          Object {
+        [
+          {
             "color": undefined,
             "fontFamily": undefined,
             "fontSize": undefined,
             "lineHeight": undefined,
             "paddingHorizontal": 16,
           },
-          Object {
+          {
             "flexGrow": 1,
             "flexShrink": 1,
             "padding": 0,

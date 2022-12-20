@@ -13,7 +13,7 @@ exports[`renders correctly 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "backgroundColor": "red",
       "justifyContent": "center",
@@ -23,15 +23,15 @@ exports[`renders correctly 1`] = `
 >
   <Text
     style={
-      Array [
-        Object {
+      [
+        {
           "color": "red",
           "fontFamily": "Nunito-Regular",
           "fontSize": 14,
           "lineHeight": undefined,
           "textAlign": "auto",
         },
-        Object {},
+        {},
       ]
     }
   >

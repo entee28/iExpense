@@ -40,9 +40,12 @@ export const CategoriesScreen = () => {
     <>
       <NavigationBar
         transparent
+        testIDScreen="categories_screen"
         title={t('setting_screen.categories')}
         right={
-          <Pressable onPress={handleToggleEditMode}>
+          <Pressable
+            testID="categories_screen.edit_btn"
+            onPress={handleToggleEditMode}>
             <FontAwesomeIcon icon={faPen} size={14} color={colors.mono100} />
           </Pressable>
         }

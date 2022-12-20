@@ -13,7 +13,7 @@ exports[`should match snapshot 1`] = `
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "flexDirection": "row",
       "marginTop": 4,
@@ -24,15 +24,15 @@ exports[`should match snapshot 1`] = `
   <Text
     accessibilityLabel="icon"
     style={
-      Array [
-        Object {
+      [
+        {
           "color": "#1A1A1A",
           "fontFamily": "Nunito-Regular",
           "fontSize": 32,
           "lineHeight": undefined,
           "textAlign": "auto",
         },
-        Object {},
+        {},
       ]
     }
   >
@@ -40,7 +40,7 @@ exports[`should match snapshot 1`] = `
   </Text>
   <View
     style={
-      Object {
+      {
         "alignItems": "center",
         "borderBottomColor": "#1A1A1A1A",
         "borderBottomWidth": 1,
@@ -56,15 +56,15 @@ exports[`should match snapshot 1`] = `
     <Text
       accessibilityLabel="category"
       style={
-        Array [
-          Object {
+        [
+          {
             "color": "#1A1A1A",
             "fontFamily": "Nunito-Bold",
             "fontSize": 18,
             "lineHeight": 32,
             "textAlign": "auto",
           },
-          Object {},
+          {},
         ]
       }
     >
@@ -73,15 +73,15 @@ exports[`should match snapshot 1`] = `
     <Text
       accessibilityLabel="amount"
       style={
-        Array [
-          Object {
+        [
+          {
             "color": "#1A1A1A",
             "fontFamily": "Nunito-Bold",
             "fontSize": 16,
             "lineHeight": 32,
             "textAlign": "auto",
           },
-          Object {},
+          {},
         ]
       }
     >
