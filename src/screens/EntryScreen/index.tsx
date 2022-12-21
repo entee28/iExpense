@@ -196,10 +196,11 @@ export const EntryScreen = ({ route, navigation }: Props) => {
   return (
     <>
       <NavigationBar
+        testIDScreen="entry_screen"
         title={t(title)}
         right={
           entry && (
-            <Pressable onPress={handleDelete}>
+            <Pressable testID="entry_screen.delete_btn" onPress={handleDelete}>
               <FontAwesomeIcon
                 icon={faTrashCan}
                 color={colors.destructive80}
@@ -228,7 +229,7 @@ export const EntryScreen = ({ route, navigation }: Props) => {
             flexDirection="row"
             borderBottomColor={colors.mono40}
             borderBottomWidth={4}>
-            <Text fontSize={48}>
+            <Text testID="entry_screen.primary_amount" fontSize={48}>
               {amount === '' ? 0 : numberWithCommas(amount)}
             </Text>
             <Text color={colors.mono70} fontSize={24}>
@@ -253,6 +254,7 @@ export const EntryScreen = ({ route, navigation }: Props) => {
             color={colors.mono40}
           />
           <TextInput
+            testID="entry_screen.note_input"
             style={styles.input}
             value={note}
             onChangeText={setNote}
@@ -289,6 +291,7 @@ export const EntryScreen = ({ route, navigation }: Props) => {
             size={16}
           />
           <Pressable
+            testID="entry_screen.to_category"
             onPress={() => handleOpenSheet('to')}
             flex={1}
             flexDirection="row"
@@ -307,6 +310,7 @@ export const EntryScreen = ({ route, navigation }: Props) => {
             label={t('entry_screen.save')}
             labelStyle={styles.saveBtnLabel}
             onPress={handleSave}
+            testID="entry_screen.save_btn"
           />
         </Box>
 

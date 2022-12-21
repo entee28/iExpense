@@ -121,6 +121,7 @@ export const HomeScreen = () => {
           })}
         </Animated.Text>
         <Pressable
+          testID="home_screen.add_btn"
           onPress={() => toEntryScreen()}
           borderRadius={999}
           backgroundColor={colors.primary100}
