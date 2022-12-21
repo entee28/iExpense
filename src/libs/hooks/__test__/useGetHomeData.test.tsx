@@ -99,13 +99,6 @@ describe('useGetHomeData hook', () => {
       return idArr.toString()
     }
 
-    const getSectionOrder = (data: typeof DATA) => {
-      let dateArr: string[] = []
-      data.forEach(section => dateArr.push(section.title))
-
-      return dateArr.toString()
-    }
-
     return (
       <>
         <Text testID="week_spent">{weekSpent}</Text>
@@ -115,7 +108,6 @@ describe('useGetHomeData hook', () => {
         <Text testID="month_income">{monthIncome}</Text>
         <Text testID="month_spent">{monthSpent}</Text>
         <Text testID="section_count">{DATA.length}</Text>
-        <Text testID="section_order">{getSectionOrder(DATA)}</Text>
         {DATA.map((section, index) => (
           <>
             <Text testID={`section${index + 1}_item`}>
