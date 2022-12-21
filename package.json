@@ -92,7 +92,9 @@
       "./__mocks__/nativeAnimatedMock.js",
       "./__mocks__/reactNativeFontAwesome.js",
       "./__mocks__/reactNativeModalMock.js",
-      "./__mocks__/bottomSheetMock.js"
+      "./__mocks__/bottomSheetMock.js",
+      "./__mocks__/rnSafeAreaContextMock.js",
+      "./__mocks__/reactNavigationMock.js"
     ]
   }
 }

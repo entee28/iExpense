@@ -1,6 +1,5 @@
 import { cleanup, render } from '@testing-library/react-native'
 import dayjs from 'dayjs'
-import { useAppSelector } from 'libs/redux'
 import React from 'react'
 import { Text } from 'react-native'
 import { Provider } from 'react-redux'
@@ -70,16 +69,9 @@ describe('useGetHomeData hook', () => {
     }
   ]
 
-  beforeEach(() => {
-    useSelectorMock.mockClear()
-  })
-
   afterAll(() => {
     cleanup()
   })
-
-  const reactRedux = { useAppSelector }
-  const useSelectorMock = jest.spyOn(reactRedux, 'useAppSelector')
 
   const TestComponent = () => {
     const {
@@ -110,10 +102,16 @@ describe('useGetHomeData hook', () => {
         <Text testID="section_count">{DATA.length}</Text>
         {DATA.map((section, index) => (
           <>
-            <Text testID={`section${index + 1}_item`}>
+            <Text
+              key={`section${index + 1}_item`}
+              testID={`section${index + 1}_item`}>
               {getSectionItemIds(section.data)}
             </Text>
-            <Text testID={`section${index + 1}_total`}>{section.total}</Text>
+            <Text
+              key={`section${index + 1}_total`}
+              testID={`section${index + 1}_total`}>
+              {section.total}
+            </Text>
           </>
         ))}
       </>
