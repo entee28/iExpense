@@ -41,6 +41,7 @@ exports[`should match snapshot 1`] = `
           "width": 48,
         }
       }
+      testID="keyboard.key_1"
     >
       <Text
         style={
@@ -87,6 +88,7 @@ exports[`should match snapshot 1`] = `
           "width": 48,
         }
       }
+      testID="keyboard.key_2"
     >
       <Text
         style={
@@ -133,6 +135,7 @@ exports[`should match snapshot 1`] = `
           "width": 48,
         }
       }
+      testID="keyboard.key_3"
     >
       <Text
         style={
@@ -189,6 +192,7 @@ exports[`should match snapshot 1`] = `
           "width": 48,
         }
       }
+      testID="keyboard.key_4"
     >
       <Text
         style={
@@ -235,6 +239,7 @@ exports[`should match snapshot 1`] = `
           "width": 48,
         }
       }
+      testID="keyboard.key_5"
     >
       <Text
         style={
@@ -281,6 +286,7 @@ exports[`should match snapshot 1`] = `
           "width": 48,
         }
       }
+      testID="keyboard.key_6"
     >
       <Text
         style={
@@ -337,6 +343,7 @@ exports[`should match snapshot 1`] = `
           "width": 48,
         }
       }
+      testID="keyboard.key_7"
     >
       <Text
         style={
@@ -383,6 +390,7 @@ exports[`should match snapshot 1`] = `
           "width": 48,
         }
       }
+      testID="keyboard.key_8"
     >
       <Text
         style={
@@ -429,6 +437,7 @@ exports[`should match snapshot 1`] = `
           "width": 48,
         }
       }
+      testID="keyboard.key_9"
     >
       <Text
         style={
@@ -485,6 +494,7 @@ exports[`should match snapshot 1`] = `
           "width": 48,
         }
       }
+      testID="keyboard.key_."
     >
       <Text
         style={
@@ -531,6 +541,7 @@ exports[`should match snapshot 1`] = `
           "width": 48,
         }
       }
+      testID="keyboard.key_0"
     >
       <Text
         style={
@@ -577,6 +588,7 @@ exports[`should match snapshot 1`] = `
           "width": 48,
         }
       }
+      testID="keyboard.key_del"
     >
       <
         color="#1A1A1A"

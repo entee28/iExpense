@@ -1,4 +1,4 @@
-const { element } = require('detox')
+import { expect } from 'detox'
 
 describe('Category Modifying Flow', () => {
   beforeAll(async () => {

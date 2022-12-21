@@ -35,6 +35,7 @@ exports[`should match snapshot 1`] = `
         {},
       ]
     }
+    testID="expense_item.category_icon"
   >
     🍽️
   </Text>
@@ -67,6 +68,7 @@ exports[`should match snapshot 1`] = `
           {},
         ]
       }
+      testID="expense_item.category_name"
     >
       Eating out
     </Text>
@@ -84,6 +86,7 @@ exports[`should match snapshot 1`] = `
           {},
         ]
       }
+      testID="expense_item.amount"
     >
       49,000.0 ₫
     </Text>

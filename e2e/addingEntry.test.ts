@@ -1,3 +1,5 @@
+import { expect } from 'detox'
+
 describe('Adding Entry Flow', () => {
   beforeAll(async () => {
     await device.launchApp()
