@@ -12,6 +12,7 @@ export const Link = (props: LinkProps) => {
   return (
     <Pressable {...buttonProps}>
       <Text
+        testID="link_label"
         semiBold
         color={buttonProps.disabled ? colors.mono40 : colors.primary100}>
         {label}
