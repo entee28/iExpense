@@ -61,7 +61,7 @@ describe('Adding Entry Flow', () => {
     await element(by.id('entry_screen.to_category')).tap()
     await element(by.id('category_picker.scroll_view')).scroll(400, 'down')
     await element(by.text('Salary')).tap()
-    await element(by.id('entry_screen.save_btn')).tap()
+    await element(by.id('entry_screen.save_btn')).tap({ x: 5, y: 5 })
     await expect(element(by.id('expense_item.category_icon'))).toHaveText('💸')
     await expect(element(by.id('expense_item.category_name'))).toHaveText(
       'Salary'
