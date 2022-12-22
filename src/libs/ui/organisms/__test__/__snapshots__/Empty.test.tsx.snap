@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+      "paddingBottom": 55,
+      "paddingHorizontal": 24,
+    }
+  }
+>
+  <SvgMock />
+  <Text
+    style={
+      [
+        {
+          "color": "#1A1A1A66",
+          "fontFamily": "Nunito-Regular",
+          "fontSize": 16,
+          "lineHeight": 24,
+          "textAlign": "center",
+        },
+        {
+          "marginTop": 16,
+        },
+      ]
+    }
+  >
+    common.empty_list_message
+  </Text>
+</View>
+`;

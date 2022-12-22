@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot 1`] = `
+<react-native-modal
+  backdropOpacity={0.5}
+  backdropTransitionOutTiming={0}
+  isVisible={true}
+  style={
+    [
+      {
+        "justifyContent": "center",
+        "margin": 0,
+      },
+      {
+        "paddingBottom": 24,
+        "paddingHorizontal": 24,
+        "paddingTop": 24,
+      },
+      undefined,
+    ]
+  }
+/>
+`;
