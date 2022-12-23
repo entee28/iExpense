@@ -33,3 +33,8 @@ type Entry = {
   note: string
   type: EntryType
 }
+
+type InsightDay = {
+  day: number
+  amount: number
+}

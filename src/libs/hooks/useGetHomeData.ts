@@ -1,11 +1,12 @@
 import dayjs from 'dayjs'
 import 'dayjs/locale/vi'
-import isToday from 'dayjs/plugin/isToday'
 import isBetween from 'dayjs/plugin/isBetween'
+import isToday from 'dayjs/plugin/isToday'
+import i18n from 'libs/i18n'
 import { useAppSelector } from 'libs/redux'
+import { getTotal } from 'libs/utils'
 import { uniq } from 'lodash'
 import { useTranslation } from 'react-i18next'
-import i18n from 'libs/i18n'
 
 dayjs.extend(isToday)
 dayjs.extend(isBetween)
@@ -41,20 +42,20 @@ export const useGetHomeData = () => {
   const weekSpent = getTotal(
     entryList.filter(
       entry =>
-        dayjs(entry.date).isBetween(dayjs().day(0), dayjs().day(6)) &&
+        dayjs(entry.date).isBetween(dayjs().day(-1), dayjs().day(6)) &&
         entry.type === 'expense'
     )
   )
   const weekIncome = getTotal(
     entryList.filter(
       entry =>
-        dayjs(entry.date).isBetween(dayjs().day(0), dayjs().day(6)) &&
+        dayjs(entry.date).isBetween(dayjs().day(-1), dayjs().day(6)) &&
         entry.type === 'income'
     )
   )
   const weekDiff = getDiff(
     entryList.filter(entry =>
-      dayjs(entry.date).isBetween(dayjs().day(0), dayjs().day(6))
+      dayjs(entry.date).isBetween(dayjs().day(-1), dayjs().day(6))
     )
   )
   const monthSpent = getTotal(
@@ -86,13 +87,6 @@ export const useGetHomeData = () => {
     monthIncome,
     monthSpent
   }
-}
-
-const getTotal = (entryList: Entry[]) => {
-  let amount = 0
-  entryList.forEach(entry => (amount += entry.amount))
-
-  return amount
 }
 
 const getDiff = (entryList: Entry[]) => {
