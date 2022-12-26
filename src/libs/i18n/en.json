@@ -64,5 +64,9 @@
         "save": "Save",
         "today": "Today",
         "accounts": "ACCOUNTS"
+    },
+    "insight_screen": {
+        "expense": "Expense",
+        "income": "Income"
     }
 }
