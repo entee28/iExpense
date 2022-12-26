@@ -18,6 +18,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { HOME_AMOUNT_OPTIONS } from 'src/constants'
+import { useGetSummaryAmount } from 'libs/hooks'
 import { SectionHeader } from './components'
 
 export const HomeScreen = () => {
@@ -27,15 +28,15 @@ export const HomeScreen = () => {
   const { t } = useTranslation()
   const insets = useSafeAreaInsets()
   const navigation = useAppNavigation()
+  const DATA = useGetHomeData()
   const {
-    data: DATA,
     weekSpent,
     weekDiff,
     weekIncome,
     monthDiff,
     monthIncome,
     monthSpent
-  } = useGetHomeData()
+  } = useGetSummaryAmount()
   const CURRENCY = primarySymbol ? primaryCurrency.symbol : primaryCurrency.code
 
   const homeAmount = useMemo(() => {

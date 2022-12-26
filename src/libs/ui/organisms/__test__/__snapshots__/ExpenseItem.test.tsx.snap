@@ -54,24 +54,152 @@ exports[`should match snapshot 1`] = `
       }
     }
   >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <Text
+        accessibilityLabel="category"
+        style={
+          [
+            {
+              "color": "#1A1A1A",
+              "fontFamily": "Nunito-Bold",
+              "fontSize": 18,
+              "lineHeight": 32,
+              "textAlign": "auto",
+            },
+            {},
+          ]
+        }
+        testID="expense_item.category_name"
+      >
+        Eating out
+      </Text>
+    </View>
     <Text
-      accessibilityLabel="category"
+      accessibilityLabel="amount"
       style={
         [
           {
             "color": "#1A1A1A",
             "fontFamily": "Nunito-Bold",
-            "fontSize": 18,
+            "fontSize": 16,
             "lineHeight": 32,
             "textAlign": "auto",
           },
           {},
         ]
       }
-      testID="expense_item.category_name"
+      testID="expense_item.amount"
     >
-      Eating out
+      49,000.0 ₫
     </Text>
+  </View>
+</View>
+`;
+
+exports[`should match snapshot 2`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "marginTop": 4,
+      "opacity": 1,
+    }
+  }
+>
+  <Text
+    accessibilityLabel="icon"
+    style={
+      [
+        {
+          "color": "#1A1A1A",
+          "fontFamily": "Nunito-Regular",
+          "fontSize": 32,
+          "lineHeight": undefined,
+          "textAlign": "auto",
+        },
+        {},
+      ]
+    }
+    testID="expense_item.category_icon"
+  >
+    🍽️
+  </Text>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "borderBottomColor": "#1A1A1A1A",
+        "borderBottomWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginLeft": 20,
+        "paddingBottom": 8,
+        "paddingTop": 14,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <Text
+        accessibilityLabel="category"
+        style={
+          [
+            {
+              "color": "#1A1A1A",
+              "fontFamily": "Nunito-Bold",
+              "fontSize": 18,
+              "lineHeight": 32,
+              "textAlign": "auto",
+            },
+            {},
+          ]
+        }
+        testID="expense_item.category_name"
+      >
+        Eating out
+      </Text>
+      <Text
+        style={
+          [
+            {
+              "color": "#1A1A1A66",
+              "fontFamily": "Nunito-Regular",
+              "fontSize": 18,
+              "lineHeight": 32,
+              "textAlign": "auto",
+            },
+            {
+              "marginLeft": 8,
+            },
+          ]
+        }
+      >
+        x12
+      </Text>
+    </View>
     <Text
       accessibilityLabel="amount"
       style={

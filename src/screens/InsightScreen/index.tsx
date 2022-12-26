@@ -1,8 +1,14 @@
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { useGetHomeData } from 'libs/hooks'
+import { useGetInsightData, useGetSummaryAmount } from 'libs/hooks'
 import { useAppSelector } from 'libs/redux'
-import { Box, Pressable, SCREEN_PADDING_HORIZONTAL, Text } from 'libs/ui'
+import {
+  Box,
+  ExpenseItem,
+  Pressable,
+  SCREEN_PADDING_HORIZONTAL,
+  Text
+} from 'libs/ui'
 import colors from 'libs/ui/colors'
 import { formatNumber } from 'libs/utils'
 import React from 'react'
@@ -15,21 +21,14 @@ import Animated, {
   useSharedValue
 } from 'react-native-reanimated'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
-import {
-  VictoryAxis,
-  VictoryBar,
-  VictoryChart,
-  VictoryTheme
-} from 'victory-native'
-import { useGetInsightData } from '../../libs/hooks/useGetInsightData'
 import { InsightChart } from './components'
 
 export const InsightScreen = () => {
   const { primaryCurrency, primarySymbol } = useAppSelector(
     state => state.setting
   )
-  const { weekSpent } = useGetHomeData()
-  const { data: DATA } = useGetInsightData()
+  const { chartData: DATA, categoryData } = useGetInsightData()
+  const { weekSpent } = useGetSummaryAmount()
   const insets = useSafeAreaInsets()
   const { t } = useTranslation()
 
@@ -113,6 +112,20 @@ export const InsightScreen = () => {
           </Text>
         </Box>
         <InsightChart data={DATA} weekSpent={weekSpent} />
+        <Box paddingHorizontal={SCREEN_PADDING_HORIZONTAL}>
+          {categoryData.map(category => (
+            <ExpenseItem
+              icon={category.category.icon}
+              amount={category.total}
+              category={category.category.name}
+              key={category.category.id}
+              currency={CURRENCY}
+              type="expense"
+              count={category.count}
+              onPress={() => {}}
+            />
+          ))}
+        </Box>
       </Animated.ScrollView>
     </SafeAreaView>
   )

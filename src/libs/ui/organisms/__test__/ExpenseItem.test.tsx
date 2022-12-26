@@ -24,7 +24,7 @@ it('should display information correctly', () => {
 })
 
 it('should match snapshot', () => {
-  const snapshot = render(
+  const snapshot1 = render(
     <ExpenseItem
       type="expense"
       onPress={() => {}}
@@ -34,6 +34,18 @@ it('should match snapshot', () => {
       currency={currency}
     />
   ).toJSON()
+  const snapshot2 = render(
+    <ExpenseItem
+      type="expense"
+      onPress={() => {}}
+      category={category}
+      icon={icon}
+      amount={amount}
+      currency={currency}
+      count={12}
+    />
+  ).toJSON()
 
-  expect(snapshot).toMatchSnapshot()
+  expect(snapshot1).toMatchSnapshot()
+  expect(snapshot2).toMatchSnapshot()
 })
