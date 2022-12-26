@@ -6,7 +6,7 @@ import { uniq } from 'lodash'
 
 dayjs.extend(isBetween)
 
-export const useGetInsightData = () => {
+export const useGetInsightData = (type: 'expense' | 'income') => {
   const { entryList } = useAppSelector(state => state.category)
   let chartData: InsightDay[] = []
 
@@ -17,19 +17,20 @@ export const useGetInsightData = () => {
         entryList.filter(
           entry =>
             entry.date.slice(0, 10) ===
-            dayjs().day(i).toISOString().slice(0, 10)
+              dayjs().day(i).toISOString().slice(0, 10) && entry.type === type
         )
       )
     })
   }
 
-  const weekEntry = entryList.filter(entry =>
-    dayjs(entry.date).isBetween(
-      dayjs().day(0).startOf('day'),
-      dayjs().day(6).endOf('day')
-    )
+  const weekEntry = entryList.filter(
+    entry =>
+      dayjs(entry.date).isBetween(
+        dayjs().day(0).startOf('day'),
+        dayjs().day(6).endOf('day')
+      ) && entry.type === type
   )
-  const weekCategory = uniq(entryList.map(entry => entry.toCategory))
+  const weekCategory = uniq(weekEntry.map(entry => entry.toCategory))
   const categoryCount = (category: Category) => {
     let count = 0
     weekEntry.forEach(entry => {
@@ -45,7 +46,7 @@ export const useGetInsightData = () => {
     category,
     count: categoryCount(category),
     total: getTotal(
-      entryList.filter(entry => entry.toCategory.id === category.id)
+      weekEntry.filter(entry => entry.toCategory.id === category.id)
     )
   }))
 

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { useGetInsightData, useGetSummaryAmount } from 'libs/hooks'
 import { useAppSelector } from 'libs/redux'
 import {
+  BottomSheetMethods,
   Box,
   ExpenseItem,
   Pressable,
@@ -11,7 +12,7 @@ import {
 } from 'libs/ui'
 import colors from 'libs/ui/colors'
 import { formatNumber } from 'libs/utils'
-import React from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet } from 'react-native'
 import Animated, {
@@ -21,18 +22,33 @@ import Animated, {
   useSharedValue
 } from 'react-native-reanimated'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
-import { InsightChart } from './components'
+import { InsightChart, ModeSelectorSheet } from './components'
 
 export const InsightScreen = () => {
   const { primaryCurrency, primarySymbol } = useAppSelector(
     state => state.setting
   )
-  const { chartData: DATA, categoryData } = useGetInsightData()
-  const { weekSpent } = useGetSummaryAmount()
+  const { weekSpent, weekIncome } = useGetSummaryAmount()
+  const [mode, setMode] = useState<'expense' | 'income'>('expense')
+  const { chartData: DATA, categoryData } = useGetInsightData(mode)
   const insets = useSafeAreaInsets()
   const { t } = useTranslation()
 
   const CURRENCY = primarySymbol ? primaryCurrency.symbol : primaryCurrency.code
+
+  const modeDisplay = useMemo(() => {
+    if (mode === 'expense') {
+      return {
+        amount: weekSpent,
+        title: 'home_amount_screen.SPENT_THIS_WEEK'
+      }
+    }
+
+    return {
+      amount: weekIncome,
+      title: 'home_amount_screen.REVENUE_THIS_WEEK'
+    }
+  }, [mode, weekIncome, weekSpent])
 
   const scroll = useSharedValue(0)
   const scrollHandler = useAnimatedScrollHandler(({ contentOffset: { y } }) => {
@@ -63,17 +79,27 @@ export const InsightScreen = () => {
     }
   })
 
+  const modeSelectorRef = useRef<BottomSheetMethods>(null)
+
+  const handleOpenSheet = () => {
+    modeSelectorRef.current?.present()
+  }
+  const handleCloseSheet = () => {
+    modeSelectorRef.current?.close()
+  }
+
   return (
     <SafeAreaView style={styles.root}>
       <Animated.View style={[styles.header, headerBorderWidth]}>
         <Animated.Text style={[styles.headerTotal, animatedTextOpacity]}>
-          {formatNumber(weekSpent, {
+          {formatNumber(modeDisplay.amount, {
             currency: CURRENCY,
             showCurrency: true,
             decimalCount: 2
           })}
         </Animated.Text>
         <Pressable
+          onPress={handleOpenSheet}
           testID="home_screen.add_btn"
           borderRadius={999}
           borderWidth={2}
@@ -101,17 +127,17 @@ export const InsightScreen = () => {
         overScrollMode="always">
         <Box marginTop={-12} paddingHorizontal={SCREEN_PADDING_HORIZONTAL}>
           <Text bold fontSize={36}>
-            {formatNumber(weekSpent, {
+            {formatNumber(modeDisplay.amount, {
               currency: CURRENCY,
               showCurrency: true,
               decimalCount: 2
             })}
           </Text>
           <Text fontSize={16} bold color={colors.mono40}>
-            {t('home_amount_screen.SPENT_THIS_WEEK')}
+            {t(modeDisplay.title)}
           </Text>
         </Box>
-        <InsightChart data={DATA} weekSpent={weekSpent} />
+        <InsightChart data={DATA} amount={modeDisplay.amount} />
         <Box paddingHorizontal={SCREEN_PADDING_HORIZONTAL}>
           {categoryData.map(category => (
             <ExpenseItem
@@ -126,6 +152,12 @@ export const InsightScreen = () => {
             />
           ))}
         </Box>
+        <ModeSelectorSheet
+          currentMode={mode}
+          setMode={setMode}
+          closeSheet={handleCloseSheet}
+          ref={modeSelectorRef}
+        />
       </Animated.ScrollView>
     </SafeAreaView>
   )

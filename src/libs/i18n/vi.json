@@ -64,5 +64,9 @@
         "save": "Lưu",
         "today": "Hôm nay",
         "accounts": "TÀI KHOẢN"
+    },
+    "insight_screen": {
+        "expense": "Chi tiêu",
+        "income": "Thu nhập"
     }
 }

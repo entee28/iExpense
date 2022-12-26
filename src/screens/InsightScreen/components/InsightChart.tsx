@@ -9,10 +9,10 @@ import colors from 'libs/ui/colors'
 
 type Props = {
   data: InsightDay[]
-  weekSpent: number
+  amount: number
 }
 
-export const InsightChart = ({ data, weekSpent }: Props) => {
+export const InsightChart = ({ data, amount }: Props) => {
   return (
     <VictoryChart height={250} theme={VictoryTheme.material}>
       <VictoryAxis
@@ -30,7 +30,7 @@ export const InsightChart = ({ data, weekSpent }: Props) => {
           ticks: { stroke: colors.white }
         }}
         dependentAxis
-        tickValues={[0, weekSpent / 7, weekSpent]}
+        tickValues={[0, amount / 7, amount]}
         tickFormat={(x: number) =>
           x > 1000
             ? `${(x / 1000).toFixed(1)}k`
