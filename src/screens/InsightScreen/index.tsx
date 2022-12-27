@@ -6,6 +6,7 @@ import {
   BottomSheetMethods,
   Box,
   ExpenseItem,
+  FontFamily,
   Pressable,
   SCREEN_PADDING_HORIZONTAL,
   Text
@@ -183,7 +184,7 @@ const styles = StyleSheet.create({
   headerTotal: {
     textAlign: 'center',
     fontSize: 20,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: FontFamily.bold,
     paddingLeft: 33,
     flex: 1,
     color: colors.mono100

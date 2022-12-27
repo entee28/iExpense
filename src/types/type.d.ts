@@ -1,3 +1,5 @@
+type ObjectValues<T> = T[keyof T]
+
 type FontWeight = {
   extraBold?: boolean
   bold?: boolean

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { useGetHomeData } from 'libs/hooks'
 import { useAppNavigation } from 'libs/navigation'
 import { useAppSelector } from 'libs/redux'
-import { ExpenseItem, Pressable, Text } from 'libs/ui'
+import { ExpenseItem, FontFamily, Pressable, Text } from 'libs/ui'
 import colors from 'libs/ui/colors'
 import { SCREEN_PADDING_HORIZONTAL } from 'libs/ui/constants'
 import { formatNumber } from 'libs/utils'
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   headerTotal: {
     textAlign: 'center',
     fontSize: 20,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: FontFamily.bold,
     paddingLeft: 33,
     flex: 1,
     color: colors.mono100

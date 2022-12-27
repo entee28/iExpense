@@ -39,11 +39,7 @@ export const HomeAmountScreen = () => {
         paddingTop={12}
         backgroundColor={colors.white}
         paddingHorizontal={SCREEN_PADDING_HORIZONTAL}>
-        {(
-          Object.keys(HOME_AMOUNT_OPTIONS) as Array<
-            keyof typeof HOME_AMOUNT_OPTIONS
-          >
-        ).map(key => (
+        {Object.values(HOME_AMOUNT_OPTIONS).map(key => (
           <Pressable
             key={key}
             style={styles.button}

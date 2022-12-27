@@ -1,10 +1,11 @@
 import { FlagEN, FlagVN } from 'assets/icons'
 import React from 'react'
 
-export enum Language {
-  VI = 'vi',
-  EN = 'en'
-}
+export const Language = {
+  VI: 'vi',
+  EN: 'en'
+} as const
+export type Language = ObjectValues<typeof Language>
 
 export const LANGUAGE_FLAG_MAP: Record<Language, JSX.Element> = {
   [Language.VI]: <FlagVN />,
