@@ -12,6 +12,7 @@ type Props = {
   currency: string
   onPress: (entry?: Entry) => void
   type: EntryType
+  count?: number
 }
 
 export const ExpenseItem = ({
@@ -20,6 +21,7 @@ export const ExpenseItem = ({
   icon,
   currency,
   type,
+  count,
   onPress
 }: Props) => {
   return (
@@ -59,14 +61,26 @@ export const ExpenseItem = ({
         borderBottomWidth={1}
         paddingBottom={8}
         paddingTop={14}>
-        <Text
-          testID="expense_item.category_name"
-          fontSize={18}
-          accessibilityLabel="category"
-          lineHeight={32}
-          bold>
-          {category}
-        </Text>
+        <Box flexDirection="row">
+          <Text
+            testID="expense_item.category_name"
+            fontSize={18}
+            accessibilityLabel="category"
+            lineHeight={32}
+            bold>
+            {category}
+          </Text>
+          {count && (
+            <Text
+              color={colors.mono40}
+              fontSize={18}
+              lineHeight={32}
+              marginLeft={8}>
+              {`x${count}`}
+            </Text>
+          )}
+        </Box>
+
         <Text
           testID="expense_item.amount"
           color={type === 'income' ? colors.positive100 : colors.mono100}

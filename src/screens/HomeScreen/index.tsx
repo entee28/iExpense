@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { useGetHomeData } from 'libs/hooks'
 import { useAppNavigation } from 'libs/navigation'
 import { useAppSelector } from 'libs/redux'
-import { ExpenseItem, Pressable, Text } from 'libs/ui'
+import { ExpenseItem, FontFamily, Pressable, Text } from 'libs/ui'
 import colors from 'libs/ui/colors'
 import { SCREEN_PADDING_HORIZONTAL } from 'libs/ui/constants'
 import { formatNumber } from 'libs/utils'
@@ -18,6 +18,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { HOME_AMOUNT_OPTIONS } from 'src/constants'
+import { useGetSummaryAmount } from 'libs/hooks'
 import { SectionHeader } from './components'
 
 export const HomeScreen = () => {
@@ -27,15 +28,15 @@ export const HomeScreen = () => {
   const { t } = useTranslation()
   const insets = useSafeAreaInsets()
   const navigation = useAppNavigation()
+  const DATA = useGetHomeData()
   const {
-    data: DATA,
     weekSpent,
     weekDiff,
     weekIncome,
     monthDiff,
     monthIncome,
     monthSpent
-  } = useGetHomeData()
+  } = useGetSummaryAmount()
   const CURRENCY = primarySymbol ? primaryCurrency.symbol : primaryCurrency.code
 
   const homeAmount = useMemo(() => {
@@ -215,7 +216,7 @@ const styles = StyleSheet.create({
   headerTotal: {
     textAlign: 'center',
     fontSize: 20,
-    fontFamily: 'Nunito-Bold',
+    fontFamily: FontFamily.bold,
     paddingLeft: 33,
     flex: 1,
     color: colors.mono100

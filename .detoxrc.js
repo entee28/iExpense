@@ -53,7 +53,13 @@ module.exports = {
     emulator: {
       type: 'android.emulator',
       device: {
-        avdName: 'Pixel_4a_API_31'
+        avdName: 'Pixel_4_API_30'
+      }
+    },
+    emulator_release: {
+      type: 'android.emulator',
+      device: {
+        avdName: 'Pixel_API_30_AOSP'
       }
     }
   },
@@ -79,7 +85,7 @@ module.exports = {
       app: 'android.debug'
     },
     'android.emu.release': {
-      device: 'emulator',
+      device: 'emulator_release',
       app: 'android.release'
     }
   }

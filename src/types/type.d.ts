@@ -1,3 +1,5 @@
+type ObjectValues<T> = T[keyof T]
+
 type FontWeight = {
   extraBold?: boolean
   bold?: boolean
@@ -32,4 +34,9 @@ type Entry = {
   amount: number
   note: string
   type: EntryType
+}
+
+type InsightDay = {
+  day: number
+  amount: number
 }

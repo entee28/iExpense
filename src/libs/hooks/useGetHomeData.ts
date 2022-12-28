@@ -1,14 +1,13 @@
 import dayjs from 'dayjs'
 import 'dayjs/locale/vi'
 import isToday from 'dayjs/plugin/isToday'
-import isBetween from 'dayjs/plugin/isBetween'
+import i18n from 'libs/i18n'
 import { useAppSelector } from 'libs/redux'
 import { uniq } from 'lodash'
 import { useTranslation } from 'react-i18next'
-import i18n from 'libs/i18n'
+import { getTotal } from 'libs/utils'
 
 dayjs.extend(isToday)
-dayjs.extend(isBetween)
 
 const formatDate = (date: string) => {
   if (dayjs().isSame(date, 'year')) {
@@ -38,72 +37,5 @@ export const useGetHomeData = () => {
     )
   }))
 
-  const weekSpent = getTotal(
-    entryList.filter(
-      entry =>
-        dayjs(entry.date).isBetween(dayjs().day(0), dayjs().day(6)) &&
-        entry.type === 'expense'
-    )
-  )
-  const weekIncome = getTotal(
-    entryList.filter(
-      entry =>
-        dayjs(entry.date).isBetween(dayjs().day(0), dayjs().day(6)) &&
-        entry.type === 'income'
-    )
-  )
-  const weekDiff = getDiff(
-    entryList.filter(entry =>
-      dayjs(entry.date).isBetween(dayjs().day(0), dayjs().day(6))
-    )
-  )
-  const monthSpent = getTotal(
-    entryList.filter(
-      entry =>
-        dayjs(entry.date).get('month') === dayjs().month() &&
-        entry.type === 'expense'
-    )
-  )
-  const monthIncome = getTotal(
-    entryList.filter(
-      entry =>
-        dayjs(entry.date).get('month') === dayjs().month() &&
-        entry.type === 'income'
-    )
-  )
-  const monthDiff = getDiff(
-    entryList.filter(
-      entry => dayjs(entry.date).get('month') === dayjs().month()
-    )
-  )
-
-  return {
-    data,
-    weekDiff,
-    weekIncome,
-    weekSpent,
-    monthDiff,
-    monthIncome,
-    monthSpent
-  }
-}
-
-const getTotal = (entryList: Entry[]) => {
-  let amount = 0
-  entryList.forEach(entry => (amount += entry.amount))
-
-  return amount
-}
-
-const getDiff = (entryList: Entry[]) => {
-  let amount = 0
-  entryList.forEach(entry => {
-    if (entry.type === 'expense') {
-      amount -= entry.amount
-    } else if (entry.type === 'income') {
-      amount += entry.amount
-    }
-  })
-
-  return amount
+  return data
 }

@@ -14,13 +14,14 @@ export type TextProps = {
 } & TextStyle &
   FontWeight
 
-export enum FontFamily {
-  extraBold = 'Nunito-ExtraBold',
-  bold = 'Nunito-Bold',
-  medium = 'Nunito-Medium',
-  semiBold = 'Nunito-SemiBold',
-  regular = 'Nunito-Regular'
-}
+export const FontFamily = {
+  extraBold: 'Nunito-ExtraBold',
+  bold: 'Nunito-Bold',
+  medium: 'Nunito-Medium',
+  semiBold: 'Nunito-SemiBold',
+  regular: 'Nunito-Regular'
+} as const
+export type FontFamily = ObjectValues<typeof FontFamily>
 
 export const Text = ({
   textProps,
