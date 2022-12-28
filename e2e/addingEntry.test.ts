@@ -39,7 +39,7 @@ describe('Adding Entry Flow', () => {
     await element(by.id('home_screen.add_btn')).tap()
     await element(by.id('keyboard.key_2')).multiTap(6)
     await element(by.id('entry_screen.note_input')).typeText('Test note')
-    await element(by.id('entry_screen.save_btn')).tap()
+    await element(by.text('Save')).tap()
     await expect(element(by.id('expense_item.category_icon'))).toHaveText('🍉')
     await expect(element(by.id('expense_item.category_name'))).toHaveText(
       'Groceries'
@@ -61,7 +61,7 @@ describe('Adding Entry Flow', () => {
     await element(by.id('entry_screen.to_category')).tap()
     await element(by.id('category_picker.scroll_view')).scroll(400, 'down')
     await element(by.text('Salary')).tap()
-    await element(by.id('entry_screen.save_btn')).tap()
+    await element(by.text('Save')).tap()
     await expect(element(by.id('expense_item.category_icon'))).toHaveText('💸')
     await expect(element(by.id('expense_item.category_name'))).toHaveText(
       'Salary'
