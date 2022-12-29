@@ -30,7 +30,7 @@ export const InsightScreen = () => {
     state => state.setting
   )
   const { weekSpent, weekIncome } = useGetSummaryAmount()
-  const [mode, setMode] = useState<'expense' | 'income'>('expense')
+  const [mode, setMode] = useState<InsightType>('expense')
   const { chartData: DATA, categoryData } = useGetInsightData(mode)
   const insets = useSafeAreaInsets()
   const { t } = useTranslation()

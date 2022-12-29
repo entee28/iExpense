@@ -25,14 +25,20 @@ export const useGetHomeData = () => {
   const { t } = useTranslation()
   const { entryList } = useAppSelector(state => state.category)
 
-  const dateList = uniq(entryList.map(entry => entry.date.slice(0, 10)))
+  const dateList = uniq(
+    entryList.map(entry => dayjs(entry.date).endOf('day').toISOString())
+  )
 
   const data = dateList.map(date => ({
     title: dayjs(date).isToday() ? t('home_screen.today') : formatDate(date),
-    data: entryList.filter(entry => entry.date.slice(0, 10) === date),
+    data: entryList.filter(entry =>
+      dayjs(entry.date).isSame(dayjs(date), 'day')
+    ),
     total: getTotal(
       entryList.filter(
-        entry => entry.date.slice(0, 10) === date && entry.type === 'expense'
+        entry =>
+          dayjs(entry.date).isSame(dayjs(date), 'day') &&
+          entry.type === 'expense'
       )
     )
   }))

@@ -15,8 +15,8 @@ import { StyleSheet } from 'react-native'
 
 type Props = {
   closeSheet: () => void
-  currentMode: 'expense' | 'income'
-  setMode: (mode: 'expense' | 'income') => void
+  currentMode: InsightType
+  setMode: (mode: InsightType) => void
 }
 
 export const ModeSelectorSheet = forwardRef<BottomSheetMethods, Props>(
@@ -24,7 +24,7 @@ export const ModeSelectorSheet = forwardRef<BottomSheetMethods, Props>(
     const { closeSheet, currentMode, setMode } = props
     const { t } = useTranslation()
 
-    const handleSelect = (mode: 'expense' | 'income') => {
+    const handleSelect = (mode: InsightType) => {
       setMode(mode)
       closeSheet()
     }
