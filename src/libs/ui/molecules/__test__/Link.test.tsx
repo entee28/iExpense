@@ -4,16 +4,14 @@ import { Link } from '../Link'
 
 describe('Link', () => {
   it('correctly handles press event', () => {
-    let pressed = false
+    const handlePress = jest.fn()
 
-    const press = () => {
-      pressed = true
-    }
-
-    const link = render(<Link testID="link" label="Hello" onPress={press} />)
+    const link = render(
+      <Link testID="link" label="Hello" onPress={handlePress} />
+    )
 
     fireEvent.press(link.getByTestId('link'))
-    expect(pressed).toEqual(true)
+    expect(handlePress).toHaveBeenCalled()
   })
 
   it('should render label correctly', () => {

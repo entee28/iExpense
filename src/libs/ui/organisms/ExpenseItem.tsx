@@ -13,6 +13,7 @@ type Props = {
   onPress: (entry?: Entry) => void
   type: EntryType
   count?: number
+  testID?: string
 }
 
 export const ExpenseItem = ({
@@ -22,10 +23,12 @@ export const ExpenseItem = ({
   currency,
   type,
   count,
+  testID,
   onPress
 }: Props) => {
   return (
     <Pressable
+      testID={testID}
       onPress={() => onPress()}
       flexDirection="row"
       alignItems="center"

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react-native'
 import colors from 'libs/ui/colors'
-import { Text } from '../Text'
+import { FontFamily, Text } from '../Text'
 
 it('renders text correctly', () => {
   const text = render(<Text>Hello World</Text>)
@@ -9,37 +9,62 @@ it('renders text correctly', () => {
 })
 
 it('renders the correct styles', () => {
-  const text1 = render(<Text>Hello World</Text>)
-  const text2 = render(
+  const styledText = render(
     <Text
       color={colors.mono40}
       fontSize={16}
       lineHeight={24}
-      textAlign="center"
-      bold>
+      textAlign="center">
       Hello World
     </Text>
   )
+  const boldText = render(<Text bold>Hello World</Text>)
+  const semiBoldText = render(<Text semiBold>Hello World</Text>)
+  const mediumText = render(<Text medium>Hello World</Text>)
+  const extraBoldText = render(<Text extraBold>Hello World</Text>)
+  const regularText = render(<Text regular>Hello World</Text>)
 
-  const text3 = render(<Text semiBold>Hello World</Text>)
-
-  expect(text1.getByText('Hello World')).toHaveStyle({
-    color: colors.mono100,
-    fontSize: 14,
-    textAlign: 'auto',
-    fontFamily: 'Nunito-Regular'
-  })
-
-  expect(text2.getByText('Hello World')).toHaveStyle({
+  expect(styledText.getByText('Hello World')).toHaveStyle({
+    fontFamily: FontFamily.regular,
     color: colors.mono40,
     fontSize: 16,
     lineHeight: 24,
-    textAlign: 'center',
-    fontFamily: 'Nunito-Bold'
+    textAlign: 'center'
   })
 
-  expect(text3.getByText('Hello World')).toHaveStyle({
-    fontFamily: 'Nunito-SemiBold'
+  expect(boldText.getByText('Hello World')).toHaveStyle({
+    color: colors.mono100,
+    fontSize: 14,
+    textAlign: 'auto',
+    fontFamily: FontFamily.bold
+  })
+
+  expect(semiBoldText.getByText('Hello World')).toHaveStyle({
+    fontFamily: FontFamily.semiBold,
+    color: colors.mono100,
+    fontSize: 14,
+    textAlign: 'auto'
+  })
+
+  expect(mediumText.getByText('Hello World')).toHaveStyle({
+    fontFamily: FontFamily.medium,
+    color: colors.mono100,
+    fontSize: 14,
+    textAlign: 'auto'
+  })
+
+  expect(extraBoldText.getByText('Hello World')).toHaveStyle({
+    fontFamily: FontFamily.extraBold,
+    color: colors.mono100,
+    fontSize: 14,
+    textAlign: 'auto'
+  })
+
+  expect(regularText.getByText('Hello World')).toHaveStyle({
+    fontFamily: FontFamily.regular,
+    color: colors.mono100,
+    fontSize: 14,
+    textAlign: 'auto'
   })
 })
 

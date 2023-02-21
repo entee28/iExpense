@@ -1,5 +1,9 @@
 import { formatNumber } from '../formatNumber'
 
+it('should return NaN string when receive NaN value', () => {
+  expect(formatNumber(NaN)).toEqual('NaN')
+})
+
 it('should return the formatted string correctly', () => {
   const num1 = 200000000000
   expect(formatNumber(num1)).toEqual('200,000,000,000')

@@ -73,11 +73,11 @@ export const TextInput = ({
 
   const rightIndicator = useMemo(() => {
     if (error) {
-      return <InvalidIndicator />
+      return <InvalidIndicator testID="invalid_indicator" />
     }
 
     if (isValid) {
-      return <ValidIndicator />
+      return <ValidIndicator testID="valid_indicator" />
     }
   }, [error, isValid])
 
@@ -110,7 +110,8 @@ export const TextInput = ({
           alignItems="center"
           width="100%"
           height={48}
-          paddingVertical={INPUT_PADDING_VERTICAL}>
+          paddingVertical={INPUT_PADDING_VERTICAL}
+          testID="text_input.container">
           {!!left && <Box paddingLeft={INPUT_PADDING_HORIZONTAL}>{left}</Box>}
 
           <RNTextInput

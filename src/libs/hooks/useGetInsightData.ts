@@ -6,6 +6,28 @@ import { uniq } from 'lodash'
 
 dayjs.extend(isBetween)
 
+export const useGetWeekInsightData = (type: InsightType) => {
+  const { entryList } = useAppSelector(state => state.category)
+  const chartData = getWeekChartData(entryList, type)
+
+  const weekEntry = filterCurrentWeekEntryByType(entryList, type)
+  const weekCategory = uniq(weekEntry.map(entry => entry.toCategory))
+  const weekData = getCategorySummaryFromList(weekCategory, weekEntry)
+
+  return { chartData, weekData }
+}
+
+export const useGetMonthInsightData = (type: InsightType) => {
+  const { entryList } = useAppSelector(state => state.category)
+  const chartData = getMonthChartData(entryList, type)
+
+  const monthEntry = filterCurrentMonthEntryByType(entryList, type)
+  const monthCategory = uniq(monthEntry.map(entry => entry.toCategory))
+  const monthData = getCategorySummaryFromList(monthCategory, monthEntry)
+
+  return { chartData, monthData }
+}
+
 const getWeekChartData = (entryList: Entry[], type: InsightType) => {
   let chartData: InsightDay[] = []
 
@@ -87,32 +109,13 @@ const getCategoryTotalAmountByList = (
   )
 }
 
-export const useGetWeekInsightData = (type: InsightType) => {
-  const { entryList } = useAppSelector(state => state.category)
-  const chartData = getWeekChartData(entryList, type)
-
-  const weekEntry = filterCurrentWeekEntryByType(entryList, type)
-  const weekCategory = uniq(weekEntry.map(entry => entry.toCategory))
-  const weekData = weekCategory.map(category => ({
+const getCategorySummaryFromList = (
+  categoryList: Category[],
+  entryList: Entry[]
+) => {
+  return categoryList.map(category => ({
     category,
-    count: countCategoryFromEntryList(category, weekEntry),
+    count: countCategoryFromEntryList(category, entryList),
     total: getCategoryTotalAmountByList(category, entryList)
   }))
-
-  return { chartData, weekData }
-}
-
-export const useGetMonthInsightData = (type: InsightType) => {
-  const { entryList } = useAppSelector(state => state.category)
-  const chartData = getMonthChartData(entryList, type)
-
-  const monthEntry = filterCurrentMonthEntryByType(entryList, type)
-  const monthCategory = uniq(monthEntry.map(entry => entry.toCategory))
-  const monthData = monthCategory.map(category => ({
-    category,
-    count: countCategoryFromEntryList(category, monthEntry),
-    total: getCategoryTotalAmountByList(category, entryList)
-  }))
-
-  return { chartData, monthData }
 }

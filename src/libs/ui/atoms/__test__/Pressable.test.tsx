@@ -20,16 +20,12 @@ it('renders children correctly', () => {
 })
 
 it('correctly handles press event', () => {
-  let pressed = false
+  const onPress = jest.fn()
 
-  const press = () => {
-    pressed = true
-  }
-
-  const pressable = render(<Pressable testID="pressable" onPress={press} />)
+  const pressable = render(<Pressable testID="pressable" onPress={onPress} />)
 
   fireEvent.press(pressable.getByTestId('pressable'))
-  expect(pressed).toEqual(true)
+  expect(onPress).toHaveBeenCalled()
 })
 
 it('renders styles correctly', () => {

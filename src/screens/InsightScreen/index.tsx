@@ -1,6 +1,6 @@
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { useGetInsightData, useGetSummaryAmount } from 'libs/hooks'
+import { useGetSummaryAmount, useGetWeekInsightData } from 'libs/hooks'
 import { useAppSelector } from 'libs/redux'
 import {
   BottomSheetMethods,
@@ -31,7 +31,7 @@ export const InsightScreen = () => {
   )
   const { weekSpent, weekIncome } = useGetSummaryAmount()
   const [mode, setMode] = useState<InsightType>('expense')
-  const { chartData: DATA, categoryData } = useGetInsightData(mode)
+  const { chartData: DATA, weekData } = useGetWeekInsightData(mode)
   const insets = useSafeAreaInsets()
   const { t } = useTranslation()
 
@@ -140,7 +140,7 @@ export const InsightScreen = () => {
         </Box>
         <InsightChart data={DATA} amount={modeDisplay.amount} />
         <Box paddingHorizontal={SCREEN_PADDING_HORIZONTAL}>
-          {categoryData.map(category => (
+          {weekData.map(category => (
             <ExpenseItem
               icon={category.category.icon}
               amount={category.total}
