@@ -67,6 +67,8 @@
     },
     "insight_screen": {
         "expense": "Expense",
-        "income": "Income"
+        "income": "Income",
+        "week": "Week",
+        "month": "Month"
     }
 }

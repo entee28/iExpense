@@ -67,6 +67,8 @@
     },
     "insight_screen": {
         "expense": "Chi tiêu",
-        "income": "Thu nhập"
+        "income": "Thu nhập",
+        "week": "Tuần",
+        "month": "Tháng"
     }
 }
