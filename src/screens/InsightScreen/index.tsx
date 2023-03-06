@@ -1,6 +1,11 @@
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { useGetInsightData, useGetSummaryAmount } from 'libs/hooks'
+import {
+  useGetMonthInsightData,
+  useGetSummaryAmount,
+  useGetWeekInsightData,
+  useGetYearInsightData
+} from 'libs/hooks'
 import { useAppSelector } from 'libs/redux'
 import {
   BottomSheetMethods,
@@ -29,27 +34,61 @@ export const InsightScreen = () => {
   const { primaryCurrency, primarySymbol } = useAppSelector(
     state => state.setting
   )
-  const { weekSpent, weekIncome } = useGetSummaryAmount()
-  const [mode, setMode] = useState<'expense' | 'income'>('expense')
-  const { chartData: DATA, categoryData } = useGetInsightData(mode)
+  const {
+    weekSpent,
+    weekIncome,
+    monthSpent,
+    monthIncome,
+    yearSpent,
+    yearIncome
+  } = useGetSummaryAmount()
+  const [mode, setMode] = useState<InsightType>('expense')
+  const [insightDuration, setInsightDuration] = useState<
+    'week' | 'month' | 'year'
+  >('week')
+  const { chartData: WEEK_CHART, weekData } = useGetWeekInsightData(mode)
+  const { chartData: MONTH_CHART, monthData } = useGetMonthInsightData(mode)
+  const { chartData: YEAR_CHART, yearData } = useGetYearInsightData(mode)
   const insets = useSafeAreaInsets()
   const { t } = useTranslation()
 
   const CURRENCY = primarySymbol ? primaryCurrency.symbol : primaryCurrency.code
 
-  const modeDisplay = useMemo(() => {
-    if (mode === 'expense') {
+  const DATA = useMemo(() => {
+    if (insightDuration === 'week') {
       return {
-        amount: weekSpent,
-        title: 'home_amount_screen.SPENT_THIS_WEEK'
+        amount: mode === 'expense' ? weekSpent : weekIncome,
+        title:
+          mode === 'expense'
+            ? 'home_amount_screen.SPENT_THIS_WEEK'
+            : 'home_amount_screen.REVENUE_THIS_WEEK',
+        chartData: WEEK_CHART,
+        listData: weekData
+      }
+    }
+
+    if (insightDuration === 'month') {
+      return {
+        amount: mode === 'expense' ? monthSpent : monthIncome,
+        title:
+          mode === 'expense'
+            ? 'home_amount_screen.SPENT_THIS_MONTH'
+            : 'home_amount_screen.REVENUE_THIS_MONTH',
+        chartData: MONTH_CHART,
+        listData: monthData
       }
     }
 
     return {
-      amount: weekIncome,
-      title: 'home_amount_screen.REVENUE_THIS_WEEK'
+      amount: mode === 'expense' ? yearSpent : yearIncome,
+      title:
+        mode === 'expense'
+          ? 'home_amount_screen.SPENT_THIS_YEAR'
+          : 'home_amount_screen.REVENUE_THIS_YEAR',
+      chartData: YEAR_CHART,
+      listData: yearData
     }
-  }, [mode, weekIncome, weekSpent])
+  }, [insightDuration, mode, weekIncome, weekSpent])
 
   const scroll = useSharedValue(0)
   const scrollHandler = useAnimatedScrollHandler(({ contentOffset: { y } }) => {
@@ -93,7 +132,7 @@ export const InsightScreen = () => {
     <SafeAreaView style={styles.root}>
       <Animated.View style={[styles.header, headerBorderWidth]}>
         <Animated.Text style={[styles.headerTotal, animatedTextOpacity]}>
-          {formatNumber(modeDisplay.amount, {
+          {formatNumber(DATA.amount, {
             currency: CURRENCY,
             showCurrency: true,
             decimalCount: 2
@@ -128,19 +167,70 @@ export const InsightScreen = () => {
         overScrollMode="always">
         <Box marginTop={-12} paddingHorizontal={SCREEN_PADDING_HORIZONTAL}>
           <Text bold fontSize={36}>
-            {formatNumber(modeDisplay.amount, {
+            {formatNumber(DATA.amount, {
               currency: CURRENCY,
               showCurrency: true,
               decimalCount: 2
             })}
           </Text>
           <Text fontSize={16} bold color={colors.mono40}>
-            {t(modeDisplay.title)}
+            {t(DATA.title)}
           </Text>
         </Box>
-        <InsightChart data={DATA} amount={modeDisplay.amount} />
+        <InsightChart
+          type={insightDuration}
+          data={DATA.chartData}
+          amount={DATA.amount}
+        />
+        <Box flexDirection="row" paddingHorizontal={SCREEN_PADDING_HORIZONTAL}>
+          <Pressable
+            borderWidth={insightDuration !== 'week' ? 0 : 0.75}
+            borderRadius={8}
+            borderColor={colors.mono10}
+            paddingHorizontal={12}
+            paddingVertical={8}
+            marginRight={12}
+            onPress={() => setInsightDuration('week')}>
+            <Text
+              fontSize={16}
+              color={insightDuration !== 'week' ? colors.mono40 : colors.mono80}
+              bold>
+              {t('insight_screen.week')}
+            </Text>
+          </Pressable>
+          <Pressable
+            borderWidth={insightDuration !== 'month' ? 0 : 0.75}
+            borderRadius={8}
+            borderColor={colors.mono10}
+            paddingHorizontal={12}
+            paddingVertical={8}
+            onPress={() => setInsightDuration('month')}>
+            <Text
+              fontSize={16}
+              color={
+                insightDuration !== 'month' ? colors.mono40 : colors.mono80
+              }
+              bold>
+              {t('insight_screen.month')}
+            </Text>
+          </Pressable>
+          <Pressable
+            borderWidth={insightDuration !== 'year' ? 0 : 0.75}
+            borderRadius={8}
+            borderColor={colors.mono10}
+            paddingHorizontal={12}
+            paddingVertical={8}
+            onPress={() => setInsightDuration('year')}>
+            <Text
+              fontSize={16}
+              color={insightDuration !== 'year' ? colors.mono40 : colors.mono80}
+              bold>
+              {t('insight_screen.year')}
+            </Text>
+          </Pressable>
+        </Box>
         <Box paddingHorizontal={SCREEN_PADDING_HORIZONTAL}>
-          {categoryData.map(category => (
+          {DATA.listData.map(category => (
             <ExpenseItem
               icon={category.category.icon}
               amount={category.total}

@@ -54,6 +54,7 @@ exports[`should match snapshot 1`] = `
           "paddingVertical": 4,
         }
       }
+      testID="navigation_bar.left"
     >
       <
         color="#1A1A1A"

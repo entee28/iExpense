@@ -26,6 +26,8 @@ type Currency = {
 
 type EntryType = 'expense' | 'income' | 'transfer'
 
+type InsightType = 'expense' | 'income'
+
 type Entry = {
   id: string
   fromCategory: Category
@@ -36,7 +38,7 @@ type Entry = {
   type: EntryType
 }
 
-type InsightDay = {
-  day: number
+type InsightBar = {
+  barIndex: number
   amount: number
 }

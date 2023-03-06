@@ -53,6 +53,20 @@ export const useGetSummaryAmount = () => {
       entry => dayjs(entry.date).get('month') === dayjs().month()
     )
   )
+  const yearSpent = getTotal(
+    entryList.filter(
+      entry =>
+        dayjs(entry.date).get('year') === dayjs().year() &&
+        entry.type === 'expense'
+    )
+  )
+  const yearIncome = getTotal(
+    entryList.filter(
+      entry =>
+        dayjs(entry.date).get('year') === dayjs().year() &&
+        entry.type === 'income'
+    )
+  )
 
   return {
     weekDiff,
@@ -60,6 +74,8 @@ export const useGetSummaryAmount = () => {
     weekSpent,
     monthDiff,
     monthIncome,
-    monthSpent
+    monthSpent,
+    yearIncome,
+    yearSpent
   }
 }

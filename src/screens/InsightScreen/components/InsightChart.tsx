@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   VictoryAxis,
   VictoryBar,
@@ -6,13 +6,61 @@ import {
   VictoryTheme
 } from 'victory-native'
 import colors from 'libs/ui/colors'
+import { genMonthTickFormat, genMonthTickValue } from 'libs/utils'
+import dayjs from 'dayjs'
 
 type Props = {
-  data: InsightDay[]
+  data: InsightBar[]
   amount: number
+  type: 'week' | 'month' | 'year'
 }
 
-export const InsightChart = ({ data, amount }: Props) => {
+export const InsightChart = ({ data, amount, type }: Props) => {
+  const horizontalTick = useMemo(() => {
+    if (type === 'week') {
+      return {
+        values: [0, 1, 2, 3, 4, 5, 6],
+        format: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+      }
+    }
+    if (type === 'month') {
+      return {
+        values: genMonthTickValue(),
+        format: genMonthTickFormat()
+      }
+    }
+
+    return {
+      values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+      format: [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec'
+      ]
+    }
+  }, [type])
+
+  const verticalAverageTick = useMemo(() => {
+    if (type === 'week') {
+      return amount / 7
+    }
+
+    if (type === 'year') {
+      return amount / 12
+    }
+
+    return amount / dayjs().daysInMonth()
+  }, [type])
+
   return (
     <VictoryChart height={250} theme={VictoryTheme.material}>
       <VictoryAxis
@@ -20,8 +68,8 @@ export const InsightChart = ({ data, amount }: Props) => {
           axis: { stroke: colors.white },
           ticks: { stroke: colors.white }
         }}
-        tickValues={[0, 1, 2, 3, 4, 5, 6]}
-        tickFormat={['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']}
+        tickValues={horizontalTick.values}
+        tickFormat={horizontalTick.format}
       />
       <VictoryAxis
         orientation="right"
@@ -30,7 +78,7 @@ export const InsightChart = ({ data, amount }: Props) => {
           ticks: { stroke: colors.white }
         }}
         dependentAxis
-        tickValues={[0, amount / 7, amount]}
+        tickValues={[0, verticalAverageTick, amount]}
         tickFormat={(x: number) =>
           x > 1000
             ? `${(x / 1000).toFixed(1)}k`
@@ -48,7 +96,7 @@ export const InsightChart = ({ data, amount }: Props) => {
         }}
         style={{ data: { fill: colors.primary100 } }}
         data={data}
-        x="day"
+        x="barIndex"
         y="amount"
       />
     </VictoryChart>

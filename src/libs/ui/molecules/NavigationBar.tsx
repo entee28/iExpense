@@ -68,7 +68,10 @@ export const NavigationBar = ({
         {left !== undefined ? (
           left
         ) : (
-          <Pressable onPress={goBack} style={styles.backButton}>
+          <Pressable
+            testID="navigation_bar.left"
+            onPress={goBack}
+            style={styles.backButton}>
             <FontAwesomeIcon icon={faChevronLeft} size={14} color={color} />
           </Pressable>
         )}

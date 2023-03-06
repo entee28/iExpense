@@ -1,11 +1,10 @@
-import { NavigationContainer } from '@react-navigation/native'
 import { render } from '@testing-library/react-native'
+import i18n from 'libs/i18n'
+import React from 'react'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 import { CategoryModifyScreen } from '..'
-import i18n from 'libs/i18n'
-import React from 'react'
 
 describe('Category Modify Screen', () => {
   const mockStore = configureStore()()
@@ -55,8 +54,6 @@ describe('Category Modify Screen', () => {
   })
 
   it('should display correct navbar title based on option param', () => {
-    const mockStore = configureStore()()
-
     const renderScreenByOption = (
       option:
         | 'edit_expense_category'

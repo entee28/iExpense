@@ -29,11 +29,7 @@ export const convertEntryAmount = async (
   toCurrencyCode: string
 ) => {
   const { code, rate } = await getConvertRate(fromCurrencyCode, toCurrencyCode)
-
-  let convertRate = rate
-  if (toCurrencyCode === code) {
-    convertRate = 1 / rate
-  }
+  const convertRate = toCurrencyCode === code ? 1 / rate : rate
 
   for (let i = 0; i < amountList.length; i++) {
     amountList[i] = new Decimal(amountList[i]).mul(convertRate).toNumber()
