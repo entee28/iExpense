@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import {
   useGetMonthInsightData,
   useGetSummaryAmount,
-  useGetWeekInsightData
+  useGetWeekInsightData,
+  useGetYearInsightData
 } from 'libs/hooks'
 import { useAppSelector } from 'libs/redux'
 import {
@@ -33,14 +34,21 @@ export const InsightScreen = () => {
   const { primaryCurrency, primarySymbol } = useAppSelector(
     state => state.setting
   )
-  const { weekSpent, weekIncome, monthSpent, monthIncome } =
-    useGetSummaryAmount()
+  const {
+    weekSpent,
+    weekIncome,
+    monthSpent,
+    monthIncome,
+    yearSpent,
+    yearIncome
+  } = useGetSummaryAmount()
   const [mode, setMode] = useState<InsightType>('expense')
-  const [insightDuration, setInsightDuration] = useState<'week' | 'month'>(
-    'week'
-  )
+  const [insightDuration, setInsightDuration] = useState<
+    'week' | 'month' | 'year'
+  >('week')
   const { chartData: WEEK_CHART, weekData } = useGetWeekInsightData(mode)
   const { chartData: MONTH_CHART, monthData } = useGetMonthInsightData(mode)
+  const { chartData: YEAR_CHART, yearData } = useGetYearInsightData(mode)
   const insets = useSafeAreaInsets()
   const { t } = useTranslation()
 
@@ -59,14 +67,26 @@ export const InsightScreen = () => {
       }
     }
 
+    if (insightDuration === 'month') {
+      return {
+        amount: mode === 'expense' ? monthSpent : monthIncome,
+        title:
+          mode === 'expense'
+            ? 'home_amount_screen.SPENT_THIS_MONTH'
+            : 'home_amount_screen.REVENUE_THIS_MONTH',
+        chartData: MONTH_CHART,
+        listData: monthData
+      }
+    }
+
     return {
-      amount: mode === 'expense' ? monthSpent : monthIncome,
+      amount: mode === 'expense' ? yearSpent : yearIncome,
       title:
         mode === 'expense'
-          ? 'home_amount_screen.SPENT_THIS_MONTH'
-          : 'home_amount_screen.REVENUE_THIS_MONTH',
-      chartData: MONTH_CHART,
-      listData: monthData
+          ? 'home_amount_screen.SPENT_THIS_YEAR'
+          : 'home_amount_screen.REVENUE_THIS_YEAR',
+      chartData: YEAR_CHART,
+      listData: yearData
     }
   }, [insightDuration, mode, weekIncome, weekSpent])
 
@@ -164,7 +184,7 @@ export const InsightScreen = () => {
         />
         <Box flexDirection="row" paddingHorizontal={SCREEN_PADDING_HORIZONTAL}>
           <Pressable
-            borderWidth={insightDuration === 'week' ? 0.75 : 0}
+            borderWidth={insightDuration !== 'week' ? 0 : 0.75}
             borderRadius={8}
             borderColor={colors.mono10}
             paddingHorizontal={12}
@@ -173,13 +193,13 @@ export const InsightScreen = () => {
             onPress={() => setInsightDuration('week')}>
             <Text
               fontSize={16}
-              color={insightDuration === 'week' ? colors.mono80 : colors.mono40}
+              color={insightDuration !== 'week' ? colors.mono40 : colors.mono80}
               bold>
               {t('insight_screen.week')}
             </Text>
           </Pressable>
           <Pressable
-            borderWidth={insightDuration === 'month' ? 0.75 : 0}
+            borderWidth={insightDuration !== 'month' ? 0 : 0.75}
             borderRadius={8}
             borderColor={colors.mono10}
             paddingHorizontal={12}
@@ -188,10 +208,24 @@ export const InsightScreen = () => {
             <Text
               fontSize={16}
               color={
-                insightDuration === 'month' ? colors.mono80 : colors.mono40
+                insightDuration !== 'month' ? colors.mono40 : colors.mono80
               }
               bold>
               {t('insight_screen.month')}
+            </Text>
+          </Pressable>
+          <Pressable
+            borderWidth={insightDuration !== 'year' ? 0 : 0.75}
+            borderRadius={8}
+            borderColor={colors.mono10}
+            paddingHorizontal={12}
+            paddingVertical={8}
+            onPress={() => setInsightDuration('year')}>
+            <Text
+              fontSize={16}
+              color={insightDuration !== 'year' ? colors.mono40 : colors.mono80}
+              bold>
+              {t('insight_screen.year')}
             </Text>
           </Pressable>
         </Box>

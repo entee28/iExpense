@@ -11,7 +11,15 @@ export const genMonthTickValue = () => {
 export const genMonthTickFormat = () => {
   const monthArray = []
   for (let i = 1; i <= dayjs().daysInMonth(); i++) {
-    if (i === 1 || i === 5 || i === 10 || i === 15 || i === 20 || i === 25) {
+    if (
+      i === 1 ||
+      i === 5 ||
+      i === 10 ||
+      i === 15 ||
+      i === 20 ||
+      i === 25 ||
+      i === 28
+    ) {
       monthArray.push(i)
     } else {
       monthArray.push('')

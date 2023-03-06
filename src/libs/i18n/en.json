@@ -17,8 +17,10 @@
     "home_amount_screen": {
         "SPENT_THIS_WEEK": "Spent this week",
         "SPENT_THIS_MONTH": "Spent this month",
+        "SPENT_THIS_YEAR": "Spent this year",
         "REVENUE_THIS_WEEK": "Revenue this week",
         "REVENUE_THIS_MONTH": "Revenue this month",
+        "REVENUE_THIS_YEAR": "Revenue this year",
         "PROFIT_LOSS_THIS_WEEK": "Profit / Loss this week",
         "PROFIT_LOSS_THIS_MONTH": "Profit / Loss this month"
     },
@@ -69,6 +71,7 @@
         "expense": "Expense",
         "income": "Income",
         "week": "Week",
-        "month": "Month"
+        "month": "Month",
+        "year": "Year"
     }
 }

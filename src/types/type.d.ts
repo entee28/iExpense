@@ -38,7 +38,7 @@ type Entry = {
   type: EntryType
 }
 
-type InsightDay = {
-  day: number
+type InsightBar = {
+  barIndex: number
   amount: number
 }

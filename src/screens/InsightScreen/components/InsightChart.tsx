@@ -10,9 +10,9 @@ import { genMonthTickFormat, genMonthTickValue } from 'libs/utils'
 import dayjs from 'dayjs'
 
 type Props = {
-  data: InsightDay[]
+  data: InsightBar[]
   amount: number
-  type: 'week' | 'month'
+  type: 'week' | 'month' | 'year'
 }
 
 export const InsightChart = ({ data, amount, type }: Props) => {
@@ -23,16 +23,39 @@ export const InsightChart = ({ data, amount, type }: Props) => {
         format: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
       }
     }
+    if (type === 'month') {
+      return {
+        values: genMonthTickValue(),
+        format: genMonthTickFormat()
+      }
+    }
 
     return {
-      values: genMonthTickValue(),
-      format: genMonthTickFormat()
+      values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+      format: [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec'
+      ]
     }
   }, [type])
 
   const verticalAverageTick = useMemo(() => {
     if (type === 'week') {
       return amount / 7
+    }
+
+    if (type === 'year') {
+      return amount / 12
     }
 
     return amount / dayjs().daysInMonth()
@@ -73,7 +96,7 @@ export const InsightChart = ({ data, amount, type }: Props) => {
         }}
         style={{ data: { fill: colors.primary100 } }}
         data={data}
-        x="day"
+        x="barIndex"
         y="amount"
       />
     </VictoryChart>

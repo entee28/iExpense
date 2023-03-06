@@ -28,12 +28,23 @@ export const useGetMonthInsightData = (type: InsightType) => {
   return { chartData, monthData }
 }
 
+export const useGetYearInsightData = (type: InsightType) => {
+  const { entryList } = useAppSelector(state => state.category)
+  const chartData = getYearChartData(entryList, type)
+
+  const yearEntry = filterCurrentYearEntryByType(entryList, type)
+  const yearCategory = uniq(yearEntry.map(entry => entry.toCategory))
+  const yearData = getCategorySummaryFromList(yearCategory, yearEntry)
+
+  return { chartData, yearData }
+}
+
 const getWeekChartData = (entryList: Entry[], type: InsightType) => {
-  let chartData: InsightDay[] = []
+  let chartData: InsightBar[] = []
 
   for (let i = 0; i < 7; i++) {
     chartData.push({
-      day: i,
+      barIndex: i,
       amount: getTotal(
         entryList.filter(
           entry =>
@@ -48,16 +59,33 @@ const getWeekChartData = (entryList: Entry[], type: InsightType) => {
 }
 
 const getMonthChartData = (entryList: Entry[], type: InsightType) => {
-  let chartData: InsightDay[] = []
+  let chartData: InsightBar[] = []
 
   for (let i = 1; i <= dayjs().daysInMonth(); i++) {
     chartData.push({
-      day: i,
+      barIndex: i,
       amount: getTotal(
         entryList.filter(
           entry =>
             dayjs(entry.date).isSame(dayjs().date(i), 'day') &&
             entry.type === type
+        )
+      )
+    })
+  }
+
+  return chartData
+}
+
+const getYearChartData = (entryList: Entry[], type: InsightType) => {
+  let chartData: InsightBar[] = []
+
+  for (let i = 0; i < 12; i++) {
+    chartData.push({
+      barIndex: i,
+      amount: getTotal(
+        entryList.filter(
+          entry => dayjs(entry.date).get('month') === i && entry.type === type
         )
       )
     })
@@ -86,6 +114,16 @@ const filterCurrentMonthEntryByType = (
   return entryList.filter(
     entry =>
       dayjs(entry.date).get('month') === dayjs().month() && entry.type === type
+  )
+}
+
+const filterCurrentYearEntryByType = (
+  entryList: Entry[],
+  type: InsightType
+) => {
+  return entryList.filter(
+    entry =>
+      dayjs(entry.date).get('year') === dayjs().year() && entry.type === type
   )
 }
 

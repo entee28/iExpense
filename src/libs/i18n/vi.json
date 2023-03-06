@@ -17,8 +17,10 @@
     "home_amount_screen": {
         "SPENT_THIS_WEEK": "Đã tiêu tuần này",
         "SPENT_THIS_MONTH": "Đã tiêu tháng này",
+        "SPENT_THIS_YEAR": "Đã tiêu năm này",
         "REVENUE_THIS_WEEK": "Thu nhập tuần này",
         "REVENUE_THIS_MONTH": "Thu nhập tháng này",
+        "REVENUE_THIS_YEAR": "Thu nhập năm này",
         "PROFIT_LOSS_THIS_WEEK": "Lãi / Lỗ tuần này",
         "PROFIT_LOSS_THIS_MONTH": "Lãi / Lỗ tháng này"
     },
@@ -69,6 +71,7 @@
         "expense": "Chi tiêu",
         "income": "Thu nhập",
         "week": "Tuần",
-        "month": "Tháng"
+        "month": "Tháng",
+        "year": "Năm"
     }
 }
