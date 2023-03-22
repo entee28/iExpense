@@ -73,5 +73,18 @@
         "week": "Week",
         "month": "Month",
         "year": "Year"
+    },
+    "register_screen": {
+        "title": "Account Info",
+        "name": "Name <destructive>*</destructive>",
+        "email": "Email <destructive>*</destructive>",
+        "pin": "PIN Code <destructive>*</destructive>",
+        "register": "Register"
+    },
+    "login_screen": {
+        "title": "Login"
+    },
+    "user_profile_screen": {
+        "login": "Login"
     }
 }

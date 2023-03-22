@@ -27,10 +27,6 @@ export const SettingScreen = () => {
 
   const handlePress = (label: string) => {
     switch (label) {
-      case 'setting_screen.appearance':
-        break
-      case 'setting_screen.noti':
-        break
       case 'setting_screen.currencies':
         navigation.navigate('CurrencyScreen')
         break
@@ -46,28 +42,13 @@ export const SettingScreen = () => {
       case 'setting_screen.home_amount':
         navigation.navigate('HomeAmountScreen')
         break
+      case 'setting_screen.user':
+        navigation.navigate('UserProfileScreen')
+        break
     }
   }
 
   const ITEMS = [
-    {
-      label: 'setting_screen.appearance',
-      sub_label: 'System',
-      icon: (
-        <FontAwesomeIcon
-          icon={faCircleHalfStroke}
-          size={16}
-          color={colors.primary100}
-        />
-      )
-    },
-    {
-      label: 'setting_screen.noti',
-      sub_label: 'Every Evening',
-      icon: (
-        <FontAwesomeIcon icon={faBell} size={16} color={colors.primary100} />
-      )
-    },
     {
       label: 'setting_screen.currencies',
       icon: (

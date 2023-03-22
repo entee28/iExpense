@@ -73,5 +73,18 @@
         "week": "Tuần",
         "month": "Tháng",
         "year": "Năm"
+    },
+    "register_screen": {
+        "title": "Thông tin tài khoản",
+        "name": "Tên <destructive>*</destructive>",
+        "email": "Email <destructive>*</destructive>",
+        "pin": "Mã PIN <destructive>*</destructive>",
+        "register": "Đăng ký"
+    },
+    "login_screen": {
+        "title": "Đăng nhập"
+    },
+    "user_profile_screen": {
+        "login": "Đăng nhập"
     }
 }
