@@ -24,6 +24,7 @@
     "@reduxjs/toolkit": "^1.9.1",
     "@types/detox": "^18.1.0",
     "@types/uuid": "^9.0.0",
+    "@types/validator": "^13.7.14",
     "dayjs": "^1.11.7",
     "decimal.js": "^10.4.3",
     "detox": "^20.1.0",
@@ -46,6 +47,7 @@
     "react-redux": "^8.0.5",
     "redux-persist": "^6.0.0",
     "uuid": "^9.0.0",
+    "validator": "^13.9.0",
     "victory-native": "^36.6.8"
   },
   "devDependencies": {

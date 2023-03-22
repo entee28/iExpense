@@ -14,6 +14,8 @@ declare type StackParamList = {
   HomeAmountScreen: undefined
   CategoriesScreen: undefined
   AccountListScreen: undefined
+  RegisterScreen: undefined
+  LoginScreen: undefined
   CategoryModifyScreen: {
     icon?: string
     category?: string
@@ -29,4 +31,5 @@ declare type StackParamList = {
   EntryScreen: {
     entry?: Entry
   }
+  UserProfileScreen: undefined
 }

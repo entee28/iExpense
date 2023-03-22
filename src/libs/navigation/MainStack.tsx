@@ -6,7 +6,10 @@ import {
   CategoryModifyScreen,
   AccountListScreen,
   CurrencyScreen,
-  EntryScreen
+  EntryScreen,
+  RegisterScreen,
+  LoginScreen,
+  UserProfileScreen
 } from 'screens/index'
 import { HomeTabBar } from './HomeTabBar'
 
@@ -24,11 +27,14 @@ export const MainStack = () => {
       <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
       <Stack.Screen name="AccountListScreen" component={AccountListScreen} />
       <Stack.Screen name="CurrencyScreen" component={CurrencyScreen} />
+      <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen
         name="CategoryModifyScreen"
         component={CategoryModifyScreen}
       />
       <Stack.Screen name="EntryScreen" component={EntryScreen} />
+      <Stack.Screen name="UserProfileScreen" component={UserProfileScreen} />
     </Stack.Navigator>
   )
 }
