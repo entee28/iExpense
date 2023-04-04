@@ -1,12 +1,20 @@
-import React, { useMemo, useState } from 'react'
+import { ApolloError, useMutation } from '@apollo/client'
 import {
   Box,
+  Link,
   NavigationBar,
   SCREEN_PADDING_HORIZONTAL,
   SubmitButton,
   Text,
-  TextInput
+  TextInput,
+  showApiError,
+  showError,
+  showSuccessToast
 } from 'libs/ui'
+import colors from 'libs/ui/colors'
+import { isEmail, isEmpty } from 'libs/utils'
+import React, { useMemo, useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import {
   KeyboardAvoidingView,
   Platform,
@@ -14,19 +22,62 @@ import {
   StyleSheet
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import colors from 'libs/ui/colors'
-import { Trans, useTranslation } from 'react-i18next'
-import { isEmail, isEmpty } from 'libs/utils'
+import { LOG_IN, LogInData, LogInVariables } from './graphql'
+import { STORAGE_USER_ID, loadStorage, saveStorage } from 'libs/storage'
+import { useOnLoginSuccess } from 'libs/hooks'
+import { useAppNavigation } from 'libs/navigation'
 
 export const LoginScreen = () => {
   const { t } = useTranslation()
+  const onLoginSuccess = useOnLoginSuccess()
+  const navigation = useAppNavigation()
 
   const [email, setEmail] = useState('')
   const [pinCode, setPinCode] = useState('')
 
   const disabled = useMemo(() => {
-    return isEmail(email) || isEmpty(pinCode) || email.length > 200
+    return !isEmail(email) || isEmpty(pinCode) || email.length > 200
   }, [pinCode, email])
+
+  const [logIn] = useMutation<LogInData, LogInVariables>(LOG_IN, {
+    onCompleted: async data => {
+      const { user, token } = data.login
+      const userId = await loadStorage(STORAGE_USER_ID)
+      if (user?._id && (!userId || user._id !== userId)) {
+        saveStorage(STORAGE_USER_ID, user?._id)
+      }
+
+      if (token && user._id) {
+        onLoginSuccess({
+          user,
+          access_token: token
+        })
+      }
+      showSuccessToast(`Welcome, ${user?.name}`)
+      navigation.navigate('UserProfileScreen')
+    },
+    onError: (error: ApolloError) => {
+      if (error.message) {
+        showApiError(error)
+      } else {
+        showError(t('login_screen.error'))
+      }
+      console.log(error)
+    }
+  })
+
+  const handleLogIn = () => {
+    logIn({
+      variables: {
+        email,
+        password: pinCode
+      }
+    })
+  }
+
+  const navigateToRegister = () => {
+    navigation.navigate('RegisterScreen')
+  }
 
   return (
     <SafeAreaView edges={['bottom']} style={styles.root}>
@@ -73,6 +124,10 @@ export const LoginScreen = () => {
             onChangeText={setPinCode}
             containerStyle={styles.input}
           />
+          <Link
+            label={t('login_screen.no_account')}
+            onPress={navigateToRegister}
+          />
         </ScrollView>
       </Box>
       <KeyboardAvoidingView
@@ -80,7 +135,7 @@ export const LoginScreen = () => {
         <SubmitButton
           disabled={disabled}
           label={t('login_screen.title')}
-          onPress={() => {}}
+          onPress={handleLogIn}
         />
       </KeyboardAvoidingView>
     </SafeAreaView>

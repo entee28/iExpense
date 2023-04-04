@@ -79,12 +79,23 @@
         "name": "Name <destructive>*</destructive>",
         "email": "Email <destructive>*</destructive>",
         "pin": "PIN Code <destructive>*</destructive>",
-        "register": "Register"
+        "register": "Register",
+        "error": "Register failed, please check your connection"
     },
     "login_screen": {
-        "title": "Login"
+        "title": "Login",
+        "no_account": "Don't have an account?",
+        "error": "Login failed, please check your connection"
     },
     "user_profile_screen": {
-        "login": "Login"
+        "login": "Login",
+        "upload": "Upload user data",
+        "download": "Download user data",
+        "logout": "Logout",
+        "logout_success": "Successfully logged out",
+        "upload_error": "Failed to upload data, please check your connection",
+        "upload_success": "Data uploaded successfully",
+        "download_error": "Failed to download data, please check your connection",
+        "download_success": "Data downloaded successfully"
     }
 }

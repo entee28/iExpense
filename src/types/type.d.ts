@@ -42,3 +42,15 @@ type InsightBar = {
   barIndex: number
   amount: number
 }
+
+type User = {
+  _id: string
+  name: string
+  email: string
+  incomeCategories: Category[]
+  expenseCategories: Category[]
+  entryList: Entry[]
+  accountList: Account[]
+  primaryCurrency: Currency
+  secondaryCurrency: Currency | null
+}
