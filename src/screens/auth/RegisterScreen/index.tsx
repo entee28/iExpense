@@ -1,12 +1,22 @@
-import React, { useMemo, useState } from 'react'
+import { useMutation } from '@apollo/client'
+import { useOnLoginSuccess } from 'libs/hooks'
+import { useAppNavigation } from 'libs/navigation'
+import { STORAGE_USER_ID, loadStorage, saveStorage } from 'libs/storage'
 import {
   Box,
   NavigationBar,
   SCREEN_PADDING_HORIZONTAL,
   SubmitButton,
   Text,
-  TextInput
+  TextInput,
+  showApiError,
+  showError,
+  showSuccessToast
 } from 'libs/ui'
+import colors from 'libs/ui/colors'
+import { isEmail, isEmpty } from 'libs/utils'
+import React, { useMemo, useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import {
   KeyboardAvoidingView,
   Platform,
@@ -14,26 +24,64 @@ import {
   StyleSheet
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import colors from 'libs/ui/colors'
-import { Trans, useTranslation } from 'react-i18next'
-import { isEmail, isEmpty } from 'libs/utils'
+import { REGISTER, RegisterData, RegisterVariables } from './graphql'
 
 export const RegisterScreen = () => {
   const { t } = useTranslation()
+  const onLoginSuccess = useOnLoginSuccess()
+  const navigation = useAppNavigation()
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [pinCode, setPinCode] = useState('')
 
+  const [register] = useMutation<RegisterData, RegisterVariables>(REGISTER, {
+    onCompleted: async data => {
+      const { user, token } = data.createUser
+
+      const userId = await loadStorage(STORAGE_USER_ID)
+      if (user?._id && (!userId || userId !== user._id)) {
+        saveStorage(STORAGE_USER_ID, user?._id)
+      }
+
+      if (token && user._id) {
+        onLoginSuccess({
+          user,
+          access_token: token
+        })
+      }
+
+      showSuccessToast(`Welcome, ${user?.name}`)
+      navigation.navigate('UserProfileScreen')
+    },
+    onError: error => {
+      if (error.graphQLErrors[0].message === 'User already exists') {
+        showApiError(error)
+      } else {
+        showError(t('register_screen.error'))
+      }
+    }
+  })
+
   const disabled = useMemo(() => {
     return (
       isEmpty(name) ||
-      isEmail(email) ||
+      !isEmail(email) ||
       isEmpty(pinCode) ||
       name.length > 200 ||
       email.length > 200
     )
   }, [name, email, pinCode])
+
+  const handleRegister = () => {
+    register({
+      variables: {
+        name,
+        email,
+        password: pinCode
+      }
+    })
+  }
 
   return (
     <SafeAreaView edges={['bottom']} style={styles.root}>
@@ -101,7 +149,7 @@ export const RegisterScreen = () => {
         <SubmitButton
           disabled={disabled}
           label={t('register_screen.register')}
-          onPress={() => {}}
+          onPress={handleRegister}
         />
       </KeyboardAvoidingView>
     </SafeAreaView>

@@ -79,12 +79,23 @@
         "name": "Tên <destructive>*</destructive>",
         "email": "Email <destructive>*</destructive>",
         "pin": "Mã PIN <destructive>*</destructive>",
-        "register": "Đăng ký"
+        "register": "Đăng ký",
+        "error": "Đăng kí tài khoản thất bại, vui lòng kiểm tra kết nối"
     },
     "login_screen": {
-        "title": "Đăng nhập"
+        "title": "Đăng nhập",
+        "no_account": "Chưa có tài khoản?",
+        "error": "Đăng nhập thất bại, vui lòng kiểm tra kết nối"
     },
     "user_profile_screen": {
-        "login": "Đăng nhập"
+        "login": "Đăng nhập",
+        "upload": "Tải lên dữ liệu người dùng",
+        "download": "Tải xuống dữ liệu người dùng",
+        "logout": "Đăng xuất",
+        "logout_success": "Đăng xuất thành công",
+        "upload_error": "Tải lên dữ liệu thất bại, vui lòng kiểm tra lại kết nối",
+        "upload_success": "Tải lên dữ liệu thành công",
+        "download_error": "Tải xuống dữ liệu thất bại, vui lòng kiểm tra lại kết nối",
+        "download_success": "Tải xuống dữ liệu thành công"
     }
 }
